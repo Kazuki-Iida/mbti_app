@@ -1,38 +1,39 @@
 <?php
 
+use App\Http\Controllers\FriendController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+//何となくアルファベット順
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 
 Route::middleware('auth')->group(function () {
+    Route::post('/block', [UserController::class, 'block'])->name('block');
+    Route::delete('/unblock', [UserController::class, 'unblock'])->name('unblock');
+    
+    //ルーティングはlikeひとつにまとめてif文でいいねといいね解除してもいいけど別な方がいいかも？
+    Route::post('/like', [LikeController::class, 'like'])->name('like');
+    Route::delete('/unlike', [LikeController::class, 'unlike'])->name('unlike');
+    
+    Route::get('/posts/create/{post}', [PostController::class, 'create'])->name('post.create');
+    Route::post('/store/{post}', [PostController::class, 'store'])->name('post.store');
+    Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');
+    
+    Route::post('/request', [FriendController::class, 'request'])->name('friend.request');
+    Route::delete('/request', [FriendController::class, 'unrequest'])->name('friend.unrequest');
+    Route::post('/permit', [friendController::class, 'permit'])->name('friend.permit');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';
