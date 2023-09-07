@@ -13,6 +13,12 @@ class Post extends Model
     use SoftDeletes;
 
     protected $with = ["user:id,name,image_path.mbti", "images"];
+    
+    protected $fillable = [
+        'user_id',
+        'post_id',
+        'body'
+    ];
 
     public function images()
     {
