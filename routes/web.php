@@ -21,8 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/like', [LikeController::class, 'like'])->name('like');
     Route::delete('/unlike', [LikeController::class, 'unlike'])->name('unlike');
     
-    Route::get('/posts/create/{post}', [PostController::class, 'create'])->name('post.create');
-    Route::post('/store/{post}', [PostController::class, 'store'])->name('post.store');
+    Route::get('/posts/parent/create', [PostController::class, 'parentCreate'])->name('post.parent.create');
+    Route::get('/posts/create/{post}', [PostController::class, 'childCreate'])->name('post.child.create');
+    Route::post('/store', [PostController::class, 'store'])->name('post.store');
     Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');
     
     Route::post('/request', [FriendController::class, 'request'])->name('friend.request');
