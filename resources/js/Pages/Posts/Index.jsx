@@ -2,8 +2,8 @@ import React from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 
 const Index = (props) => {
-    const { posts } = props; // 追加
-    console.log(props); // 確認用に追加
+    const { posts } = props; 
+    console.log(props); 
 
     return (
         <>
