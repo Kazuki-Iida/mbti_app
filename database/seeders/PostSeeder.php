@@ -34,7 +34,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesf#ハッシュタグjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => 2,
             'body' => '#mbti ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -47,7 +48,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfj#mbti esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => 3,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ#mbti ESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -60,7 +62,8 @@ class PostSeeder extends Seeder
             'body' => '#ハッカソンesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => 4,
             'body' => 'ESFJESFJESFJESFJESF#ハッカソン ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -73,12 +76,6 @@ class PostSeeder extends Seeder
             'body' => 'esfj#ハッカソン esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => 1,
-            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
         ]);
         DB::table('posts')->insert([
             'user_id' => 1,
@@ -90,10 +87,18 @@ class PostSeeder extends Seeder
         DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => 1,
+            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => 1,
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => 1,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -120,59 +125,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => null,
-            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
         ]);
         DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => null,
-            'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => null,
-            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
-        ]);
-        DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => null,
-            'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => null,
-            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
-        ]);
-        DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => null,
-            'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => null,
-            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
-        ]);
-        DB::table('posts')->insert([
-            'user_id' => 1,
-            'parent_post_id' => null,
-            'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -189,10 +143,18 @@ class PostSeeder extends Seeder
         DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
+            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => null,
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -205,7 +167,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -218,7 +181,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -231,7 +195,57 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => null,
+            'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => null,
+            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => null,
+            'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => null,
+            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => null,
+            'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => null,
+            'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
+            'user_id' => 1,
+            'parent_post_id' => null,
+            'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -384,7 +398,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -397,7 +412,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -410,7 +426,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',
@@ -423,7 +440,8 @@ class PostSeeder extends Seeder
             'body' => 'esfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfjesfj',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
-        ]);DB::table('posts')->insert([
+        ]);
+        DB::table('posts')->insert([
             'user_id' => 1,
             'parent_post_id' => null,
             'body' => 'ESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJESFJ',

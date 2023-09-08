@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hashtag;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
+use Cloudinary;
 use Exception;
 use Illuminate\Http\PostRequest;
 use Inertia\Inertia;
@@ -22,6 +25,7 @@ class PostController extends Controller
                 ["posts" => $posts,]
             );
     }
+
 
     public function show(Post $post)
     {
@@ -50,10 +54,12 @@ class PostController extends Controller
             );
     }
     
+    
     public function parentCreate()
     {
         return Inertia::render("Posts/ParentCreate");
     }
+    
     
     public function childCreate(Post $post)
     {
@@ -65,29 +71,42 @@ class PostController extends Controller
             );
     }
 
+
     public function store(PostRequest $request, Post $post)
     {
-        //Posts/ParentCreateからはpost_id(parent_idのことね)が渡されなくて、Posts/ChildCreateからはpost_idが渡されるから子投稿の時だけpost_idが自動でfillされる寸法！(post_idはnull許容)
+        //●postの保存
+        //Posts/ParentCreateからはparent_post_idが渡されなくて、Posts/ChildCreateからはparent_post_idが渡されるから子投稿の時だけparent_post_idが自動でfillされる寸法！(parent_post_idはnull許容)
         $post_input = $request['post'];
         $post_input += ['user_id' => \Auth::id()];
-        
         $post->fill($post_input)->save();
         
-        return redirect()->route('post.show', ["post" => $post->id]);
+        //●ハッシュタグの保存
+        $post_body = $post->body;
+        $hashtags = [];
+        preg_match_all("/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u", $post_body, $hashtags); //正規表現を用いてハッシュタグを見つけて配列($hashtags)に入れる。
+        foreach ($hashtags[1] as $tag) {
+            $tag = ltrim($tag, '#'); //先頭の`#`を削除。
+            $hashtag = Hashtag::firstOrCreate(['name' => $tag]); //すでにhashtagテーブルにある場合はfirst、なければcreateする。
+            $post->hashtags()->attach($hashtag); //postと紐づけて保存。
+        }
         
-        // try
-        // {
-        //     $saveSuccess = $post->fill($post_input)->save();
-        //     if ($saveSuccess)
-        //     {
-        //         return response()->json(['message' => '保存に成功しました'], 200);
-        //     } else {
-        //         return response()->json(['message' => '保存に失敗しました'], 500);
-        //     }
-        // } catch (Exception $e) {
-        //     return response()->json(['message' => '保存に失敗しました'], 500);
-        // }
+        //●画像の保存
+        $request_images = $request->file('images_array');
+        if (isset($images))
+        {
+            foreach ($request_images as $request_image)
+            {
+                $image_path = Cloudinary::upload($request_image->getRealPath())->getSecurePath();
+                Image::create([
+                        'post_id' => $post->id,
+                        'image_path' => $image_path,
+                    ]);
+            }
+        }
+        
+        return redirect()->route('post.show', ["post" => $post->id]);
     }
+    
 
     public function delete(Post $post)
     {

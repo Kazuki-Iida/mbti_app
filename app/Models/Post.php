@@ -22,7 +22,12 @@ class Post extends Model
     
     public function scopeParentPosts($query)
     {
-        return $query->whereNull('post_id');
+        return $query->whereNull('parent_post_id');
+    }
+    
+    public function hashtags()
+    {
+        return $this->hasMany(Hashtag::class);
     }
 
     public function images()
@@ -48,9 +53,9 @@ class Post extends Model
     // $parentPost = Post::find($parentId);
     // $replies = $parentPost->replies;
 
-    public function replies()
+    public function childPosts()
     {
-        return $this->hasMany(Post::class, 'parent_id');
+        return $this->hasMany(Post::class, 'parent_post_id');
     }
     
     public function user()
