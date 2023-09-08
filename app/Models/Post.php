@@ -12,13 +12,18 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $with = ["user:id,name,image_path.mbti", "images"];
+    protected $with = ["user.mbti", "images"];
     
     protected $fillable = [
         'user_id',
         'post_id',
         'body'
     ];
+    
+    public function scopeParentPosts($query)
+    {
+        return $query->whereNull('post_id');
+    }
 
     public function images()
     {
