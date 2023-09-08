@@ -16,7 +16,7 @@ class PostController extends Controller
         
         //あとでできたらparentPosts()を先にもってくるのを試してみる。
         // モデルで記述したからeagerローディングの記述いらないかな。
-        $posts = $post->parentPost()->get();
+        $posts = $post->parentPosts()->get();
         return Inertia::render(
                 "Posts/Index", 
                 ["posts" => $posts,]
