@@ -53,11 +53,6 @@ class Post extends Model
         return $this->hasMany(Post::class, 'parent_id');
     }
     
-    public function scopeParentPosts($query)
-    {
-        return $query->whereNull('parent_id');
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
