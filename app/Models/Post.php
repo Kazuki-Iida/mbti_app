@@ -32,7 +32,7 @@ class Post extends Model
 
     public function images()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Image::class);
     }
 
     public function likedUsers()
