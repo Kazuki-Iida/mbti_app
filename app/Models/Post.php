@@ -15,9 +15,9 @@ class Post extends Model
     protected $with = ["user.mbti", "images"];
     
     protected $fillable = [
+        'body',
         'user_id',
         'parent_post_id',
-        'body'
     ];
     
     public function scopeParentPosts($query)

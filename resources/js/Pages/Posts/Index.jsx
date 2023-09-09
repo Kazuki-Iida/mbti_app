@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { Link, usePage } from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 
 const Index = (props) => {
@@ -7,6 +8,7 @@ const Index = (props) => {
 
     return (
         <>
+        <Link href="/posts/parent/create">投稿作成</Link>
             
             <div className="p-12">
                 <h1>Blog Name</h1>
