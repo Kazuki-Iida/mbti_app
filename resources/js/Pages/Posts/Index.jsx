@@ -63,7 +63,7 @@ function Index( props ) {
                         <div key={post.id} className="border-t border-gray-300 text-gray-900  py-5 px-10 w-[100%] mt-1">
                             <a href="">
                                 <div class="flex justify-between items-center">
-                                    <p className="text-xl font-bold flex items-center object-cover	"><img src="img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                    <p className="text-xl font-bold flex items-center object-cover"><img src="img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs">intp</span></div></p>
                                     <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
                                 </div>
                                 <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>
@@ -80,19 +80,12 @@ function Index( props ) {
                     <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
                     <textarea placeholder="今日は何があったか言ってみい？？"className="w-full h-[150px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"/>
                     <div className="flex justify-between items-center border-t border-gray-300 py-5">
-                        <label for="form-image" className="cursor-pointer px-5 block"><img src="img/image.png" class="w-[25px]"/>img</label>
+                        <label for="form-image" className="cursor-pointer px-5 block font-bold text-sm"><img src="img/image.png" class="w-[25px]"/>img</label>
                         <input type="file" id="form-image"/>
                         <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="img/post.png"className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
                     </div>
                 </div>
             </div>
-            {/* <InfiniteScroll
-                loadMore={loadMore}    
-                hasMore={true}       
-                loader={loader}>      
-
-                {posts}            
-            </InfiniteScroll> */}
         </>
     );
 }
