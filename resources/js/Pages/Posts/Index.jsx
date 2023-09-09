@@ -63,7 +63,7 @@ function Index( props ) {
                         <div key={post.id} className="border-t border-gray-300 text-gray-900  py-5 px-10 w-[100%] mt-1">
                             <a href="">
                                 <div class="flex justify-between items-center">
-                                    <p className="text-xl font-bold flex items-center object-cover	"><img src="img/sunrise.jpg" className="w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                    <p className="text-xl font-bold flex items-center object-cover	"><img src="img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs">intp</span></div></p>
                                     <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
                                 </div>
                                 <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>
