@@ -7,7 +7,8 @@ import { useState } from "react";
 
 function Show( props ) {
     console.log( props );
-    const { post } = props;
+    const { parent_posts , post } = props;
+    console.log(post);
     return (
         <>
         <div className="fixed flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
@@ -42,7 +43,18 @@ function Show( props ) {
             <div class="flex justify-between w-[82%] ml-[18%]">
                 {/* <InfiniteScroll posts = { posts }/> */}
                 <div className="w-[52%] mt-14">
-               
+                        <div key={post.id} className="border-t border-gray-300 text-gray-900  py-5 px-10 w-[100%] mt-1">
+                                <div class="flex justify-between items-center">
+                                    <p className="text-xl font-bold flex items-center object-cover"><img src="img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                    <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
+                                </div>
+                                <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.body}</p>
+                                <img className="mt-5 w-full rounded-xl"src="https://assets.st-note.com/production/uploads/images/52423220/rectangle_large_type_2_3b3d0d397bf5d630997f1b7534936d91.jpeg?width=2000&height=2000&fit=bounds&quality=85" />
+                                <div className="mt-5 flex">
+                                    <a href="" className="flex items-center text-sm"><img src="img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
+                                    <a href="" className="ml-10 flex items-center text-sm"><img src="img/heart.png" className="w-[20px] mr-[10px]"/>20</a>
+                                </div>
+                        </div>
                 </div>
                 <div className="w-[48%] bg-neutral-100 p-10 border-l border-gray-300">
                     <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
