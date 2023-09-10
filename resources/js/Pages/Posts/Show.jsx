@@ -8,8 +8,10 @@ import Menu from "../Common/Menu";
 
 function Show( props ) {
     console.log( props );
-    const { parent_posts , post } = props;
-    console.log(post);
+    const { parent_posts, post, child_posts } = props;
+    console.log('post',post);
+    console.log('parent_posts',parent_posts);
+    console.log('child_posts',child_posts);
     return (
         <>
         <div className="fixed flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
@@ -27,7 +29,6 @@ function Show( props ) {
                     </div>
                 </div>
             <div class="flex justify-between w-[82%] ml-[18%]">
-                {/* <InfiniteScroll posts = { posts }/> */}
                 <div className="w-[52%] mt-14">
                         <div key={post.id} className="border-t border-gray-300 text-gray-900  py-5 px-10 w-[100%] mt-1">
                                 <div class="flex justify-between items-center">
@@ -41,15 +42,23 @@ function Show( props ) {
                                     <a href="" className="ml-10 flex items-center text-sm"><img src="img/heart.png" className="w-[20px] mr-[10px]"/>20</a>
                                 </div>
                         </div>
+                        <div className="w-[100%] bg-neutral-100 p-10 border-l border-gray-300">
+                            <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">コメントする</p></div>
+                            <textarea placeholder="今日は何があったか言ってみい？？"className="w-full h-[150px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"/>
+                            <div className="flex justify-between items-center border-t border-gray-300 py-5">
+                            <label for="form-image" className="cursor-pointer px-5 block font-bold text-sm"><img src="img/image.png" class="w-[25px]"/>img</label>
+                            <input type="file" id="form-image"/>
+                            <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="img/post.png"className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
+                        </div>
+                        <div>
+                            <p>hi</p>
+                            {child_posts.map((child_post) => (
+                                <>
+                                {child_post.body}
+                                </>
+                            ))}
+                        </div>
                 </div>
-                <div className="w-[48%] bg-neutral-100 p-10 border-l border-gray-300">
-                    <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
-                    <textarea placeholder="今日は何があったか言ってみい？？"className="w-full h-[150px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"/>
-                    <div className="flex justify-between items-center border-t border-gray-300 py-5">
-                        <label for="form-image" className="cursor-pointer px-5 block font-bold text-sm"><img src="img/image.png" class="w-[25px]"/>img</label>
-                        <input type="file" id="form-image"/>
-                        <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="img/post.png"className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
-                    </div>
                 </div>
             </div>
         </>

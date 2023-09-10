@@ -8,24 +8,6 @@ import Menu from "../Common/Menu";
 function Index( props ) {
     console.log( props );
     const { posts ,user} = props;
-
-    const [list, setList] = useState([]);          //表示するデータ
-    // const [hasMore, setHasMore] = useState(true);  //再読み込み判定
-
-    // const loader =<div className="loader" key={0}>Loading ...</div>;
-    // const loadMore = async (page) => {
-      
-    //     const response = await fetch(`http://localhost:3000/api/test?page=${page}`);  //API通信
-    //     const data = await response.json();  //取得データ
-  
-    //     //データ件数が0件の場合、処理終了
-    //     if (data.length < 1) {
-    //       setHasMore(false);
-    //       return;
-    //     }
-    //     //取得データをリストに追加
-    //     setList([...list, ...data])
-    //   }
     return (
         <>  
         <div className="fixed flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
@@ -60,7 +42,7 @@ function Index( props ) {
                                 </div>
                             </Link>
                         </div>
-                    ))}
+                ))}
                 </div>
                 <div className="w-[48%] bg-neutral-100 p-10 border-l border-gray-300">
                    <Link href="/posts/parent/create">投稿作成</Link>
