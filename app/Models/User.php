@@ -41,6 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    public function isFriend(int $friend_id)
+    {
+        return (boolean) $this->friends($friend_id)->first();
+    }
+    
 
     public function requesters()
     {
