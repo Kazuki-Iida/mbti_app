@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, usePage } from '@inertiajs/react';
+import { Link, usePage , useForm } from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-
-import { Link, useForm } from '@inertiajs/react';
-
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 
@@ -40,7 +37,7 @@ function Index( props ) {
                     <a href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="img/pen.png"/>profile</a>
                     <a href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="img/hand.png"/>friends</a>
                 </div>
-                    <div class="border-t border-gray-300 mt-5">
+                    <div className="border-t border-gray-300 mt-5">
                         <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/tora.png" className="w-[25px] mr-5"/><p>INTJ</p></a></div>
                         <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/hukuro.png"className="w-[25px] mr-5"/><p>INTP</p></a></div>
                         <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/lion.png"className="w-[25px] mr-5"/><p>ENTJ</p></a></div>
