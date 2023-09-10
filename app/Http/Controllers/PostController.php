@@ -16,10 +16,7 @@ class PostController extends Controller
     public function index(Post $post)
     {
         //絞り込みとか検索のコードはあとで！！
-        
-        //あとでできたらparentPosts()を先にもってくるのを試してみる。
-        // モデルで記述したからeagerローディングの記述いらないかな。
-        $posts = $post->parentPosts()->get();
+        $posts = $post->getOrderedParentPosts();
         return Inertia::render(
                 "Posts/Index", 
                 ["posts" => $posts,]
@@ -45,7 +42,7 @@ class PostController extends Controller
         
         $parentPosts = array_reverse($parentPosts);
 
-        $childPosts = $post->childPosts()->get();
+        $childPosts = $post->getOrderedChildPosts();
         // dd($childPosts);
         return Inertia::render(
                 "Posts/Show", 
