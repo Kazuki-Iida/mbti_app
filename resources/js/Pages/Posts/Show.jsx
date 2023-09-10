@@ -2,6 +2,7 @@ import React from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Link, useForm } from '@inertiajs/react';
 import { useState } from "react";
+
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 

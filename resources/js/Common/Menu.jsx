@@ -16,7 +16,7 @@ function Menu( props ) {
             <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/sika.png"className="w-[25px] mr-5"/><p>ISFJ</p></a></div>
             <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/kuma.png"className="w-[25px] mr-5"/><p>ESTJ</p></a></div>
             <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/uma.png"className="w-[25px] mr-5"/><p>ESFJ</p></a></div>
-             <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/cat.png"className="w-[25px] mr-5"/><p>ISTP</p></a></div>
+            <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/cat.png"className="w-[25px] mr-5"/><p>ISTP</p></a></div>
             <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/hituji.png"className="w-[25px] mr-5"/><p>ISFP</p></a></div>
             <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/simauma.png"className="w-[25px] mr-5"/><p>ESTP</p></a></div>
             <div className="mt-5 font-bold text-md w-[45%] p-1"><a href="" className="flex"><img src="img/usi.png"className="w-[25px] mr-5"/><p>ESFP</p></a></div>
