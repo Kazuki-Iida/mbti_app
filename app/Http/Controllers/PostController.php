@@ -29,15 +29,15 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $parent_post = $post->parentPost();
+        $parent_post = $post->parentPost;
         $parent_posts = [];
         while ($parent_post)
         {
             array_push($parent_posts, $parent_post);
 
-            if ($parent_post->parentPost()) 
+            if ($parent_post->parentPost)
             {
-                $parent_post = $parent_post->parentPost();
+                $parent_post = $parent_post->parentPost;
             } else {
                 break;
             }
