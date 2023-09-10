@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { Link, usePage } from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
+
 import { Link, useForm } from '@inertiajs/react';
-import { useState } from "react";
+
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 
@@ -27,7 +29,7 @@ function Index( props ) {
     //     setList([...list, ...data])
     //   }
     return (
-        <>
+        <>  
         <div className="fixed flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
             <p className="font-bold text-xl mr-5">home</p>
             <input type="text" placeholder = "🔎検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/>
@@ -78,6 +80,8 @@ function Index( props ) {
                     ))}
                 </div>
                 <div className="w-[48%] bg-neutral-100 p-10 border-l border-gray-300">
+                   <Link href="/posts/parent/create">投稿作成</Link>
+
                     <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
                     <textarea placeholder="今日は何があったか言ってみい？？"className="w-full h-[150px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"/>
                     <div className="flex justify-between items-center border-t border-gray-300 py-5">
