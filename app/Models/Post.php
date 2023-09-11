@@ -25,6 +25,16 @@ class Post extends Model
         return $query->whereNull('parent_post_id');
     }
     
+    public function getOrderedChildPosts()
+    {
+        return $this->childPosts()->orderBy('created_at', 'DESC')->get();
+    }
+    
+    public function getOrderedParentPosts()
+    {
+        return $this->parentPosts()->orderBy('created_at', 'DESC')->get();
+    }
+    
     public function hashtags()
     {
         return $this->hasMany(Hashtag::class);
