@@ -105,7 +105,7 @@ const ParentCreate = (props) => {
                         <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
                         <textarea placeholder="投稿する" className="w-full h-[150px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md" onChange={(e) => setData("body", e.target.value)} />
                         <div className="flex justify-between items-center border-t border-gray-300 py-5">
-                            <label htmlFor="images" className="cursor-pointer px-5 block font-bold text-sm"><img src="img/image.png" className="w-[25px]"/>img</label>
+                            <label htmlFor="images" className="cursor-pointer px-5 block font-bold text-sm"><img src="../img/image2.png" className="w-[25px]"/>img</label>
                             <input type="file" id="images" onChange={handleFileChange} accept="image/*" multiple />
                         </div>
                     </div>
