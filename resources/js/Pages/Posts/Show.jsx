@@ -19,7 +19,7 @@ function Show( props ) {
             <input type="text" placeholder = "🔎検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/>
         </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
-                <h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1>
+                <h1 className="font-bold text-2xl"><Link href="/">MBTI APP<span className="text-xs block">あなたはどんな人？</span></Link></h1>
                 <div className="border-t border-gray-300 mt-5">
                     <a href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="../img/pen.png"/>profile</a>
                     <a href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</a>

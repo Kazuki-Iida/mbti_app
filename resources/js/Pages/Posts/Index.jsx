@@ -37,7 +37,7 @@ function Index( props ) {
                                     <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
                                 </div>
                                 <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>
-                                <div className="grid gap-5 grid-cols-2 w-full">
+                                <div className="grid gap-5 grid-cols-2 w-full mt-5">
                                 {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
                                 <div className="">
                                     <img
