@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGripVertical } from '@fortawesome/free-solid-svg-icons';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faGripVertical } from '@fortawesome/free-solid-svg-icons';
 
 function Menu() {
     

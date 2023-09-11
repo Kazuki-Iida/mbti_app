@@ -37,15 +37,15 @@ function Index( props ) {
                                     <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
                                 </div>
                                 <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>
-                                <img className="mt-5 w-full rounded-xl"src="https://eiga.k-img.com/images/buzz/51968/main_large.jpg"/>
-                              {/* {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
+                               
+                              {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
                                     <img
                                         key={index}
                                         className="mt-5 w-full rounded-xl"
                                         src={image.image_path}
                                         alt={`Image ${index}`}
                                     />
-                                ))} */} 
+                                ))} 
                                 <div className="mt-5 flex">
                                     <a href="" className="flex items-center text-sm"><img src="img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
                                     <a href="" className="ml-10 flex items-center text-sm"><img src="img/heart.png" className="w-[20px] mr-[10px]"/>20</a>
