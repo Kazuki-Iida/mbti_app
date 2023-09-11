@@ -4,6 +4,24 @@
 input[type="file"]{
     display: none;
 }
+#container {
+  height: 100vh; /* スクロール可能な高さを指定 */
+  overflow-y: scroll; /* 垂直スクロールを有効にする */
+}
+.post {
+  transition: transform 0.3s ease-in-out, scale 0.3s ease-in-out;
+}
+.big {
+  transform: scale(1);
+  position:relative;
+  z-index:2;
+}
+
+.small {
+  position:relative;
+  z-index:1;
+  transform:translateY(-300px)scale(0.6);
+}
 
 .mbti-block:hover {
   background-color: rgb(209, 213, 219);
