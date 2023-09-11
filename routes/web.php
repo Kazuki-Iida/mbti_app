@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/request/permit', [FriendController::class, 'permit'])->name('friend.permit');
     Route::delete('/request/dismiss', [FriendController::class, 'dismiss'])->name('friend.dismiss');
     
+    Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

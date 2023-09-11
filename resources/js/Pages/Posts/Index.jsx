@@ -20,10 +20,10 @@ function Index( props ) {
                     <a href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="img/pen.png"/>profile</a>
                     <a href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="img/hand.png"/>friends</a>
                 </div>
-                    <div className="border-t border-gray-300 mt-5">
-                        <Menu/>
-                    </div>
+                <div className="border-t border-gray-300 mt-5">
+                    <Menu/>
                 </div>
+            </div>
             <div class="flex justify-between w-[82%] ml-[18%]">
                 {/* <InfiniteScroll posts = { posts }/> */}
                 <div className="w-[52%] mt-14">
