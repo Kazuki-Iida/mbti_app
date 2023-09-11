@@ -4,3 +4,13 @@
 input[type="file"]{
     display: none;
 }
+
+.mbti-block:hover {
+  background-color: rgb(209, 213, 219);
+}
+
+.drag-list li {
+    line-height:3em;
+    border:1px solid #cccccc;
+    cursor:pointer;
+}
