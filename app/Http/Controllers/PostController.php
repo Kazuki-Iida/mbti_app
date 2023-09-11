@@ -93,7 +93,9 @@ class PostController extends Controller
         }
         
         //●画像の保存
+        
         $request_images = $request->file('images');
+       
         if (isset($request_images))
         {
             foreach ($request_images as $request_image)
