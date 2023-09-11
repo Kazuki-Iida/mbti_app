@@ -43,6 +43,12 @@ class User extends Authenticatable
     ];
     
     
+    
+    public function getOrderedFriends()
+    {
+        return $this->friends()->orderaby('created_at', 'DESC')->get();
+    }
+    
     public function isFriend(int $friend_id)
     {
         return (boolean) $this->friends($friend_id)->first();

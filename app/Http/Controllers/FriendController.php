@@ -10,6 +10,17 @@ use Illuminate\Http\Request;
 
 class FriendController extends Controller
 {
+    public function index()
+    {
+        $user = \Auth::user();
+        $friends = $user->getOrderedFriends();
+        return response()->json([
+            'message' => '繋がり一覧の取得に成功しました',
+            'friends' => $friends,
+            ], 200);
+    }
+    
+    
     public function request(Request $request)
     {
         $requester = \Auth::user();
