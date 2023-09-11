@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, usePage , useForm } from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Menu from "../Common/Menu";
+import ParentCreate from './ParentCreate'; // ParentCreateコンポーネントをインポート
+
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 
@@ -36,6 +38,14 @@ function Index( props ) {
                                 </div>
                                 <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>
                                 <img className="mt-5 w-full rounded-xl"src="https://eiga.k-img.com/images/buzz/51968/main_large.jpg"/>
+                              {/* {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
+                                    <img
+                                        key={index}
+                                        className="mt-5 w-full rounded-xl"
+                                        src={image.image_path}
+                                        alt={`Image ${index}`}
+                                    />
+                                ))} */} 
                                 <div className="mt-5 flex">
                                     <a href="" className="flex items-center text-sm"><img src="img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
                                     <a href="" className="ml-10 flex items-center text-sm"><img src="img/heart.png" className="w-[20px] mr-[10px]"/>20</a>
@@ -44,17 +54,10 @@ function Index( props ) {
                         </div>
                 ))}
                 </div>
-                <div className="w-[39%] bg-neutral-100 p-10 border-l border-gray-300 fixed right-0 z-0 h-screen">
-                   <Link href="/posts/parent/create">投稿作成</Link>
+               
+                    <ParentCreate /> {/* ParentCreateコンポーネントを配置 */}
+                
 
-                    <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
-                    <textarea placeholder="投稿する"className="w-full h-[150px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"/>
-                    <div className="flex justify-between items-center border-t border-gray-300 py-5">
-                        <label for="form-image" className="cursor-pointer px-5 block font-bold text-sm"><img src="img/image.png" class="w-[25px]"/>img</label>
-                        <input type="file" id="form-image"/>
-                        <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="img/post.png"className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
-                    </div>
-                </div>
             </div>
         </>
     );
