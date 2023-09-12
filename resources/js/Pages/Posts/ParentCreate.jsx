@@ -14,13 +14,12 @@ const ParentCreate = (props) => {
      const handleTextareaChange = (e) => {
         const inputValue = e.target.value;
         setData('body', inputValue);
-      };
-      const formatText = (text) => {
-        // #からスペースまでのテキストを青く表示
+    };
+
+    const formatText = (text) => {
         const formattedText = text.replace(/(#\S+)/g, '<span style="color: blue;">$1</span>');
-        // HTMLを解釈する
         return { __html: formattedText };
-      };
+    };
     // フォームの高さスタイルを制御するステート
     const [formHeight, setFormHeight] = useState('auto');
     // 画像ファイルが選択されたときの処理
@@ -84,6 +83,11 @@ const ParentCreate = (props) => {
                             本文は200文字以内で入力してください。
                         </div>
                     )}
+                    {showTooManyImagesBanner && (
+                        <div className="bg-sky-500 text-white p-2 mb-4 absolute" style={{ marginTop: '20px' }}>
+                            写真は4枚までしか投稿できません。
+                        </div>
+                    )}
                     <div className="">
                         <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
                         <textarea
@@ -94,8 +98,8 @@ const ParentCreate = (props) => {
                         />
                         <div className="bottom-bar">
                             {/* 入力しているテキストを表示 */}
-                            <div className="mt-2" style={{ color: 'blue' }}>{data.body}</div>
-                          </div>
+                            <div className="mt-2" dangerouslySetInnerHTML={formatText(data.body)} />
+                        </div>
                         <div className="flex justify-between items-center border-t border-gray-300 py-5">
                             <label htmlFor="images" className="cursor-pointer px-5 block font-bold text-sm"><img src="img/image.png" className="w-[25px]"/>img</label>
                             <input type="file" id="images" onChange={handleFileChange} accept="image/*" multiple />
