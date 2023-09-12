@@ -72,8 +72,12 @@ const ParentCreate = (props) => {
     };
     return (
         <div className="p-12">
-            <form onSubmit={handleSendPosts} encType="multipart/form-data">
-                <div className="w-[39%] bg-neutral-100 p-10 border-l border-gray-300 fixed right-0 z-0 h-screen">
+
+            <form onSubmit={handleSendPosts} encType="multipart/form-data" style={{ height: formHeight }}>
+            
+                <div className="w-[39%] bg-neutral-100 p-10 border-l border-gray-300 fixed right-0 z-0 h-screen overflow-scroll">
+                    {/* bodyの文字数が0の場合に表示 */}
+
                     {showEmptyBodyBanner && (
                         <div className="bg-sky-500 text-white p-2 mb-4 absolute" style={{ marginTop: '20px' }}>
                             本文を入力してください。
@@ -86,6 +90,7 @@ const ParentCreate = (props) => {
                     )}
                     <div className="">
                         <div className="mt-20 flex items-center"><img src="img/pen.png" className="w-[35px] mr-1"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
+
                         <textarea
                             placeholder="投稿する"
                             className="w-full h-[150px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"
@@ -101,19 +106,33 @@ const ParentCreate = (props) => {
                             <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="img/post.png" className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
                         </div>
                     </div>
+
                     {data.images.length > 0 && (
                         <div className="mt-10">
-                            <h2>プレビュー</h2>
+                            <div className="grid gap-5 grid-cols-2 w-full mt-5">
                             {data.images.map((file, index) => (
                                 <img
                                     key={index}
                                     src={URL.createObjectURL(file)}
                                     alt={`Image Preview ${index}`}
-                                    className="max-w-xs mt-2"
+                                    className="max-w-xs mt-2 block w-full"
                                 />
                             ))}
+                            </div>
                         </div>
                     )}
+                        <div className="flex justify-between items-center border-t border-gray-300 py-5">
+                            <label htmlFor="images" className="cursor-pointer px-5 block font-bold text-sm"><img src="../img/image2.png" className="w-[25px]"/>img</label>
+                            <input type="file" id="images" onChange={handleFileChange} accept="image/*" multiple />
+                            <button className="flex items-center border border-gray-400 p-1 rounded-md block"><img src="img/post.png" className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
+                        </div>
+                    </div>
+
+                    {/* 送信ボタンを固定位置に配置 */}
+                    {/*<div className="fixed bottom-50 right-10">
+                        <button className="flex items-center border border-gray-400 p-1 rounded-md block"><img src="img/post.png" className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
+                    </div>
+                    */}
                 </div>
             </form>
         </div>
