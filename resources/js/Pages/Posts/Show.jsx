@@ -15,11 +15,11 @@ function Show( props ) {
     return (
         <>
         <div className="fixed flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
-            <p className="font-bold text-xl mr-5">home</p>
+            <p className="font-bold text-xl mr-5"></p>
             <input type="text" placeholder = "🔎検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/>
         </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
-                <h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1>
+                <h1 className="font-bold text-2xl"><Link href="/">MBTI APP<span className="text-xs block">あなたはどんな人？</span></Link></h1>
                 <div className="border-t border-gray-300 mt-5">
                     <a href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="../img/pen.png"/>profile</a>
                     <a href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</a>
@@ -49,7 +49,7 @@ function Show( props ) {
                             </div>
                             <div className="flex justify-between items-center border-t border-gray-300 py-1">
                             <label for="form-image" className="cursor-pointer px-5 block font-bold text-sm">
-                            
+                            <img src="../img/image2.png" className="w-[25px]"/>
                             img
                             </label>
                             <input type="file" id="form-image"/>

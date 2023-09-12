@@ -10,6 +10,29 @@ import ParentCreate from './ParentCreate'; // ParentCreateコンポーネント�
 function Index( props ) {
     console.log( props );
     const { posts ,user} = props;
+    
+    useEffect(() => {
+        const container = document.getElementById('container');
+    const boxes = container.querySelectorAll('.post');
+
+    container.addEventListener('scroll', () => {
+    const containerCenter = container.scrollTop + container.clientHeight / 2;
+
+    boxes.forEach((box) => {
+        const boxTop = box.offsetTop + box.clientHeight ;
+        const distanceToCenter = Math.abs(containerCenter - boxTop);
+
+        if (distanceToCenter < container.clientHeight  / 1.5) {
+            box.classList.add('big');
+            box.classList.remove('small');
+        } else {
+            box.classList.remove('big');
+            box.classList.add('small');
+        }
+        });
+    })
+        
+    },[])
     return (
         <>  
         <div className="fixed z-10 flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
@@ -26,26 +49,29 @@ function Index( props ) {
                     <Menu/>
                 </div>
             </div>
-            <div class="flex justify-between w-[82%] ml-[18%]">
+            <div id="container" class="flex justify-between w-[82%] ml-[18%]">
                 {/* <InfiniteScroll posts = { posts }/> */}
                 <div className="w-[52%] mt-14">
                 { posts.map(( post ) => (
-                        <div key={post.id} className="border-t border-gray-300 text-gray-900  py-10 px-10 w-[100%] mt-1">
+                        <div key={post.id} className="post bg-neutral-100 border-t border-gray-300 text-gray-900  py-10 px-10 w-[100%] mt-1">
                             <Link href={`/posts/${post.id}`}>
                                 <div class="flex justify-between items-center">
                                     <p className="text-xl font-bold flex items-center object-cover"><img src="img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
                                     <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
                                 </div>
                                 <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>
-                                <img className="mt-5 w-full rounded-xl"src="https://eiga.k-img.com/images/buzz/51968/main_large.jpg"/>
-                              {/* {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
+                                <div className="grid gap-5 grid-cols-2 w-full mt-5">
+                                {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
+                                <div className="">
                                     <img
                                         key={index}
-                                        className="mt-5 w-full rounded-xl"
+                                        className="w-full rounded-xl block"
                                         src={image.image_path}
                                         alt={`Image ${index}`}
                                     />
-                                ))} */} 
+                                </div>
+                                ))} 
+                                </div>
                                 <div className="mt-5 flex">
                                     <a href="" className="flex items-center text-sm"><img src="img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
                                     <a href="" className="ml-10 flex items-center text-sm"><img src="img/heart.png" className="w-[20px] mr-[10px]"/>20</a>
