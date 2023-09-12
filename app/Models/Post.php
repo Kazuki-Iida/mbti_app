@@ -37,7 +37,7 @@ class Post extends Model
     
     public function hashtags()
     {
-        return $this->hasMany(Hashtag::class);
+        return $this->belongsToMany(Hashtag::class);
     }
 
     public function images()
