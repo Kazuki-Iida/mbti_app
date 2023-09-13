@@ -26,8 +26,10 @@ class FriendController extends Controller
     
     public function request(Request $request)
     {
+        // dd($request);
         $requester = \Auth::user();
         $permitterId = $request['permitter_id'];
+        
         if (!$requester->isFriend($permitterId))
         {
             try
