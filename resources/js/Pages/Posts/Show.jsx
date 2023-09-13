@@ -3,6 +3,7 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Link, useForm } from '@inertiajs/react';
 import { useState } from "react";
 import Menu from "../Common/Menu";
+import ChildCreate from './ChildCreate';
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 
@@ -42,19 +43,7 @@ function Show( props ) {
                                     <a href="" className="ml-10 flex items-center text-sm"><img src="../img/heart.png" className="w-[20px] mr-[10px]"/>20</a>
                                 </div>
                         </div>
-                        <div className="w-[100%] bg-neutral-100 px-10 py-1 border-t border-b border-gray-300">
-                            <div class="flex">
-                                <div className="mt-5 flex items-center"><img src="../img/pen.png" className="w-[35px] mr-1"/></div>
-                                <textarea placeholder="返信する"className="w-full h-[50px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"/>
-                            </div>
-                            <div className="flex justify-between items-center border-t border-gray-300 py-1">
-                            <label for="form-image" className="cursor-pointer px-5 block font-bold text-sm">
-                            <img src="../img/image2.png" className="w-[25px]"/>
-                            img
-                            </label>
-                            <input type="file" id="form-image"/>
-                            <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="../img/post.png"className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
-                        </div>
+                            <ChildCreate />
                         <div className="pb-24">
                             {child_posts.map((child_post) => (
                                 <>
@@ -74,7 +63,7 @@ function Show( props ) {
                             ))}
                         </div>
                 </div>
-                </div>
+               
             </div>
         </>
     );
