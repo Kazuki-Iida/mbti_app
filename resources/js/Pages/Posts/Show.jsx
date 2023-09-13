@@ -1,18 +1,30 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Link, useForm } from '@inertiajs/react';
+import { Link, useForm,  } from '@inertiajs/react';
 import { useState } from "react";
 import Menu from "../Common/Menu";
 import ChildCreate from './ChildCreate';
+import LikeButton from '../Button/LikeButton';
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 
 function Show( props ) {
-    console.log( props );
-    const { parent_posts, post, child_posts } = props;
+    const { parent_post, post, child_posts, likedPosts: initialLikedPosts } = props;
+    
     console.log('post',post);
-    console.log('parent_posts',parent_posts);
+    console.log('parent_post',parent_post);
     console.log('child_posts',child_posts);
+    console.log('likedpost', initialLikedPosts)
+    
+    const [likedPosts, setLikedPosts] = useState(initialLikedPosts); 
+    
+    
+    useEffect(() => {
+        setLikedPosts(props.likedPosts);
+    }, []); 
+    
+    
+    // const [childPostsData, setChildPostsData] = useState(child_posts);
     return (
         <>
         <div className="fixed flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
@@ -40,27 +52,67 @@ function Show( props ) {
                                 <img className="mt-5 w-full rounded-xl"src="https://eiga.k-img.com/images/buzz/51968/main_large.jpg" />
                                 <div className="mt-5 flex">
                                     <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
-                                    <a href="" className="ml-10 flex items-center text-sm"><img src="../img/heart.png" className="w-[20px] mr-[10px]"/>20</a>
+                                    <LikeButton
+                                        className="ml-10 flex items-center text-sm"
+                                        postId={post.id}
+                                        initialIsLiked={likedPosts.includes(post.id)}
+                                        initialLikesCount={post.likes_count}
+                                        setLikedPosts={setLikedPosts}
+                                    　　/>
                                 </div>
                         </div>
-                            <ChildCreate />
+                        <ChildCreate parentId={post.id}/>
                         <div className="pb-24">
                             {child_posts.map((child_post) => (
                                 <>
-                                    <div key={post.id} className="border-t border-gray-300 text-gray-900  py-5  w-[100%] mt-1">
+                                    <div key={child_post.id} className="border-t border-gray-300 text-gray-900  py-5  w-[100%] mt-1">
                                         <div class="flex justify-between items-center">
-                                        <p className="text-xl font-bold flex items-center object-cover"><img src="../img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                        <p className="text-xl font-bold flex items-center object-cover"><img src="../img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{child_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{child_post.created_at}</span><span className="block text-xs">intp</span></div></p>
                                         <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="../img/hand.png" className="w-[25px] mr-1"/>friend request</button>
                                     </div>
-                                    <p className="text-md break-words mt-5 leading-8 tracking-tight">{child_post.body}</p>
+                                    <Link href={`/posts/${child_post.id}`}>
+                                        <p className="text-md break-words mt-5 leading-8 tracking-tight">{child_post.body}</p>
+                                    </Link>
                                     <img className="mt-5 w-full rounded-xl"src="https://pbs.twimg.com/media/Dii55LMVQAEhSZJ?format=jpg&name=4096x4096" />
                                     <div className="mt-5 flex">
                                         <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
-                                        <a href="" className="ml-10 flex items-center text-sm"><img src="../img/heart.png" className="w-[20px] mr-[10px]"/>20</a>
+                                        <LikeButton
+                                            className="ml-10 flex items-center text-sm"
+                                            postId={child_post.id}
+                                            initialIsLiked={likedPosts.includes(child_post.id)}
+                                            initialLikesCount={child_post.likes_count}
+                                            setLikedPosts={setLikedPosts}
+                                        　　/>
                                     </div>
                                     </div>
                                 </>
                             ))}
+                             <>
+                                {parent_post !== null ? (
+                                <div key={parent_post.id} className="border-t border-gray-300 text-gray-900 py-5 w-[100%] mt-1">
+                                    <div class="flex justify-between items-center">
+                                        <p className="text-xl font-bold flex items-center object-cover"><img src="../img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{parent_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{parent_post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                        <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="../img/hand.png" className="w-[25px] mr-1"/>friend request</button>
+                                    </div>
+                                    <Link href={`/posts/${parent_post.id}`}>
+                                        <p className="text-md break-words mt-5 leading-8 tracking-tight">{parent_post.body}</p>
+                                        <img className="mt-5 w-full rounded-xl"src="https://pbs.twimg.com/media/Dii55LMVQAEhSZJ?format=jpg&name=4096x4096" />
+                                    </Link>
+                                    <div className="mt-5 flex">
+                                        <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
+                                        <LikeButton
+                                            className="ml-10 flex items-center text-sm"
+                                            postId={parent_post.id}
+                                            initialIsLiked={likedPosts.includes(parent_post.id)}
+                                            initialLikesCount={parent_post.likes_count}
+                                            setLikedPosts={setLikedPosts}
+                                        />
+                                    </div>
+                                </div>
+                                ) : null}
+                            
+                                {parent_post !== null ? <ChildCreate /> : null}
+                            </>
                         </div>
                 </div>
                

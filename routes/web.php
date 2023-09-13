@@ -11,6 +11,7 @@ use Inertia\Inertia;
 //何となくアルファベット順
 
 Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get("/posts/isliked", [PostController::class, "isLiked"]);
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 
 Route::middleware('auth')->group(function () {
@@ -18,8 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/unblock', [UserController::class, 'unblock'])->name('unblock');
     
     //ルーティングはlikeひとつにまとめてif文でいいねといいね解除してもいいけど別な方がいいかも？
-    Route::post('/like', [LikeController::class, 'like'])->name('like');
-    Route::delete('/unlike', [LikeController::class, 'unlike'])->name('unlike');
+    Route::post('/posts/{post}/like', [LikeController::class, "like"])->name('post.like');
+    Route::post('/posts/{post}/dislike', [LikeController::class, "dislike"])->name('post.dislike');
     
     Route::get('/posts/parent/create', [PostController::class, 'parentCreate'])->name('post.parent.create');
     Route::get('/posts/create/{post}', [PostController::class, 'childCreate'])->name('post.child.create');
