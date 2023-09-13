@@ -17,39 +17,55 @@ class PostController extends Controller
     {
         //絞り込みとか検索のコードはあとで！！
         $posts = $post->getOrderedParentPosts();
+        
+        $user = auth()->user();
+        $likedPosts = $user->likedPosts()->pluck('post_id');
+        
         return Inertia::render(
                 "Posts/Index", 
-                ["posts" => $posts,]
+                ["posts" => $posts,
+                "likedPosts" => $likedPosts]
             );
     }
 
 
     public function show(Post $post)
     {
-        $parentPost = $post->parentPost;
-        $parentPosts = [];
-        while ($parentPost)
-        {
-            array_push($parentPosts, $parentPost);
+        $parentPost = $post->parentPost()->withCount('likes')->first();
+        // $parentPosts = [];
+        // while ($parentPost)
+        // {
+        //     array_push($parentPosts, $parentPost);
 
-            if ($parentPost->parentPost)
-            {
-                $parentPost = $parentPost->parentPost;
-            } else {
-                break;
-            }
-        }
+        //     if ($parentPost->parentPost)
+        //     {
+        //         $parentPost = $post->parentPost()->withCount('likes')->first();
+        //     } else {
+        //         break;
+        //     }
+        // }
+        $postId = $post->id;
+        $showPost = Post::withCount('likes')->find($postId);
         
-        $parentPosts = array_reverse($parentPosts);
+        // $parentPost = array_reverse($parentPost);
 
         $childPosts = $post->getOrderedChildPosts();
+        
+        // $post = $post->withCount('likes')->first();
+        
+       
         // dd($childPosts);
+        
+        $user = auth()->user();
+        $likedPosts = $user->likedPosts()->pluck('post_id');
+        
         return Inertia::render(
                 "Posts/Show", 
                 [
-                    "post" => $post,
-                    "parent_posts" => $parentPosts,
+                    "post" => $showPost,
+                    "parent_post" => $parentPost,
                     "child_posts" => $childPosts,
+                    "likedPosts" => $likedPosts
                 ]
             );
     }
@@ -74,7 +90,6 @@ class PostController extends Controller
 
     public function store(PostRequest $request, Post $post)
     {
-        
         //●postの保存
         //Posts/ParentCreateからはparent_post_idが渡されなくて、Posts/ChildCreateからはparent_post_idが渡されるから子投稿の時だけparent_post_idが自動でfillされる寸法！(parent_post_idはnull許容)
         $post_input = $request->all(); 

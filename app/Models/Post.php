@@ -27,12 +27,12 @@ class Post extends Model
     
     public function getOrderedChildPosts()
     {
-        return $this->childPosts()->orderBy('created_at', 'DESC')->get();
+        return $this->childPosts()->withCount('likes')->orderBy('created_at', 'DESC')->get();
     }
     
     public function getOrderedParentPosts()
     {
-        return $this->parentPosts()->orderBy('created_at', 'DESC')->get();
+        return $this->parentPosts()->withCount('likes')->orderBy('created_at', 'DESC')->get();
     }
     
     public function hashtags()
@@ -53,6 +53,16 @@ class Post extends Model
     public function parentPost()
     {
         return $this->belongsTo(self::class);
+    }
+    
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id')->withTimestamps();
+    }
+    
+    public function likesCount()
+    {
+        return $this->likes->count();
     }
 
 

@@ -11,7 +11,26 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id')->withTimestamps();
+    }
+    
+    public function like(Post $post)
+    {
+        $this->likedPosts()->attach($post);
+    }
+    
+    public function unlike(Post $post)
+    {
+        $this->likedPosts()->detach($post);
+    }
+    
+    public function hasLiked(Post $post)
+    {
+        return $this->likedPosts->contains($post);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -75,10 +94,7 @@ class User extends Authenticatable
         return $this->belongsToMany(self::class, 'friends', 'user_id', 'friend_id');
     }
 
-    public function likedPosts()
-    {
-        return $this->belongsToMany(Like::class);
-    }
+    
 
     public function mbti()
     {

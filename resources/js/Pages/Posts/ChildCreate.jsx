@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link, useForm } from '@inertiajs/react';
 
 const ChildCreate = (props) => {
-    // フォームデータを初期化
+    const parent_post_id = props.parentId;
+    // フォームデータを初期
     const { data, setData, post } = useForm({
+        parent_post_id: parent_post_id,
         body: "",
         images: [], // 画像ファイルを複数のファイルとして管理するための配列
     });
@@ -70,6 +72,7 @@ const ChildCreate = (props) => {
             post('/store', data);
         }
     };
+   
     return (
         <div className="">
             <form onSubmit={handleSendPosts} encType="multipart/form-data">
