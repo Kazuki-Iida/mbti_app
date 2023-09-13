@@ -14,10 +14,13 @@ class FriendController extends Controller
     {
         $user = \Auth::user();
         $friends = $user->getOrderedFriends();
-        return response()->json([
-            'message' => '繋がり一覧の取得に成功しました',
-            'friends' => $friends,
-            ], 200);
+        
+        return Inertia::render(
+            "Posts/FriendList", 
+            [
+                "friends" => $friends,
+            ]
+        );
     }
     
     

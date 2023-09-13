@@ -37,10 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/store', [PostController::class, 'store'])->name('post.store');
     Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');
     
+    Route::get('friend/index', [FriendController::class, 'index'])->name('friend.index');
     Route::post('friend/request', [FriendController::class, 'request'])->name('friend.request');
     Route::delete('friend/unrequest', [FriendController::class, 'unrequest'])->name('friend.unrequest');
     Route::post('/request/permit', [FriendController::class, 'permit'])->name('friend.permit');
     Route::delete('/request/dismiss', [FriendController::class, 'dismiss'])->name('friend.dismiss');
+    
+    Route::post('/talk/store', [TalkController::class, 'store'])->name('talk.store');
     
     Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
     
