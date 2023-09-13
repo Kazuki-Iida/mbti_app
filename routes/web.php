@@ -12,7 +12,17 @@ use Inertia\Inertia;
 
 Route::get('/', [PostController::class, 'index'])->name('post.index');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
-
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 Route::middleware('auth')->group(function () {
     Route::post('/block', [UserController::class, 'block'])->name('block');
     Route::delete('/unblock', [UserController::class, 'unblock'])->name('unblock');

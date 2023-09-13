@@ -6,12 +6,14 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Register() {
+export default function Register(props) {
+    console.log(props.mbtis);
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
         password: '',
         password_confirmation: '',
+        mbti_id:Number ,
     });
 
     useEffect(() => {
@@ -26,7 +28,6 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('register'));
     };
 
@@ -36,83 +37,93 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
                     <TextInput
                         id="name"
                         name="name"
                         value={data.name}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full p-5"
                         autoComplete="name"
                         isFocused={true}
                         onChange={handleOnChange}
                         required
+                        placeholder = "ユーザー名"
                     />
 
                     <InputError message={errors.name} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
+                <div className="mt-10">
                     <TextInput
                         id="email"
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full p-5"
                         autoComplete="username"
                         onChange={handleOnChange}
                         required
+                        placeholder = "メールアドレス"
                     />
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
 
+                
+                <select type="number" name="mbti_id" onChange={handleOnChange}>
+                    {props.mbtis.map((mbti) => (
+                        <>
+                            <option type="number" value={ mbti.id }>{ mbti.name }</option>
+                        </>
+                    ))
+                    }
+                </select>
+                
+                
+                <div className="mt-10">
                     <TextInput
                         id="password"
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full p-5"
                         autoComplete="new-password"
                         onChange={handleOnChange}
                         required
+                        placeholder = "パスワード"
                     />
 
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
+                <div className="mt-10">
                     <TextInput
                         id="password_confirmation"
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full p-5"
                         autoComplete="new-password"
                         onChange={handleOnChange}
                         required
+                        placeholder = "パスワード確認"
                     />
 
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
+                
+                
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center justify-center mt-10">
                     <Link
                         href={route('login')}
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Already registered?
+                        登録済みの方はこちら
                     </Link>
 
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        Register
+                        登録
                     </PrimaryButton>
                 </div>
             </form>
