@@ -107,12 +107,12 @@ class User extends Authenticatable
     
     public function ownerTalks()
     {
-        return $this->hasMany(Talk::class, 'owner_id')
+        return $this->hasMany(Talk::class, 'owner_id');
     }
     
     public function guestTalks()
     {
-        return $this->hasMany(Talk::class, 'guest_id')
+        return $this->hasMany(Talk::class, 'guest_id');
     }
 
 }
