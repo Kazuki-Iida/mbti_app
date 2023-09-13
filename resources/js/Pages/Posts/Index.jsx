@@ -5,6 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import ParentCreate from './ParentCreate'; // ParentCreateコンポーネントをインポート
 import LikeButton from '../Button/LikeButton';
 import Menu from '../Common/Menu';
+import FriendRequestButton from '../Button/FriendRequestButton';
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 
@@ -12,6 +13,16 @@ function Index( props ) {
     console.log( props );
     const { posts ,user ,auth, likedPosts: initialLikedPosts} = props;
     
+　　const [isModalOpen, setIsModalOpen] = useState(false);
+
+      const openModal = () => {
+        setIsModalOpen(true);
+      };
+    
+      const closeModal = () => {
+        setIsModalOpen(false);
+      };
+        
     const [likedPosts, setLikedPosts] = useState(initialLikedPosts); 
     const [postsData, setPostsData] = useState(posts);
     
@@ -87,13 +98,25 @@ function Index( props ) {
                 { posts.map(( post ) => (
                     
                         <div key={post.id} className="post bg-neutral-100 border-t border-gray-300 text-gray-900  py-10 px-10 w-[100%] mt-1">
-                            <Link href={`/posts/${post.id}`}>
+                            
                                 <div class="flex justify-between items-center">
+
+               
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
-                                    <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
+                                    <button className="font-bold flex rounded-md border border-gray-400 p-1" onClick={openModal}><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
+                                    {isModalOpen && (
+                                        <div className="modal">
+                                          <div className="modal-content">
+                                            <span className="close" onClick={closeModal}>&times;</span>
+                                            <FriendRequestButton permitter_id={post.user.id} post_id={post.id}/>
+                                          </div>
+                                        </div>
+                                      )}
                                 </div>
-                                <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.body}</p>
-                            </Link>
+                                <Link href={`/posts/${post.id}`}>
+                                    <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>
+                                </Link>
+
                                 <div className="grid gap-5 grid-cols-2 w-full mt-5">
                                 {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
                                 <div className="">
