@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useForm } from '@inertiajs/react';
 
 const ChildCreate = (props) => {
+    console.log('props',props);
+    const {profileImage} = props;
     const parent_post_id = props.parentId;
     // フォームデータを初期
     const { data, setData, post } = useForm({
@@ -94,7 +96,7 @@ const ChildCreate = (props) => {
                     )}
                     
                     <div class="flex">
-                                <div className="mt-5 flex items-center"><img src="../img/pen.png" className="w-[35px] mr-1"/></div>
+                                <div className="mt-5 flex items-center"><img src={profileImage} className="w-[35px] mr-1"/></div>
                                 <textarea
                                     placeholder="投稿する"
                                     className="w-full h-[50px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"

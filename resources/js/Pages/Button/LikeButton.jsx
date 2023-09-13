@@ -33,9 +33,10 @@ const LikeButton = ({ postId, initialIsLiked, initialLikesCount, setLikedPosts }
 
     return (
         <div>
-            <button onClick={handleLike} className={`relative w-20 h-20 cursor-pointer ${isLiked ? 'liked' : ''}`}>
+            <button onClick={handleLike} className={`flex items-center relative w-20 h-20 cursor-pointer ${isLiked ? 'liked' : ''}`}>
                 <FavoriteIconAnim isLiked={isLiked} />
-                <p>{likesCount}</p>
+                <p className={`${isLiked ? 'hidden' : 'block text-2xl'}`}>♡</p>
+                <p className={`${isLiked ? 'font-bold relative right-5' : 'font-bold relative'}`}>{likesCount}</p>
             </button>
         </div>
     );
