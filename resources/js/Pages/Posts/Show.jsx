@@ -88,7 +88,8 @@ function Show( props ) {
                                 </>
                             ))}
                              <>
-                                <div key={parent_post.id} className="border-t border-gray-300 text-gray-900  py-5  w-[100%] mt-1">
+                                {parent_post !== null ? (
+                                <div key={parent_post.id} className="border-t border-gray-300 text-gray-900 py-5 w-[100%] mt-1">
                                     <div class="flex justify-between items-center">
                                         <p className="text-xl font-bold flex items-center object-cover"><img src="../img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{parent_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{parent_post.created_at}</span><span className="block text-xs">intp</span></div></p>
                                         <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="../img/hand.png" className="w-[25px] mr-1"/>friend request</button>
@@ -108,6 +109,9 @@ function Show( props ) {
                                         />
                                     </div>
                                 </div>
+                                ) : null}
+                            
+                                {parent_post !== null ? <ChildCreate /> : null}
                             </>
                         </div>
                 </div>
