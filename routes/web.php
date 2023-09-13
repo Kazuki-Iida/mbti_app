@@ -13,7 +13,17 @@ use Inertia\Inertia;
 Route::get('/', [PostController::class, 'index'])->name('post.index');
 Route::get("/posts/isliked", [PostController::class, "isLiked"]);
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
-
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 Route::middleware('auth')->group(function () {
     // Route::post('/block', [UserController::class, 'block'])->name('block');
     // Route::delete('/unblock', [UserController::class, 'unblock'])->name('unblock');
@@ -27,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/store', [PostController::class, 'store'])->name('post.store');
     Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');
     
+    Route::get('friend/index', [FriendController::class, 'index'])->name('friend.index');
     Route::get('/friend/request', [FriendController::class, 'request'])->name('friend.request');
     Route::post('/friend/request', [FriendController::class, 'request'])->name('friend.request');
     Route::delete('/friend/unrequest', [FriendController::class, 'unrequest'])->name('friend.unrequest');
@@ -34,6 +45,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/request/dismiss', [FriendController::class, 'dismiss'])->name('friend.dismiss');
     
     // Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
+
+    Route::post('/talk/store', [TalkController::class, 'store'])->name('talk.store');
+    
+    Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

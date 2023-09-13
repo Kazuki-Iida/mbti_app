@@ -40,6 +40,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mbti_id'
     ];
 
     /**
@@ -59,6 +60,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'mbti_id' => 'integer',
     ];
     
     
@@ -94,7 +96,6 @@ class User extends Authenticatable
         return $this->belongsToMany(self::class, 'friends', 'user_id', 'friend_id');
     }
 
-    
 
     public function mbti()
     {
@@ -105,4 +106,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    
+    public function ownerTalks()
+    {
+        return $this->hasMany(Talk::class, 'owner_id')
+    }
+    
+    public function guestTalks()
+    {
+        return $this->hasMany(Talk::class, 'guest_id')
+    }
+
 }
