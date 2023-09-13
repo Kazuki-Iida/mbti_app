@@ -15,8 +15,8 @@ Route::get("/posts/isliked", [PostController::class, "isLiked"]);
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 
 Route::middleware('auth')->group(function () {
-    Route::post('/block', [UserController::class, 'block'])->name('block');
-    Route::delete('/unblock', [UserController::class, 'unblock'])->name('unblock');
+    // Route::post('/block', [UserController::class, 'block'])->name('block');
+    // Route::delete('/unblock', [UserController::class, 'unblock'])->name('unblock');
     
     //ルーティングはlikeひとつにまとめてif文でいいねといいね解除してもいいけど別な方がいいかも？
     Route::post('/posts/{post}/like', [LikeController::class, "like"])->name('post.like');
@@ -27,12 +27,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/store', [PostController::class, 'store'])->name('post.store');
     Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');
     
-    Route::post('friend/request', [FriendController::class, 'request'])->name('friend.request');
-    Route::delete('friend/unrequest', [FriendController::class, 'unrequest'])->name('friend.unrequest');
+    Route::get('/friend/request', [FriendController::class, 'request'])->name('friend.request');
+    Route::post('/friend/request', [FriendController::class, 'request'])->name('friend.request');
+    Route::delete('/friend/unrequest', [FriendController::class, 'unrequest'])->name('friend.unrequest');
     Route::post('/request/permit', [FriendController::class, 'permit'])->name('friend.permit');
     Route::delete('/request/dismiss', [FriendController::class, 'dismiss'])->name('friend.dismiss');
     
-    Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
+    // Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
