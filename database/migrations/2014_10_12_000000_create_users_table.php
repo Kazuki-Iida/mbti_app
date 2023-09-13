@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->foreignId('mbti_id')->constrained();
-            $table->string('introduction', 200);
-            $table->string('image_path')->default('');
+            $table->string('introduction', 200)->nullable();
+            $table->string('image_path')->default('https://img-mdpr.freetls.fastly.net/common/web/common/img_protect.png?quality=40&auto=webp');
             $table->rememberToken();
             $table->timestamps();
         });

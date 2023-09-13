@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, usePage , useForm } from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Menu from "../Common/Menu";
 import ParentCreate from './ParentCreate'; // ParentCreateコンポーネントをインポート
 import LikeButton from '../Button/LikeButton';
@@ -72,6 +73,7 @@ function Index( props ) {
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
                 <h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1>
                 <div className="border-t border-gray-300 mt-5">
+                <Link href={route('logout')} method="post" as="button">logout</Link>
                     <a href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="img/pen.png"/>profile</a>
                     <a href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="img/hand.png"/>friends</a>
                 </div>
