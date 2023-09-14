@@ -46,11 +46,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/friend/getFriendsList', [FriendController::class, 'getFriendsList'])->name('getFriendsList');
     Route::get('/friend/getPermittersList', [FriendController::class, 'getPermittersList'])->name('getPermittersList');
-
     Route::post('/friend/request', [FriendController::class, 'request'])->name('friend.request');
     Route::delete('/friend/unrequest', [FriendController::class, 'unrequest'])->name('friend.unrequest');
     Route::post('/request/permit', [FriendController::class, 'permit'])->name('friend.permit');
     Route::delete('/request/dismiss', [FriendController::class, 'dismiss'])->name('friend.dismiss');
+    //
     Route::get('/request/index', [FriendRequestController::class, 'index'])->name('request.index');
     
     //チャットルート
