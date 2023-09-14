@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->foreignId('mbti_id')->constrained();
             $table->string('introduction', 200)->nullable();
-            $table->string('image_path')->default('https://img-mdpr.freetls.fastly.net/common/web/common/img_protect.png?quality=40&auto=webp');
+            $table->string('image_path')->default("https://www.kpopmonster.jp/wp-content/uploads/2023/06/aespa.jpg");
             $table->rememberToken();
             $table->timestamps();
         });
