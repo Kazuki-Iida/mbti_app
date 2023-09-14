@@ -11,7 +11,8 @@ import FriendRequestButton from '../Button/FriendRequestButton';
 
 function Index( props ) {
     console.log( props );
-    const { posts ,user ,auth, likedPosts: initialLikedPosts} = props;
+    const { posts ,user ,auth, likedPosts: initialLikedPosts, friends: initialFriendsList, permitters: initialRequestersList} = props;
+    
     
 　　const [openModalForPost, setOpenModalForPost] = useState(null);
 
@@ -25,10 +26,67 @@ function Index( props ) {
         
     const [likedPosts, setLikedPosts] = useState(initialLikedPosts); 
     const [postsData, setPostsData] = useState(posts);
+    const [friendsList, setFriendsList] = useState(initialFriendsList);
+    const [permittersList, setPermittersList] = useState(initialRequestersList);
     
     useEffect(() => {
-        setLikedPosts(props.likedPosts);
-    }, []); 
+    const fetchFriendsList = async () => {
+        try {
+            const response = await axios.get('/friend/getFriendsList');
+            console.log('Response data:', response.data);
+            setFriendsList(response.data);
+
+            
+            console.log('friendsList:', response.data);
+
+            
+        } catch (error) {
+            console.error('友達リストの取得に失敗しました: ', error);
+        }
+    };
+
+    fetchFriendsList(); 
+}, []); // 依存リストを空にする
+
+    useEffect(() => {
+    const fetchPermittersList = async () => {
+        try {
+            const response = await axios.get('/friend/getPermittersList');
+            console.log('Response data:', response.data); // データが正しく取得できていることを確認
+            setPermittersList(response.data);
+
+            // データの取得とfriendsListの更新が完了した後に処理を行う
+            console.log('permittersList:', response.data);
+
+            // ここで他の処理を行うことができます
+        } catch (error) {
+            console.error('申請リストの取得に失敗しました: ', error);
+        }
+    };
+
+    fetchPermittersList(); 
+}, []); // 依存リストを空にする
+        
+        // useEffect(() => {
+        //     console.log('friendsList:', friendsList);
+        // }, [friendsList]);
+        const isFriendOrRequested = (postUserId) => {
+            // 自分と相手のIDを取得
+            const myId = auth.user.id;
+            const friendId = postUserId;
+        
+            // 自分と相手が友達であるかを確認
+            const isFriend = friendsList.some((friend) => {
+                return (friend.id === postUserId) 
+            });
+        
+            // 自分が相手に友達申請を送っているかを確認
+            const isPermittered = permittersList.some((permitter) => permitter.id === friendId);
+        
+            return isFriend ? "フレンド" : isPermittered ? "申請済み" : "friend request";
+        };
+        
+
     
     const handleLike = async (postId, updatedLikesCount) => {
         // いいねの数を更新する
@@ -84,7 +142,6 @@ function Index( props ) {
                 <h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1>
                 <div className="border-t border-gray-300 mt-5">
                 <Link href={route('logout')} method="post" as="button">logout</Link>
-                <Link href={route('logout')} method="post" as="button">logout</Link>
                     <a href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</a>
                     <a href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="img/hand.png"/>friends</a>
                 </div>
@@ -101,11 +158,25 @@ function Index( props ) {
                             
                                 <div class="flex justify-between items-center">
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
-                                    {post.user_id !== props.auth.user.id && (
-                                      <button className="font-bold flex rounded-md border border-gray-400 p-1" onClick={() => openModal(post.id)}>
-                                        <img src="img/hand.png" className="w-[25px] mr-1" />friend request
-                                      </button>
-                                    )}
+                                   <button
+                                    className="font-bold flex rounded-md border border-gray-400 p-1"
+                                    onClick={() => {
+                                        const status = isFriendOrRequested(post.user_id);
+                                        if (status === "フレンド") {
+                                            // フレンドの場合の処理
+                                            alert("すでにフレンドです");
+                                        } else if (status === "申請済み") {
+                                            // 申請済みの場合の処理
+                                            alert("すでに申請済みです");
+                                        } else {
+                                            // フレンドでも申請済みでもない場合、モーダルを開く
+                                            openModal(post.id);
+                                        }
+                                    }}
+                                >
+                                    <img src="img/hand.png" className="w-[25px] mr-1" />
+                                    {isFriendOrRequested(post.user_id)}
+                                </button>
                                         {openModalForPost === post.id && (
                                           <div className="modal">
                                             <div className="modal-content">

@@ -31,6 +31,27 @@ class User extends Authenticatable
     {
         return $this->likedPosts->contains($post);
     }
+    
+    public function getOrderedFriends()
+    {
+        return $this->friends()->orderaby('created_at', 'DESC')->get();
+    }
+    
+    public function getRequesters()
+    {
+        return $this->requesters()->get();
+    }
+    
+    public function getPermitters()
+    {
+        return $this->permitters()->get();
+    }
+    
+    public function isFriend(int $friend_id)
+    {
+        return (boolean) $this->friends($friend_id)->first();
+    }
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -64,26 +85,16 @@ class User extends Authenticatable
     ];
     
     
-    
-    public function getOrderedFriends()
-    {
-        return $this->friends()->orderaby('created_at', 'DESC')->get();
-    }
-    
-    public function isFriend(int $friend_id)
-    {
-        return (boolean) $this->friends($friend_id)->first();
-    }
-    
+ 
 
     public function requesters()
     {
-        return $this->belongsToMany(self::class, 'friend_requests', 'requester_id', 'permitter_id');
+        return $this->belongsToMany(self::class, 'friend_requests', 'permitter_id', 'requester_id');
     }
 
     public function permitters()
     {
-        return $this->belongsToMany(self::class, 'friend_requests', 'permitter_id', 'requester_id');
+        return $this->belongsToMany(self::class, 'friend_requests', 'requester_id', 'permitter_id');
     }
 
     public function blocks()
