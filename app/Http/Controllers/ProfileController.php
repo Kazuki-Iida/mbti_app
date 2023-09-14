@@ -39,6 +39,22 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit');
     }
+    
+    public function updateImage(ProfileUpdateRequest $request)
+    {
+        dd($request);
+
+        $request_image = $request->file('image');
+       
+        if (isset($request_image))
+        {
+            $image_path = Cloudinary::upload($request_image->getRealPath())->getSecurePath();
+            $request->user()->image_path = $image_path;
+            $request->user()->save();
+        }
+
+        return Redirect::route('profile.edit');
+    }
 
     /**
      * Delete the user's account.
