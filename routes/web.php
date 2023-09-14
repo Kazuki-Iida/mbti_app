@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::post('/', [PostController::class, 'index'])->name('searched.index');
-    Route::get('/{mbti}', [PostController::class, 'index'])->name('filtered.index');
+    Route::get('/{mbti}', [PostController::class, 'index'])->where('mbti', '[0-9]+')->name('filtered.index');
     Route::get("/posts/isliked", [PostController::class, "isLiked"]);
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
     

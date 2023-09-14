@@ -17,12 +17,12 @@ class PostController extends Controller
 {
     public function index(Request $request, Post $post, Mbti $mbti)
     {
-        $mbti_id = 0;
+        $mbti_name = 'Home';
         $query = $post->getOrderedParentPosts();
         // dd($mbti->users()->pluck('id')->toArray());
         if (isset($mbti->name))
         {
-            $mbti_id = $mbti->id;
+            $mbti_name = $mbti->name;
             $mbtiUserIdArray = $mbti->users()->pluck('id')->toArray();
             $query->whereIn('user_id', $mbtiUserIdArray);
         }
@@ -52,7 +52,7 @@ class PostController extends Controller
                     "likedPosts" => $likedPosts,
                     "friends" => $friends,
                     "permitters" => $permitters,
-                    "mbti_id" => $mbti->id
+                    "mbti_name" => $mbti_name
                 ]
             );
     }
