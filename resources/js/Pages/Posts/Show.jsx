@@ -123,23 +123,24 @@ function Show( props ) {
                         <div key={post.id} className="border-t border-gray-300 text-gray-900  py-10 px-10 w-[100%] mt-1">
                                 <div class="flex justify-between items-center">
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs">{post.user.mbti.name}</span></div></p>
-                                    <button
-                                      className="font-bold flex rounded-md border border-gray-400 p-1"
-                                      onClick={() => {
-                                        const status = isFriendOrRequested(post.user_id);
-                                        if (status === "申請済み") {
-                                          // 申請済みの場合の処理
-                                          alert("すでに申請済みです");
-                                        } else {
-                                          // フレンドでも申請済みでもない場合、モーダルを開く
-                                          openModal(post.id);
-                                        }
-                                      }}
-                                    >
-                                      <img src="../img/hand.png" className="w-[25px] mr-1" />
-                                      {isFriendOrRequested(post.user_id)}
-                                    </button>
-                                
+                                    {auth.user.id !== post.user_id && (
+                                        <button
+                                          className="font-bold flex rounded-md border border-gray-400 p-1"
+                                          onClick={() => {
+                                            const status = isFriendOrRequested(post.user_id);
+                                            if (status === "申請済み") {
+                                              // 申請済みの場合の処理
+                                              alert("すでに申請済みです");
+                                            } else {
+                                              // フレンドでも申請済みでもない場合、モーダルを開く
+                                              openModal(post.id);
+                                            }
+                                          }}
+                                        >
+                                          <img src="../img/hand.png" className="w-[25px] mr-1" />
+                                          {isFriendOrRequested(post.user_id)}
+                                        </button>
+                                    )}
                                         {openModalForPost === post.id && (
                                           <div className="modal">
                                             <div className="modal-content">
@@ -191,38 +192,39 @@ function Show( props ) {
                                     <div key={child_post.id} className="border-t border-gray-300 text-gray-900  py-5  w-[100%] mt-1">
                                         <div class="flex justify-between items-center">
                                         <p className="text-xl font-bold flex items-center object-cover"><img src={child_post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{child_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{child_post.created_at}</span><span className="block text-xs">intp</span></div></p>
-                                        <button
-                                          className="font-bold flex rounded-md border border-gray-400 p-1"
-                                          onClick={() => {
-                                            const status = isFriendOrRequested(child_post.user_id);
-                                            if (status === "申請済み") {
-                                              // 申請済みの場合の処理
-                                              alert("すでに申請済みです");
-                                            } else {
-                                              // フレンドでも申請済みでもない場合、モーダルを開く
-                                              openModal(child_post.id);
-                                            }
-                                          }}
-                                        >
-                                          <img src="../img/hand.png" className="w-[25px] mr-1" />
-                                          {isFriendOrRequested(child_post.user_id)}
-                                        </button>
-                                    
+                                        {auth.user.id !== child_post.user_id && (
+                                            <button
+                                              className="font-bold flex rounded-md border border-gray-400 p-1"
+                                              onClick={() => {
+                                                const status = isFriendOrRequested(child_post.user_id);
+                                                if (status === "申請済み") {
+                                                  // 申請済みの場合の処理
+                                                  alert("すでに申請済みです");
+                                                } else {
+                                                  // フレンドでも申請済みでもない場合、モーダルを開く
+                                                  openModal(child_post.id);
+                                                }
+                                              }}
+                                            >
+                                              <img src="../img/hand.png" className="w-[25px] mr-1" />
+                                              {isFriendOrRequested(child_post.user_id)}
+                                            </button>
+                                        )}
                                             {openModalForPost === child_post.id && (
                                               <div className="modal">
                                                 <div className="modal-content">
                                                   <span className="close" onClick={closeModal}>&times;</span>
-                                                  <FriendRequestButton
-                                                    permitterId={child_post.user_id}
-                                                    postId={child_post.id}
-                                                    onRequestComplete={(success) => {
-                                                      if (success) {
-                                                      setShowBanner(true);
-                                                       console.log(showBanner)
-                                                        closeModal();
-                                                      }
-                                                    }}
-                                                  />
+                                                      <FriendRequestButton
+                                                        permitterId={child_post.user_id}
+                                                        postId={child_post.id}
+                                                        onRequestComplete={(success) => {
+                                                          if (success) {
+                                                          setShowBanner(true);
+                                                           console.log(showBanner)
+                                                            closeModal();
+                                                          }
+                                                        }}
+                                                      />
                                                 </div>
                                               </div>
                                             )}
@@ -249,7 +251,42 @@ function Show( props ) {
                                 <div key={parent_post.id} className="border-t border-gray-300 text-gray-900 py-5 w-[100%] mt-1">
                                     <div class="flex justify-between items-center">
                                         <p className="text-xl font-bold flex items-center object-cover"><img src="../img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{parent_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{parent_post.created_at}</span><span className="block text-xs">intp</span></div></p>
-                                        <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="../img/hand.png" className="w-[25px] mr-1"/>friend request</button>
+                                        {auth.user.id !== parent_post.user_id && (
+                                            <button
+                                              className="font-bold flex rounded-md border border-gray-400 p-1"
+                                              onClick={() => {
+                                                const status = isFriendOrRequested(parent_post.user_id);
+                                                if (status === "申請済み") {
+                                                  // 申請済みの場合の処理
+                                                  alert("すでに申請済みです");
+                                                } else {
+                                                  // フレンドでも申請済みでもない場合、モーダルを開く
+                                                  openModal(parent_post.id);
+                                                }
+                                              }}
+                                            >
+                                              <img src="../img/hand.png" className="w-[25px] mr-1" />
+                                              {isFriendOrRequested(parent_post.user_id)}
+                                            </button>
+                                        )}
+                                            {openModalForPost === parent_post.id && (
+                                              <div className="modal">
+                                                <div className="modal-content">
+                                                  <span className="close" onClick={closeModal}>&times;</span>
+                                                      <FriendRequestButton
+                                                        permitterId={parent_post.user_id}
+                                                        postId={parent_post.id}
+                                                        onRequestComplete={(success) => {
+                                                          if (success) {
+                                                          setShowBanner(true);
+                                                           console.log(showBanner)
+                                                            closeModal();
+                                                          }
+                                                        }}
+                                                      />
+                                                </div>
+                                              </div>
+                                            )}
                                     </div>
                                     <Link href={`/posts/${parent_post.id}`}>
                                         <p className="text-md break-words mt-5 leading-8 tracking-tight">{parent_post.body}</p>
