@@ -20,4 +20,8 @@ class Talk extends Model
     {
         return $this->hasMany(Message::class);
     }
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

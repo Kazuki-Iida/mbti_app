@@ -17,7 +17,7 @@ class TalkController extends Controller
                         'last_sent_at' => Carbon::now(),
                         'owner_id' => $user_id,
                         'guest_id' => $request['guest_id'],
-                    ])
+                    ]);
                 if ($saveSuccess)
                 {
                     return response()->json(['message' => 'トークの作成に成功しました'], 200);

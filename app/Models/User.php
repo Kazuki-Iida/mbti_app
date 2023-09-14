@@ -85,8 +85,23 @@ class User extends Authenticatable
         'mbti_id' => 'integer',
     ];
     
-   
 
+    
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    } 
+    
+    public function getOrderedFriends()
+    {
+        return $this->friends()->orderaby('created_at', 'DESC')->get();
+    }
+    
+    public function isFriend(int $friend_id)
+    {
+        return (boolean) $this->friends($friend_id)->first();
+    }
+   
 
     public function requesters()
     {

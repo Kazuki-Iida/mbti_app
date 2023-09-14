@@ -4,6 +4,7 @@ use App\Http\Controllers\FriendController;
 use App\Http\Controllers\FriendRequestController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PostController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/request/permit', [FriendController::class, 'permit'])->name('friend.permit');
     Route::delete('/request/dismiss', [FriendController::class, 'dismiss'])->name('friend.dismiss');
     Route::get('/request/index', [FriendRequestController::class, 'index'])->name('request.index');
+    
+    //チャットルート
+    Route::get('/chat/{talk}', [MessageController::class,'show'])->name('chat.index');
+    Route::get('/messages/{talk}', [MessageController::class, 'fetchMessages'])->name('chat.fetch');
+    //Route::get('/messages', [MessageController::class, 'fetchMessages'])->name('chat.fetch');
+    Route::post('/messages', [MessageController::class, 'sendMessage'])->name('chat.store');
     
     // Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
 
