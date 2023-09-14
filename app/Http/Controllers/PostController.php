@@ -13,13 +13,24 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    public function index(Post $post)
+    public function index(Request $request, Post $post)
     {
-        //絞り込みとか検索のコードはあとで！！
-        $posts = $post->getOrderedParentPosts();
-        
-        $user = auth()->user();
-        $likedPosts = $user->likedPosts()->pluck('post_id');
+        if (isset($request['search']))
+        {
+            $search = $request['search'];
+            $spaceConversion = mb_convert_kana($search, 's');
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+            $query = Post::query();
+            foreach($wordArraySearched as $value) {
+                $query = $post->where('body', 'like', '%'.$value.'%');
+            }
+            $query->withCount('likes')->orderBy('created_at', 'desc')->get();
+        } else {
+            $posts = $query->getOrderedParentPosts();
+            
+            $user = auth()->user();
+            $likedPosts = $user->likedPosts()->pluck('post_id');
+        }
         
         $friends = $user->friends()->get(); 
         

@@ -61,6 +61,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image_path',
         'mbti_id'
     ];
 
@@ -84,8 +85,19 @@ class User extends Authenticatable
         'mbti_id' => 'integer',
     ];
     
+
     
- 
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    } 
+    public function isFriend(int $friend_id)
+    {
+        return (boolean) $this->friends($friend_id)->first();
+    }
+   
+
 
     public function requesters()
     {
