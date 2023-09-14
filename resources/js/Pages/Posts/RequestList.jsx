@@ -10,7 +10,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function RequestList( props ) {
-    const {auth} = props;
+    const {auth, requesters, mbtis} = props;
+    
+    const handleApproval = async (requester) => {
+      try {
+        // API エンドポイントを呼び出し、承認を実行
+        const response = await axios.post('/request/permit', { requester: requester });
+    
+        if (response.status === 200) {
+          // 承認が成功した場合、ここで該当の requester を非表示にする処理を実行
+          const requesterElement = document.getElementById(`requester-${requester.id}`);
+          if (requesterElement) {
+            requesterElement.style.display = 'none';
+          }
+          alert('繋がり申請が承認されました！');
+        } else {
+          alert('繋がり申請の承認に失敗しました。');
+        }
+      } catch (error) {
+        alert('エラーが発生しました。繋がり申請の承認に失敗しました。');
+        console.error(error);
+      }
+    };
+    
     return (
         <>  
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
@@ -28,79 +50,28 @@ function RequestList( props ) {
             <div id="container" class="flex justify-between w-[82%] ml-[18%]">
                 <div className="w-[52%] mt-14">
                     <div className="font-bold pl-10 text-2xl flex"><img className="w-[30px] h-[30px] mr-[20px]"src="/img/human.png"/><p>繋がり申請</p></div>
-                    
-                    <div className="mt-10 pl-10">
+                    {requesters.map((requester) => (
+                      <div className="mt-10 pl-10" key={requester.id} id={`requester-${requester.id}`}>
                         <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
+                          <div className="flex items-center">
+                            <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
+                            <div>
+                              <p className="font-bold text-xl">{requester.name}</p>
+                              <span className="font-bold">
+                                {mbtis.find((mbti) => mbti.id === requester.mbti_id)?.name}
+                              </span>
                             </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
+                          </div>
+                          <button
+                            className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"
+                            onClick={() => handleApproval(requester)}
+                          >
+                            <img className="w-[30px] h-[30px]" src="/img/hand.png" />
+                            <p className="ml-5">承認</p>
+                          </button>
                         </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
+                      </div>
+                    ))}
                 </div>
             </div>
         </>
