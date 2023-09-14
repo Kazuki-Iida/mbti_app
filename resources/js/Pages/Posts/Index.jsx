@@ -13,14 +13,14 @@ function Index( props ) {
     console.log( props );
     const { posts ,user ,auth, likedPosts: initialLikedPosts} = props;
     
-　　const [isModalOpen, setIsModalOpen] = useState(false);
+　　const [openModalForPost, setOpenModalForPost] = useState(null);
 
-      const openModal = () => {
-        setIsModalOpen(true);
+      const openModal = (postId) => {
+        setOpenModalForPost(postId);
       };
     
       const closeModal = () => {
-        setIsModalOpen(false);
+        setOpenModalForPost(null);
       };
         
     const [likedPosts, setLikedPosts] = useState(initialLikedPosts); 
@@ -100,18 +100,28 @@ function Index( props ) {
                         <div key={post.id} className="post bg-neutral-100 border-t border-gray-300 text-gray-900  py-10 px-10 w-[100%] mt-1">
                             
                                 <div class="flex justify-between items-center">
-
-               
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
-                                    <button className="font-bold flex rounded-md border border-gray-400 p-1" onClick={openModal}><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
-                                    {isModalOpen && (
-                                        <div className="modal">
-                                          <div className="modal-content">
-                                            <span className="close" onClick={closeModal}>&times;</span>
-                                            <FriendRequestButton permitter_id={post.user.id} post_id={post.id}/>
+                                    {post.user_id !== props.auth.user.id && (
+                                      <button className="font-bold flex rounded-md border border-gray-400 p-1" onClick={() => openModal(post.id)}>
+                                        <img src="img/hand.png" className="w-[25px] mr-1" />friend request
+                                      </button>
+                                    )}
+                                        {openModalForPost === post.id && (
+                                          <div className="modal">
+                                            <div className="modal-content">
+                                              <span className="close" onClick={closeModal}>&times;</span>
+                                              <FriendRequestButton
+                                                permitterId={post.user_id}
+                                                postId={post.id}
+                                                onRequestComplete={(success) => {
+                                                  if (success) {
+                                                    closeModal();
+                                                  }
+                                                }}
+                                              />
+                                            </div>
                                           </div>
-                                        </div>
-                                      )}
+                                        )}
                                 </div>
                                 <Link href={`/posts/${post.id}`}>
                                     <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>

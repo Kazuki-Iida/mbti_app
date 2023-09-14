@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios'; // axiosをインポート
+import { useForm } from '@inertiajs/react';
 
-function FriendRequestButton({ permitter_id, post_id }) {
-  const [message, setMessage] = useState('');
+function FriendRequestButton({ permitterId, postId, onRequestComplete }) {
+  const { data, setData } = useForm({
+    message: '', // 初期値を設定
+    permitter_id: permitterId,
+    post_id: postId,
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
-    // メッセージと permitter_id を含むリクエストデータを作成
-    const requestData = {
-      message,
-      permitter_id,
-      post_id
-    };
+
+    console.log('fetch リクエスト:', {
+      url: '/friend/request', // リクエストURL
+      method: 'POST', // HTTPメソッド
+      data: data, // 送信データ
+      headers: {
+        'Content-Type': 'application/json', // リクエストヘッダー
+        'X-CSRF-TOKEN': csrf_token, // CSRFトークン（必要な場合）
+      },
+    });
 
     try {
       // axiosを使用してサーバーにリクエストを送信
-      const response = await axios.post(`/friend/request`, requestData, {
-        headers: {
-          'Content-Type': 'application/json',
-          // X-CSRF-TOKENを追加する場合（LaravelのCSRF保護が有効な場合）
-           'X-CSRF-TOKEN': csrf_token,
-        },
-      });
+      const response = await axios.post('/friend/request', data);
 
       if (response.status === 200) {
         console.log('フレンドリクエストが送信されました。');
+        onRequestComplete(true);
       } else {
         console.error('フレンドリクエストの送信に失敗しました。');
+        onRequestComplete(false);
       }
     } catch (error) {
       console.error('エラーが発生しました: ', error);
+      onRequestComplete(false);
     }
-    console.log('リクエストデータ:', requestData);
   };
 
   return (
@@ -42,8 +47,8 @@ function FriendRequestButton({ permitter_id, post_id }) {
           <label htmlFor="message">メッセージ:</label>
           <textarea
             id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={data.message} // データを表示
+            onChange={(e) => setData('message', e.target.value)} // データを更新
             required
           />
         </div>

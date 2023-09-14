@@ -4,13 +4,16 @@ const UpdateProfileImage = (props) => {
     const { profileImage, auth } = props
     // フォームデータを初期化
     const { data, setData, patch } = useForm({
+
         image: null, // 画像ファイルを複数のファイルとして管理するための配列
     });
     // プレビュー用のステートを初期化
     const [imagePreview, setImagePreview] = useState(null);
      // 画像ファイルが選択されたときの処理
     const handleFileChange = (e) => {
+
         const image = e.target.files;
+
         // プレビューを表示
         let preview = null;
             const reader = new FileReader();
@@ -18,6 +21,7 @@ const UpdateProfileImage = (props) => {
                 preview = e.target.result;
                 //プレビューを更新
                 setImagePreview(preview);
+
                 reader.readAsDataURL(image[0]);
             }
         // フォームデータに選択した画像を追加
@@ -61,6 +65,7 @@ const UpdateProfileImage = (props) => {
                 <input type="file" id="image" onChange={handleFileChange} accept="image/*" />
                 <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="img/post.png" className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
             </form>
+
         </>
     );
 }

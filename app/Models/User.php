@@ -85,8 +85,8 @@ class User extends Authenticatable
         'mbti_id' => 'integer',
     ];
     
-    
- 
+   
+
 
     public function requesters()
     {
