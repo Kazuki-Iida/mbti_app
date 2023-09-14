@@ -13,14 +13,14 @@ function Index( props ) {
     console.log( props );
     const { posts ,user ,auth, likedPosts: initialLikedPosts} = props;
     
-　　const [isModalOpen, setIsModalOpen] = useState(false);
+　　const [openModalForPost, setOpenModalForPost] = useState(null);
 
-      const openModal = () => {
-        setIsModalOpen(true);
+      const openModal = (postId) => {
+        setOpenModalForPost(postId);
       };
     
       const closeModal = () => {
-        setIsModalOpen(false);
+        setOpenModalForPost(null);
       };
         
     const [likedPosts, setLikedPosts] = useState(initialLikedPosts); 
@@ -78,7 +78,9 @@ function Index( props ) {
         <>  
         <div className="fixed z-10 flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
             <p className="font-bold text-xl mr-5">home</p>
-            <input type="text" placeholder = "🔎検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/>
+            <form onSubmit={searchSubmit} className="mt-6 space-y-6">
+                <input type="text" placeholder = "🔎検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/>
+            </form>
         </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
                 <h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1>
@@ -100,18 +102,28 @@ function Index( props ) {
                         <div key={post.id} className="post bg-neutral-100 border-t border-gray-300 text-gray-900  py-10 px-10 w-[100%] mt-1">
                             
                                 <div class="flex justify-between items-center">
-
-               
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
-                                    <button className="font-bold flex rounded-md border border-gray-400 p-1" onClick={openModal}><img src="img/hand.png" className="w-[25px] mr-1"/>friend request</button>
-                                    {isModalOpen && (
-                                        <div className="modal">
-                                          <div className="modal-content">
-                                            <span className="close" onClick={closeModal}>&times;</span>
-                                            <FriendRequestButton permitter_id={post.user.id} post_id={post.id}/>
+                                    {post.user_id !== props.auth.user.id && (
+                                      <button className="font-bold flex rounded-md border border-gray-400 p-1" onClick={() => openModal(post.id)}>
+                                        <img src="img/hand.png" className="w-[25px] mr-1" />friend request
+                                      </button>
+                                    )}
+                                        {openModalForPost === post.id && (
+                                          <div className="modal">
+                                            <div className="modal-content">
+                                              <span className="close" onClick={closeModal}>&times;</span>
+                                              <FriendRequestButton
+                                                permitterId={post.user_id}
+                                                postId={post.id}
+                                                onRequestComplete={(success) => {
+                                                  if (success) {
+                                                    closeModal();
+                                                  }
+                                                }}
+                                              />
+                                            </div>
                                           </div>
-                                        </div>
-                                      )}
+                                        )}
                                 </div>
                                 <Link href={`/posts/${post.id}`}>
                                     <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>

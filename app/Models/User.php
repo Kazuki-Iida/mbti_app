@@ -31,6 +31,27 @@ class User extends Authenticatable
     {
         return $this->likedPosts->contains($post);
     }
+    
+    public function getOrderedFriends()
+    {
+        return $this->friends()->orderaby('created_at', 'DESC')->get();
+    }
+    
+    public function getRequesters()
+    {
+        return $this->requesters()->get();
+    }
+    
+    public function getPermitters()
+    {
+        return $this->permitters()->get();
+    }
+    
+    public function isFriend(int $friend_id)
+    {
+        return (boolean) $this->friends($friend_id)->first();
+    }
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -40,6 +61,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image_path',
         'mbti_id'
     ];
 
@@ -63,6 +85,7 @@ class User extends Authenticatable
         'mbti_id' => 'integer',
     ];
     
+
     
     public function messages()
     {
@@ -78,7 +101,7 @@ class User extends Authenticatable
     {
         return (boolean) $this->friends($friend_id)->first();
     }
-    
+   
 
     public function requesters()
     {
