@@ -34,7 +34,7 @@ class User extends Authenticatable
     
     public function getOrderedFriends()
     {
-        return $this->friends()->orderaby('created_at', 'DESC')->get();
+        return $this->friends()->orderby('created_at', 'DESC')->get();
     }
     
     public function getRequesters()
