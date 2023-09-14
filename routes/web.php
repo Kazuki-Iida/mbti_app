@@ -11,9 +11,7 @@ use Inertia\Inertia;
 
 //何となくアルファベット順
 
-Route::get('/', [PostController::class, 'index'])->name('index');
-Route::get("/posts/isliked", [PostController::class, "isLiked"]);
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -28,6 +26,11 @@ Route::get('/welcome', function () {
 Route::middleware('auth')->group(function () {
     // Route::post('/block', [UserController::class, 'block'])->name('block');
     // Route::delete('/unblock', [UserController::class, 'unblock'])->name('unblock');
+    
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::post('/', [PostController::class, 'index'])->name('filtered.index');
+    Route::get("/posts/isliked", [PostController::class, "isLiked"]);
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
     
     //ルーティングはlikeひとつにまとめてif文でいいねといいね解除してもいいけど別な方がいいかも？
     Route::post('/posts/{post}/like', [LikeController::class, "like"])->name('post.like');
