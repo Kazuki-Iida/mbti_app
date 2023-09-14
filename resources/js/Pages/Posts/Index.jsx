@@ -26,10 +26,13 @@ function Index( props ) {
         setOpenModalForPost(null);
       };
         
-        
-    const searchSubmit = () => {
-        
-    }    
+    const {data , setData , post} = useForm({
+        search:"",
+    })
+    const searchSubmit = async (e) => {
+        e.preventDefault();
+        post('/');
+    }
     const [likedPosts, setLikedPosts] = useState(initialLikedPosts); 
     const [postsData, setPostsData] = useState(posts);
     const [friendsList, setFriendsList] = useState(initialFriendsList);
@@ -143,7 +146,9 @@ function Index( props ) {
         <div className="fixed z-10 flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
             <p className="font-bold text-xl mr-5">home</p>
             <form onSubmit={searchSubmit} className="flex w-full">
-                <input type="text" placeholder = "検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/><button type="submit"className="block p-1 px-5 rounded-md bg-gray-200 ml-5"><FontAwesomeIcon icon={faSearch} size="lg" color="#000" /></button>
+
+                <input onChange={(e) => setData('search',e.target.value)} name="search" type="text" placeholder = "検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/><button type="submit"className="block p-1 px-5 rounded-md bg-gray-200 ml-5">🔍</button>
+
             </form>
         </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">

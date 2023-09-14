@@ -25,18 +25,15 @@ class PostController extends Controller
             foreach($wordArraySearched as $value) {
                 $query = $post->where('body', 'like', '%'.$value.'%');
             }
-            $query->withCount('likes')->orderBy('created_at', 'desc')->get();
+            $posts = $query->withCount('likes')->orderBy('created_at', 'desc')->get();
         } else {
             $posts = $post->getOrderedParentPosts();
-            
-            $user = auth()->user();
-            $likedPosts = $user->likedPosts()->pluck('post_id');
         }
-        
+        $user = auth()->user();
+        $likedPosts = $user->likedPosts()->pluck('post_id');
         $friends = $user->friends()->get(); 
         
-        $permitters = $user->permitters()->get(); 
-        
+        $permitters = $user->permitters()->get();
         return Inertia::render(
                 "Posts/Index", 
                 ["posts" => $posts,
