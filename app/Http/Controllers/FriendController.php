@@ -26,7 +26,6 @@ class FriendController extends Controller
     
     public function request(Request $request)
     {
-        // dd($request);
         $requester = \Auth::user();
         $permitterId = $request['permitter_id'];
         
@@ -35,11 +34,13 @@ class FriendController extends Controller
             try
             {
                 $saveSuccess = FriendRequest::create([
-                                    'requester' => $requester->id,
-                                    'permitter' => $permitterId,
+                                    'requester_id' => $requester->id,
+                                    'permitter_id' => $permitterId,
                                     'message' => $request['message'],
                                     'post_id' => $request['post_id']
                                 ]);
+                
+                // dd($saveSuccess);
                 if ($saveSuccess)
                 {
                     return response()->json(['message' => '繋がり申請に成功しました'], 200);
@@ -47,9 +48,11 @@ class FriendController extends Controller
                     return response()->json(['message' => '繋がり申請に失敗しました'], 500);
                 }
             } catch (Exception $e) {
+                // dd($request);
                 return response()->json(['message' => '繋がり申請に失敗しました'], 500);
             }
         } else {
+            // dd($request);
             return response()->json(['message' => 'すでに繋がっています'], 500);
         }
     }
