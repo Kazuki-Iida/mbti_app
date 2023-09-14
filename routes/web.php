@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 //何となくアルファベット順
 
-Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get('/', [PostController::class, 'index'])->name('index');
 Route::get("/posts/isliked", [PostController::class, "isLiked"]);
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 Route::get('/dashboard', function () {
@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/image', [ProfileController::class, 'updateImage'])->name('profile.image.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
