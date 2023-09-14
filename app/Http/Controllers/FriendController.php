@@ -23,11 +23,29 @@ class FriendController extends Controller
         );
     }
     
+    public function getFriendsList()
+    {
+        $user = auth()->user(); 
+        $friends = $user->friends()->get(); 
+    
+        return response()->json($friends);
+    }
+    
+    public function getPermittersList()
+    {
+        $user = \Auth::user(); 
+        $permitters = $user->permitters()->get(); 
+
+    
+        return response()->json($permitters);
+    }
+        
     
     public function request(Request $request)
     {
         $requester = \Auth::user();
         $permitterId = $request['permitter_id'];
+        
         
         if (!$requester->isFriend($permitterId))
         {

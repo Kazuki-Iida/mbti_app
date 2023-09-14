@@ -33,10 +33,16 @@ class PostController extends Controller
             $likedPosts = $user->likedPosts()->pluck('post_id');
         }
         
+        $friends = $user->friends()->get(); 
+        
+        $permitters = $user->permitters()->get(); 
+        
         return Inertia::render(
                 "Posts/Index", 
                 ["posts" => $posts,
-                "likedPosts" => $likedPosts]
+                "likedPosts" => $likedPosts,
+                "friends" => $friends,
+                "permitters" => $permitters]
             );
     }
 

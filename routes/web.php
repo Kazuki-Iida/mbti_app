@@ -43,6 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');
     
     Route::get('/friend/index', [FriendController::class, 'index'])->name('friend.index');
+
+    Route::get('/friend/getFriendsList', [FriendController::class, 'getFriendsList'])->name('getFriendsList');
+    Route::get('/friend/getPermittersList', [FriendController::class, 'getPermittersList'])->name('getPermittersList');
+
     Route::post('/friend/request', [FriendController::class, 'request'])->name('friend.request');
     Route::delete('/friend/unrequest', [FriendController::class, 'unrequest'])->name('friend.unrequest');
     Route::post('/request/permit', [FriendController::class, 'permit'])->name('friend.permit');

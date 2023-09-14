@@ -87,20 +87,22 @@ class User extends Authenticatable
     
 
     
+
     public function messages()
     {
         return $this->hasMany(Message::class);
     } 
  
 
+
     public function requesters()
     {
-        return $this->belongsToMany(self::class, 'friend_requests', 'requester_id', 'permitter_id');
+        return $this->belongsToMany(self::class, 'friend_requests', 'permitter_id', 'requester_id');
     }
 
     public function permitters()
     {
-        return $this->belongsToMany(self::class, 'friend_requests', 'permitter_id', 'requester_id');
+        return $this->belongsToMany(self::class, 'friend_requests', 'requester_id', 'permitter_id');
     }
 
     public function blocks()
