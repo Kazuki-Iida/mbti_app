@@ -5,17 +5,94 @@ import { useState } from "react";
 import Menu from "../Common/Menu";
 import ChildCreate from './ChildCreate';
 import LikeButton from '../Button/LikeButton';
+import FriendRequestButton from '../Button/FriendRequestButton';
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 
 function Show( props ) {
-    const { parent_post, post,auth, child_posts, likedPosts: initialLikedPosts } = props;
+    const { parent_post, post,auth, child_posts, likedPosts: initialLikedPosts, friends: initialFriendsList, permitters: initialRequestersList} = props;
     
     console.log('post',post);
     console.log('parent_post',parent_post);
     console.log('child_posts',child_posts);
     console.log('likedpost', initialLikedPosts)
     
+    //ここからフレンド申請
+    const [showBanner, setShowBanner] = useState(false); // バナーの表示状態を管理
+    
+    
+  
+　　const [openModalForPost, setOpenModalForPost] = useState(null);
+
+      const openModal = (postId) => {
+        setOpenModalForPost(postId);
+      };
+    
+      const closeModal = () => {
+        setOpenModalForPost(null);
+      };
+      
+     const [friendsList, setFriendsList] = useState(initialFriendsList);
+    const [permittersList, setPermittersList] = useState(initialRequestersList);
+    
+    useEffect(() => {
+    const fetchFriendsList = async () => {
+        try {
+            const response = await axios.get('/friend/getFriendsList');
+            console.log('Response data:', response.data);
+            setFriendsList(response.data);
+
+            
+            console.log('friendsList:', response.data);
+
+            
+        } catch (error) {
+            console.error('友達リストの取得に失敗しました: ', error);
+        }
+    };
+
+    fetchFriendsList(); 
+}, []); // 依存リストを空にする
+
+    useEffect(() => {
+    const fetchPermittersList = async () => {
+        try {
+            const response = await axios.get('/friend/getPermittersList');
+            console.log('Response data:', response.data); // データが正しく取得できていることを確認
+            setPermittersList(response.data);
+
+            // データの取得とfriendsListの更新が完了した後に処理を行う
+            console.log('permittersList:', response.data);
+
+            // ここで他の処理を行うことができます
+        } catch (error) {
+            console.error('申請リストの取得に失敗しました: ', error);
+        }
+    };
+
+    fetchPermittersList(); 
+}, []); // 依存リストを空にする
+     const isFriendOrRequested = (postUserId) => {
+            // 自分と相手のIDを取得
+            const myId = auth.user.id;
+            const friendId = postUserId;
+        
+            // 自分と相手が友達であるかを確認
+            const isFriend = friendsList.some((friend) => {
+                return (friend.id === postUserId) 
+            });
+        
+            // 自分が相手に友達申請を送っているかを確認
+            const isPermittered = permittersList.some((permitter) => permitter.id === friendId);
+        
+            return isFriend ? "フレンド" : isPermittered ? "申請済み" : "friend request";
+        };
+        
+    
+    //ここまでフレンド申請
+    
+    
+    //ここからいいね機能
     const [likedPosts, setLikedPosts] = useState(initialLikedPosts); 
     
     
@@ -46,7 +123,42 @@ function Show( props ) {
                         <div key={post.id} className="border-t border-gray-300 text-gray-900  py-10 px-10 w-[100%] mt-1">
                                 <div class="flex justify-between items-center">
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs">{post.user.mbti.name}</span></div></p>
-                                    <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="../img/hand.png" className="w-[25px] mr-1"/>friend request</button>
+                                    <button
+                                      className="font-bold flex rounded-md border border-gray-400 p-1"
+                                      onClick={() => {
+                                        const status = isFriendOrRequested(post.user_id);
+                                        if (status === "申請済み") {
+                                          // 申請済みの場合の処理
+                                          alert("すでに申請済みです");
+                                        } else {
+                                          // フレンドでも申請済みでもない場合、モーダルを開く
+                                          openModal(post.id);
+                                        }
+                                      }}
+                                    >
+                                      <img src="../img/hand.png" className="w-[25px] mr-1" />
+                                      {isFriendOrRequested(post.user_id)}
+                                    </button>
+                                
+                                        {openModalForPost === post.id && (
+                                          <div className="modal">
+                                            <div className="modal-content">
+                                              <span className="close" onClick={closeModal}>&times;</span>
+                                              <FriendRequestButton
+                                                permitterId={post.user_id}
+                                                postId={post.id}
+                                                onRequestComplete={(success) => {
+                                                  if (success) {
+                                                  setShowBanner(true);
+                                                   console.log(showBanner)
+                                                    closeModal();
+                                                  }
+                                                }}
+                                              />
+                                            </div>
+                                          </div>
+                                        )}
+                                    
                                 </div>
                                 <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.body}</p>
                                 <div className="grid gap-5 grid-cols-2 w-full mt-5">
@@ -78,8 +190,42 @@ function Show( props ) {
                                 <>
                                     <div key={child_post.id} className="border-t border-gray-300 text-gray-900  py-5  w-[100%] mt-1">
                                         <div class="flex justify-between items-center">
-                                        <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{child_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{child_post.created_at}</span><span className="block text-xs">intp</span></div></p>
-                                        <button className="font-bold flex rounded-md border border-gray-400 p-1"><img src="../img/hand.png" className="w-[25px] mr-1"/>friend request</button>
+                                        <p className="text-xl font-bold flex items-center object-cover"><img src={child_post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{child_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{child_post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                        <button
+                                          className="font-bold flex rounded-md border border-gray-400 p-1"
+                                          onClick={() => {
+                                            const status = isFriendOrRequested(child_post.user_id);
+                                            if (status === "申請済み") {
+                                              // 申請済みの場合の処理
+                                              alert("すでに申請済みです");
+                                            } else {
+                                              // フレンドでも申請済みでもない場合、モーダルを開く
+                                              openModal(child_post.id);
+                                            }
+                                          }}
+                                        >
+                                          <img src="../img/hand.png" className="w-[25px] mr-1" />
+                                          {isFriendOrRequested(child_post.user_id)}
+                                        </button>
+                                    
+                                            {openModalForPost === child_post.id && (
+                                              <div className="modal">
+                                                <div className="modal-content">
+                                                  <span className="close" onClick={closeModal}>&times;</span>
+                                                  <FriendRequestButton
+                                                    permitterId={child_post.user_id}
+                                                    postId={child_post.id}
+                                                    onRequestComplete={(success) => {
+                                                      if (success) {
+                                                      setShowBanner(true);
+                                                       console.log(showBanner)
+                                                        closeModal();
+                                                      }
+                                                    }}
+                                                  />
+                                                </div>
+                                              </div>
+                                            )}
                                     </div>
                                     <Link href={`/posts/${child_post.id}`}>
                                         <p className="text-md break-words mt-5 leading-8 tracking-tight">{child_post.body}</p>

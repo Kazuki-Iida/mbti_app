@@ -74,13 +74,19 @@ class PostController extends Controller
         $user = auth()->user();
         $likedPosts = $user->likedPosts()->pluck('post_id');
         
+        $friends = $user->friends()->get(); 
+        
+        $permitters = $user->permitters()->get(); 
+        
         return Inertia::render(
                 "Posts/Show", 
                 [
                     "post" => $showPost,
                     "parent_post" => $parentPost,
                     "child_posts" => $childPosts,
-                    "likedPosts" => $likedPosts
+                    "likedPosts" => $likedPosts,
+                    "friends" => $friends,
+                    "permitters" => $permitters
                 ]
             );
     }

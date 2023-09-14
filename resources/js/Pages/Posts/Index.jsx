@@ -15,7 +15,10 @@ function Index( props ) {
     console.log( props );
     const { posts ,user ,auth, likedPosts: initialLikedPosts, friends: initialFriendsList, permitters: initialRequestersList} = props;
     
+    const [showBanner, setShowBanner] = useState(false); // バナーの表示状態を管理
     
+    
+  
 　　const [openModalForPost, setOpenModalForPost] = useState(null);
 
       const openModal = (postId) => {
@@ -163,6 +166,7 @@ function Index( props ) {
                 </div>
             </div>
             <div id="container" class="flex justify-between w-[82%] ml-[18%]">
+            
                 {/* <InfiniteScroll posts = { posts }/> */}
                 <div className="w-[52%] mt-14">
                 { posts.map(( post ) => (
@@ -171,25 +175,24 @@ function Index( props ) {
                             
                                 <div class="flex justify-between items-center">
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
-                                   <button
-                                    className="font-bold flex rounded-md border border-gray-400 p-1"
-                                    onClick={() => {
+                         
+                                    <button
+                                      className="font-bold flex rounded-md border border-gray-400 p-1"
+                                      onClick={() => {
                                         const status = isFriendOrRequested(post.user_id);
-                                        if (status === "フレンド") {
-                                            // フレンドの場合の処理
-                                            alert("すでにフレンドです");
-                                        } else if (status === "申請済み") {
-                                            // 申請済みの場合の処理
-                                            alert("すでに申請済みです");
+                                        if (status === "申請済み") {
+                                          // 申請済みの場合の処理
+                                          alert("すでに申請済みです");
                                         } else {
-                                            // フレンドでも申請済みでもない場合、モーダルを開く
-                                            openModal(post.id);
+                                          // フレンドでも申請済みでもない場合、モーダルを開く
+                                          openModal(post.id);
                                         }
-                                    }}
-                                >
-                                    <img src="img/hand.png" className="w-[25px] mr-1" />
-                                    {isFriendOrRequested(post.user_id)}
-                                </button>
+                                      }}
+                                    >
+                                      <img src="../img/hand.png" className="w-[25px] mr-1" />
+                                      {isFriendOrRequested(post.user_id)}
+                                    </button>
+                                
                                         {openModalForPost === post.id && (
                                           <div className="modal">
                                             <div className="modal-content">
@@ -199,6 +202,8 @@ function Index( props ) {
                                                 postId={post.id}
                                                 onRequestComplete={(success) => {
                                                   if (success) {
+                                                  setShowBanner(true);
+                                                   console.log(showBanner)
                                                     closeModal();
                                                   }
                                                 }}
@@ -237,8 +242,10 @@ function Index( props ) {
                         </div>
                 ))}
                 </div>
-               
+                            
                     <ParentCreate profileImage = {auth.user.image_path} /> {/* ParentCreateコンポーネントを配置 */}
+                    {showBanner && <div className="relative  bg-sky-500 text-white p-2 mb-4" >申請が成功しました！</div>}
+
                 
 
             </div>
