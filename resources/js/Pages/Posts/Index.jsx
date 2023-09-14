@@ -15,10 +15,7 @@ function Index( props ) {
     console.log( props );
     const { posts ,user ,auth, likedPosts: initialLikedPosts, friends: initialFriendsList, permitters: initialRequestersList} = props;
     
-    const [showBanner, setShowBanner] = useState(false); // バナーの表示状態を管理
     
-    
-  
 　　const [openModalForPost, setOpenModalForPost] = useState(null);
 
       const openModal = (postId) => {
@@ -147,15 +144,15 @@ function Index( props ) {
     return (
         <>  
         <div className="fixed z-10 flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
-            <Link href="/"><p className="font-bold text-xl mr-5">home</p></Link>
+            <p className="font-bold text-xl mr-5">home</p>
             <form onSubmit={searchSubmit} className="flex w-full">
 
-                <input onChange={(e) => setData('search',e.target.value)} name="search" type="text" placeholder = "検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-500 focus:ring-0"/><button type="submit" className="block p-1 px-5 rounded-md bg-black border border-black ml-3"><FontAwesomeIcon icon={faSearch} size="lg" color="#fff" /></button>
+                <input onChange={(e) => setData('search',e.target.value)} name="search" type="text" placeholder = "検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/><button type="submit"className="block p-1 px-5 rounded-md bg-gray-200 ml-5">🔍</button>
 
             </form>
         </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
-                <Link href="/"><h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1></Link>
+                <h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1>
                 <div className="border-t border-gray-300 mt-5">
                 <Link href={route('logout')} method="post" as="button">logout</Link>
                     <Link href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
@@ -163,11 +160,10 @@ function Index( props ) {
                     <Link href="/request/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/hand.png"/>Requests</Link>
                 </div>
                 <div className="border-t border-gray-300 mt-5">
-                    <Menu />
+                    <Menu/>
                 </div>
             </div>
             <div id="container" class="flex justify-between w-[82%] ml-[18%]">
-            
                 {/* <InfiniteScroll posts = { posts }/> */}
                 <div className="w-[52%] mt-14">
                 { posts.map(( post ) => (
@@ -176,24 +172,25 @@ function Index( props ) {
                             
                                 <div class="flex justify-between items-center">
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
-                                    {auth.user.id !== post.user_id && (
-                                        <button
-                                          className="font-bold flex rounded-md border border-gray-400 p-1"
-                                          onClick={() => {
-                                            const status = isFriendOrRequested(post.user_id);
-                                            if (status === "申請済み") {
-                                              // 申請済みの場合の処理
-                                              alert("すでに申請済みです");
-                                            } else {
-                                              // フレンドでも申請済みでもない場合、モーダルを開く
-                                              openModal(post.id);
-                                            }
-                                          }}
-                                        >
-                                          <img src="../img/hand.png" className="w-[25px] mr-1" />
-                                          {isFriendOrRequested(post.user_id)}
-                                        </button>
-                                    )}
+                                   <button
+                                    className="font-bold flex rounded-md border border-gray-400 p-1"
+                                    onClick={() => {
+                                        const status = isFriendOrRequested(post.user_id);
+                                        if (status === "フレンド") {
+                                            // フレンドの場合の処理
+                                            alert("すでにフレンドです");
+                                        } else if (status === "申請済み") {
+                                            // 申請済みの場合の処理
+                                            alert("すでに申請済みです");
+                                        } else {
+                                            // フレンドでも申請済みでもない場合、モーダルを開く
+                                            openModal(post.id);
+                                        }
+                                    }}
+                                >
+                                    <img src="img/hand.png" className="w-[25px] mr-1" />
+                                    {isFriendOrRequested(post.user_id)}
+                                </button>
                                         {openModalForPost === post.id && (
                                           <div className="modal">
                                             <div className="modal-content">
@@ -203,8 +200,6 @@ function Index( props ) {
                                                 postId={post.id}
                                                 onRequestComplete={(success) => {
                                                   if (success) {
-                                                  setShowBanner(true);
-                                                   console.log(showBanner)
                                                     closeModal();
                                                   }
                                                 }}
@@ -243,10 +238,8 @@ function Index( props ) {
                         </div>
                 ))}
                 </div>
-                            
+               
                     <ParentCreate profileImage = {auth.user.image_path} /> {/* ParentCreateコンポーネントを配置 */}
-                    {showBanner && <div className="relative  bg-sky-500 text-white p-2 mb-4" >申請が成功しました！</div>}
-
                 
 
             </div>

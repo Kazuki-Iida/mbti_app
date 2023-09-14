@@ -6,7 +6,7 @@ export default function Guest({ children }) {
         <div className="min-h-screen flex flex-col sm:justify-centeritems-center pt-6 sm:pt-0 bg-neutral-100">
             <div className="flex justify-between w-[80%] m-auto"> 
                 <div>
-                    <p className="text-9xl font-bold">MBTI<br/>ANIMAL</p>
+                    <p className="text-[250px] leading-10 font-bold">Pots<br/><span className="mt-5block alata text-xs font-bold">ANIMAL CONN(LL)ECTION</span></p>
                     <div className="grid gap-5 grid-cols-8 mt-10">
                         <div><img className="w-[35px]"src="../img/tora.png"/></div>
                         <div><img className="w-[35px]"src="../img/hukuro.png"/></div>
