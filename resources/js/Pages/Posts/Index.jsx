@@ -13,7 +13,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function Index( props ) {
     console.log( props );
-    const { posts ,user ,auth, likedPosts: initialLikedPosts, friends: initialFriendsList, permitters: initialRequestersList} = props;
+    const { posts ,user ,auth, likedPosts: initialLikedPosts, friends: initialFriendsList, permitters: initialRequestersList, mbti_name} = props;
     
     const [showBanner, setShowBanner] = useState(false); // バナーの表示状態を管理
     
@@ -147,7 +147,10 @@ function Index( props ) {
     return (
         <>  
         <div className="fixed z-10 flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
-            <Link href="/"><p className="font-bold text-xl mr-5">home</p></Link>
+            {mbti_name == 'Home'
+                ? <Link href="/"><div className="px-2  mr-5"><p className="font-bold text-xl">{mbti_name}</p></div></Link>
+                : <Link href="/"><div className="px-2  mr-5 block rounded-md bg-black border border-black text-white"><p className="font-bold text-xl">{mbti_name}</p></div></Link>
+            }
             <form onSubmit={searchSubmit} className="flex w-full">
 
                 <input onChange={(e) => setData('search',e.target.value)} name="search" type="text" placeholder = "検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-500 focus:ring-0"/><button type="submit" className="block p-1 px-5 rounded-md bg-black border border-black ml-3"><FontAwesomeIcon icon={faSearch} size="lg" color="#fff" /></button>
