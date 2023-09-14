@@ -83,7 +83,7 @@ class FriendController extends Controller
         $permitterId = $request['permitter_id'];
         try
         {
-            $friendRequest = FriendRequest::where('requester', $requesterId)->where('permitter', $permitterId)->first();
+            $friendRequest = FriendRequest::where('requester_id', $requesterId)->where('permitter_id', $permitterId)->first();
             $deleteSuccess = $friendRequest->delete();
             if ($deleteSuccess)
             {
@@ -100,11 +100,16 @@ class FriendController extends Controller
     
     public function permit(Request $request)
     {
-        $requester = User::first($request['requester_id']);
+        
+        $requesterOne = $request->input('requester'); // リクエストからrequesterを取得
+        $requester = User::find($requesterOne['id']);
         $permitter = \Auth::user();
+        
+        // dd($requester);
+        
         try
         {
-            $friendRequest = FriendRequest::where('requester', $requester->id)->where('permitter', $permitter->id)->first();
+            $friendRequest = FriendRequest::where('requester_id', $requester->id)->where('permitter_id', $permitter->id)->first();
             $deleteSuccess = $friendRequest->delete();
             $friendCheck = Friend::where('user_id', $requester->id)->where('friend_id', $permitter->id)->first();
             if (!$requester->isFriend($permitter->id))
@@ -120,7 +125,7 @@ class FriendController extends Controller
                 return response()->json(['message' => '繋がり申請承認に失敗しました'], 500);
             }
         } catch (Exception $e) {
-            return response()->json(['message' => '繋がり申請承認に失敗しました'], 500);
+            return response()->json(['message' => 'すでにフレンド'], 500);
         }
     }
     
