@@ -175,24 +175,24 @@ function Index( props ) {
                             
                                 <div class="flex justify-between items-center">
                                     <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
-                         
-                                    <button
-                                      className="font-bold flex rounded-md border border-gray-400 p-1"
-                                      onClick={() => {
-                                        const status = isFriendOrRequested(post.user_id);
-                                        if (status === "申請済み") {
-                                          // 申請済みの場合の処理
-                                          alert("すでに申請済みです");
-                                        } else {
-                                          // フレンドでも申請済みでもない場合、モーダルを開く
-                                          openModal(post.id);
-                                        }
-                                      }}
-                                    >
-                                      <img src="../img/hand.png" className="w-[25px] mr-1" />
-                                      {isFriendOrRequested(post.user_id)}
-                                    </button>
-                                
+                                    {auth.user.id !== post.user_id && (
+                                        <button
+                                          className="font-bold flex rounded-md border border-gray-400 p-1"
+                                          onClick={() => {
+                                            const status = isFriendOrRequested(post.user_id);
+                                            if (status === "申請済み") {
+                                              // 申請済みの場合の処理
+                                              alert("すでに申請済みです");
+                                            } else {
+                                              // フレンドでも申請済みでもない場合、モーダルを開く
+                                              openModal(post.id);
+                                            }
+                                          }}
+                                        >
+                                          <img src="../img/hand.png" className="w-[25px] mr-1" />
+                                          {isFriendOrRequested(post.user_id)}
+                                        </button>
+                                    )}
                                         {openModalForPost === post.id && (
                                           <div className="modal">
                                             <div className="modal-content">
