@@ -32,7 +32,7 @@ class Post extends Model
 
     public function getOrderedParentPosts()
     {
-        return $this->parentPosts()->withCount('likes')->orderBy('created_at', 'DESC')->get();
+        return $this->parentPosts()->withCount('likes')->orderBy('created_at', 'DESC');
     }
     
     public function hashtags()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hashtag;
 use App\Models\Image;
+use App\Models\Mbti;
 use App\Models\Post;
 use App\Models\User;
 use Cloudinary;
@@ -14,20 +15,30 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    public function index(Request $request, Post $post)
+    public function index(Request $request, Post $post, Mbti $mbti)
     {
+        $mbti_id = 0;
+        $query = $post->getOrderedParentPosts();
+        // dd($mbti->users()->pluck('id')->toArray());
+        if (isset($mbti->name))
+        {
+            $mbti_id = $mbti->id;
+            $mbtiUserIdArray = $mbti->users()->pluck('id')->toArray();
+            $query->whereIn('user_id', $mbtiUserIdArray);
+        }
+        
         if (isset($request['search']))
         {
             $search = $request['search'];
             $spaceConversion = mb_convert_kana($search, 's');
             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-            $query = Post::query();
+            
             foreach($wordArraySearched as $value) {
-                $query = $post->where('body', 'like', '%'.$value.'%');
+                $query->where('body', 'like', '%'.$value.'%');
             }
-            $posts = $query->withCount('likes')->orderBy('created_at', 'desc')->get();
+            $posts = $query->get();
         } else {
-            $posts = $post->getOrderedParentPosts();
+            $posts = $query->get();
         }
         $user = auth()->user();
         $likedPosts = $user->likedPosts()->pluck('post_id');
@@ -36,10 +47,13 @@ class PostController extends Controller
         $permitters = $user->permitters()->get();
         return Inertia::render(
                 "Posts/Index", 
-                ["posts" => $posts,
-                "likedPosts" => $likedPosts,
-                "friends" => $friends,
-                "permitters" => $permitters]
+                [
+                    "posts" => $posts,
+                    "likedPosts" => $likedPosts,
+                    "friends" => $friends,
+                    "permitters" => $permitters,
+                    "mbti_id" => $mbti->id
+                ]
             );
     }
 

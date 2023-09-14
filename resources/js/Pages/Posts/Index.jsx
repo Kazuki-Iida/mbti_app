@@ -144,22 +144,22 @@ function Index( props ) {
     return (
         <>  
         <div className="fixed z-10 flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
-            <p className="font-bold text-xl mr-5">home</p>
+            <Link href="/"><p className="font-bold text-xl mr-5">home</p></Link>
             <form onSubmit={searchSubmit} className="flex w-full">
 
-                <input onChange={(e) => setData('search',e.target.value)} name="search" type="text" placeholder = "検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/><button type="submit"className="block p-1 px-5 rounded-md bg-gray-200 ml-5">🔍</button>
+                <input onChange={(e) => setData('search',e.target.value)} name="search" type="text" placeholder = "検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-500 focus:ring-0"/><button type="submit" className="block p-1 px-5 rounded-md bg-black border border-black ml-3"><FontAwesomeIcon icon={faSearch} size="lg" color="#fff" /></button>
 
             </form>
         </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
-                <h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1>
+                <Link href="/"><h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1></Link>
                 <div className="border-t border-gray-300 mt-5">
                 <Link href={route('logout')} method="post" as="button">logout</Link>
                     <a href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</a>
                     <a href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="img/hand.png"/>friends</a>
                 </div>
                 <div className="border-t border-gray-300 mt-5">
-                    <Menu/>
+                    <Menu />
                 </div>
             </div>
             <div id="container" class="flex justify-between w-[82%] ml-[18%]">
