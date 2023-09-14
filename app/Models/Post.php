@@ -29,7 +29,7 @@ class Post extends Model
     {
         return $this->childPosts()->withCount('likes')->orderBy('created_at', 'DESC')->get();
     }
-    
+
     public function getOrderedParentPosts()
     {
         return $this->parentPosts()->withCount('likes')->orderBy('created_at', 'DESC')->get();
