@@ -91,11 +91,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     } 
-    public function isFriend(int $friend_id)
-    {
-        return (boolean) $this->friends($friend_id)->first();
-    }
-   
+ 
 
     public function requesters()
     {

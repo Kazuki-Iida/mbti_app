@@ -9,6 +9,7 @@ use App\Models\User;
 use Cloudinary;
 use Exception;
 use App\Http\Requests\PostRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -26,7 +27,7 @@ class PostController extends Controller
             }
             $query->withCount('likes')->orderBy('created_at', 'desc')->get();
         } else {
-            $posts = $query->getOrderedParentPosts();
+            $posts = $post->getOrderedParentPosts();
             
             $user = auth()->user();
             $likedPosts = $user->likedPosts()->pluck('post_id');
