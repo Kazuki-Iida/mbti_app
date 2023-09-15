@@ -30,46 +30,45 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::post('/', [PostController::class, 'index'])->name('searched.index');
-    Route::get('/{mbti}', [PostController::class, 'index'])->where('mbti', '[0-9]+')->name('filtered.index');
-    Route::get("/posts/isliked", [PostController::class, "isLiked"]);
-    Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
+    Route::get('/{mbti}/', [PostController::class, 'index'])->where('mbti', '[0-9]+')->name('filtered.index');
+    Route::get('/posts/isliked/', [PostController::class, "isLiked"]);
+    Route::get('/posts/{post}/', [PostController::class, 'show'])->name('post.show');
     
-    //ルーティングはlikeひとつにまとめてif文でいいねといいね解除してもいいけど別な方がいいかも？
-    Route::post('/posts/{post}/like', [LikeController::class, "like"])->name('post.like');
-    Route::post('/posts/{post}/dislike', [LikeController::class, "dislike"])->name('post.dislike');
+    Route::post('/posts/{post}/like/', [LikeController::class, "like"])->name('post.like');
+    Route::post('/posts/{post}/dislike/', [LikeController::class, "dislike"])->name('post.dislike');
     
-    Route::get('/posts/parent/create', [PostController::class, 'parentCreate'])->name('post.parent.create');
-    Route::get('/posts/create/{post}', [PostController::class, 'childCreate'])->name('post.child.create');
-    Route::post('/store', [PostController::class, 'store'])->name('post.store');
-    Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');
+    Route::get('/posts/parent/create/', [PostController::class, 'parentCreate'])->name('post.parent.create');
+    Route::get('/posts/create/{post}/', [PostController::class, 'childCreate'])->name('post.child.create');
+    Route::post('/store/', [PostController::class, 'store'])->name('post.store');
+    Route::delete('/posts/{post}/', [PostController::class, 'delete'])->name('post.delete');
     
-    Route::get('/friend/index', [FriendController::class, 'index'])->name('friend.index');
+    Route::get('/friend/index/', [FriendController::class, 'index'])->name('friend.index');
 
-    Route::get('/friend/getFriendsList', [FriendController::class, 'getFriendsList'])->name('getFriendsList');
-    Route::get('/friend/getPermittersList', [FriendController::class, 'getPermittersList'])->name('getPermittersList');
-    Route::post('/friend/request', [FriendController::class, 'request'])->name('friend.request');
-    Route::delete('/friend/unrequest', [FriendController::class, 'unrequest'])->name('friend.unrequest');
-    Route::post('/request/permit', [FriendController::class, 'permit'])->name('friend.permit');
-    Route::delete('/request/dismiss', [FriendController::class, 'dismiss'])->name('friend.dismiss');
+    Route::get('/friend/getFriendsList/', [FriendController::class, 'getFriendsList'])->name('getFriendsList');
+    Route::get('/friend/getPermittersList/', [FriendController::class, 'getPermittersList'])->name('getPermittersList');
+    Route::post('/friend/request/', [FriendController::class, 'request'])->name('friend.request');
+    Route::delete('/friend/unrequest/', [FriendController::class, 'unrequest'])->name('friend.unrequest');
+    Route::post('/request/permit/', [FriendController::class, 'permit'])->name('friend.permit');
+    Route::delete('/request/dismiss/', [FriendController::class, 'dismiss'])->name('friend.dismiss');
     //
-    Route::get('/request/index', [FriendRequestController::class, 'index'])->name('request.index');
+    Route::get('/request/index/', [FriendRequestController::class, 'index'])->name('request.index');
     
     //チャットルート
-    Route::get('/chat/{talk}', [MessageController::class,'show'])->name('chat.index');
-    Route::get('/messages/{talk}', [MessageController::class, 'fetchMessages'])->name('chat.fetch');
-    //Route::get('/messages', [MessageController::class, 'fetchMessages'])->name('chat.fetch');
-    Route::post('/messages', [MessageController::class, 'sendMessage'])->name('chat.store');
+    Route::get('/chat/{talk}/', [MessageController::class,'show'])->name('chat.index');
+    Route::get('/messages/{talk}/', [MessageController::class, 'fetchMessages'])->name('chat.fetch');
+    //Route::get('/messages/', [MessageController::class, 'fetchMessages'])->name('chat.fetch');
+    Route::post('/messages/', [MessageController::class, 'sendMessage'])->name('chat.store');
     
-    // Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
+    // Route::post('/save-order/', [UserController::class, 'saveOrder'])->name('save.order');
 
-    Route::post('/talk/store', [TalkController::class, 'store'])->name('talk.store');
+    Route::post('/talk/store/', [TalkController::class, 'store'])->name('talk/store');
     
-    Route::post('/save-order', [UserController::class, 'saveOrder'])->name('save.order');
+    Route::post('/save-order/', [UserController::class, 'saveOrder'])->name('save.order');
     
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::patch('/profile/image', [ProfileController::class, 'updateImage'])->name('profile.image.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile/', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/image/', [ProfileController::class, 'updateImage'])->name('profile.image.update');
+    Route::delete('/profile/', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
