@@ -27,9 +27,9 @@ input[type="file"]{
   transform:translateY(-300px)scale(0.6);
 }
 
-.mbti-block:hover {
-  background-color: rgb(209, 213, 219);
-}
+/*.mbti-block:hover {*/
+/*  background-color: rgb(0, 0, 0);*/
+/*}*/
 
 .drag-list li {
     line-height:3em;
