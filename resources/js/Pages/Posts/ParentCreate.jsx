@@ -114,7 +114,7 @@ const ParentCreate = (props) => {
                         />
                         <div>
                             {hashtags.map((hashtag, index) => (
-                                <div key={index}>{hashtag}</div>
+                                <div className="hashtag" key={index}>{hashtag}</div>
                             ))}
                         </div>
                         <div className="bottom-bar">
