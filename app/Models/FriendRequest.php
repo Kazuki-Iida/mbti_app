@@ -11,5 +11,17 @@ class FriendRequest extends Model
     
     public $timestamps = false;
     
-    protected $fillable = ['requester_id', 'permitter_id', 'message', 'post_id'];
+    protected $with = ["requestUser"];
+    
+    protected $fillable = [
+            'requester_id', 
+            'permitter_id', 
+            'message', 
+            'post_id'
+        ];
+    
+    public function requestUser()
+    {
+        return $this->belongsTo(User::class,'requester_id');
+    }
 }

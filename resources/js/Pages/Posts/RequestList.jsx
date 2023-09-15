@@ -10,8 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function RequestList( props ) {
-    const {auth, requesters, mbtis} = props;
-    
+    const {auth, requests, mbtis} = props;
+    console.log(requests);
     const handleApproval = async (requester) => {
       try {
         // API エンドポイントを呼び出し、承認を実行
@@ -49,21 +49,24 @@ function RequestList( props ) {
             <div id="container" class="flex justify-between w-[82%] ml-[18%]">
                 <div className="w-[52%] mt-14">
                     <div className="font-bold pl-10 text-2xl flex"><img className="w-[30px] h-[30px] mr-[20px]"src="/img/human.png"/><p>フレンド申請</p></div>
-                    {requesters.map((requester) => (
-                      <div className="mt-10 pl-10" key={requester.id} id={`requester-${requester.id}`}>
+                    {requests.map((request) => (
+                      <div className="mt-10 pl-10" key={request.request_user.id} id={`requester-${request.request_user.id}`}>
                         <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
                           <div className="flex items-center">
                             <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
                             <div>
-                              <p className="font-bold text-xl">{requester.name}</p>
+                              <p className="font-bold text-xl">{request.request_user.name}</p>
                               <span className="font-bold">
-                                {mbtis.find((mbti) => mbti.id === requester.mbti_id)?.name}
+                                {mbtis.find((mbti) => mbti.id === request.request_user.mbti_id)?.name}
                               </span>
+                            </div>
+                            <div>
+                              <p>{request.message}</p>
                             </div>
                           </div>
                           <button
                             className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"
-                            onClick={() => handleApproval(requester)}
+                            onClick={() => handleApproval(request.request_user)}
                           >
                             <img className="w-[30px] h-[30px]" src="/img/hand.png" />
                             <p className="ml-5">承認</p>

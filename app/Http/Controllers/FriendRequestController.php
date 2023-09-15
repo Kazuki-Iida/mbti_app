@@ -11,8 +11,10 @@ class FriendRequestController extends Controller
     public function index(Mbti $mbti)
     {
         $user = \Auth::user();
-        $requesters = $user->getRequesters();
+        $friendRequests = $user->requestedFriendRequests()->get();
         
-        return Inertia::render("Posts/RequestList", ["requesters" => $requesters, "mbtis" => $mbti->get()]);
+        // dd($friendRequests);
+        
+        return Inertia::render("Posts/RequestList", ["requests" => $friendRequests, "mbtis" => $mbti->get()]);
     }
 }

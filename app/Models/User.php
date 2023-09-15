@@ -93,7 +93,10 @@ class User extends Authenticatable
         return $this->hasMany(Message::class);
     } 
  
-
+    public function requestedFriendRequests()
+    {
+        return $this->hasMany(FriendRequest::class, 'permitter_id');
+    }
 
     public function requesters()
     {
