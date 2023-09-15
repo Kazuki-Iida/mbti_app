@@ -81,7 +81,7 @@ class MbtiSeeder extends Seeder
             'first_letter' => 'I',
             'second_letter' => 'S',
             'third_letter' => 'F',
-            'fourth_letter' => 'J',
+            'fourth_letter' => 'P',
         ]);
         DB::table('mbtis')->insert([
             'name' => 'ISTJ',
