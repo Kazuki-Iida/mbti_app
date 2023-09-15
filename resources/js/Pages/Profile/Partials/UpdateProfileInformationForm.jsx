@@ -21,21 +21,14 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
     return (
         <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
 
-                <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
-                </p>
-            </header>
-
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form onSubmit={submit} className="space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name"/>
 
                     <TextInput
                         id="name"
-                        className="mt-1 block w-full"
+                        className="block w-full rounded-md font-bold text-4xl"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
                         required
@@ -47,16 +40,17 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email"/>
 
                     <TextInput
                         id="email"
                         type="email"
-                        className="mt-1 block w-full"
+                        className="mt-5 block w-full rounded-md font-bold text-xl"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required
                         autoComplete="username"
+                        placeholder="メールアドレス"
                     />
 
                     <InputError className="mt-2" message={errors.email} />
@@ -84,8 +78,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     </div>
                 )}
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                <div className="flex items-center gap-4 w-[200px]">
+                    <PrimaryButton disabled={processing}>保存</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}

@@ -39,9 +39,9 @@ const UpdateProfileImage = (props) => {
         console.log('image', data.image);
     return (
         <>
-            <form onSubmit={submit} className="mt-6 space-y-6" enctype="multipart/form-data">
+            <form onSubmit={submit} className="space-y-6" enctype="multipart/form-data">
                 <label htmlFor="image" className="cursor-pointer px-5 block font-bold text-sm">
-                    <div className="mt-10">
+                    <div className="">
                     {data.image === null ? (
                             <div className="w-full mt-5">
                                 <img
