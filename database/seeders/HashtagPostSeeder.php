@@ -14,40 +14,31 @@ class HashtagPostSeeder extends Seeder
     public function run(): void
     {
         DB::table('hashtag_post')->insert([
-            'hashtag_id' => 1,
+            'hashtag_id' => 2,
             'post_id' => 1,
         ]);
         DB::table('hashtag_post')->insert([
             'hashtag_id' => 1,
-            'post_id' => 2,
+            'post_id' => 52,
         ]);
         DB::table('hashtag_post')->insert([
             'hashtag_id' => 1,
-            'post_id' => 3,
+            'post_id' => 35,
         ]);
         DB::table('hashtag_post')->insert([
             'hashtag_id' => 2,
-            'post_id' => 4,
+            'post_id' => 50,
+            
         ]);
         DB::table('hashtag_post')->insert([
             'hashtag_id' => 2,
-            'post_id' => 5,
+            'post_id' => 16,
         ]);
-        DB::table('hashtag_post')->insert([
-            'hashtag_id' => 2,
-            'post_id' => 6,
-        ]);
-        DB::table('hashtag_post')->insert([
-            'hashtag_id' => 3,
-            'post_id' => 7,
-        ]);
-        DB::table('hashtag_post')->insert([
-            'hashtag_id' => 3,
-            'post_id' => 8,
-        ]);
+        
         DB::table('hashtag_post')->insert([
             'hashtag_id' => 3,
             'post_id' => 9,
         ]);
+       
     }
 }

@@ -14,13 +14,13 @@ class HashtagSeeder extends Seeder
     public function run(): void
     {
         DB::table('hashtags')->insert([
-            'name' => 'ハッシュタグ',
-        ]);
-        DB::table('hashtags')->insert([
-            'name' => 'mbti',
-        ]);
-        DB::table('hashtags')->insert([
             'name' => 'ハッカソン',
+        ]);
+        DB::table('hashtags')->insert([
+            'name' => '日本',
+        ]);
+        DB::table('hashtags')->insert([
+            'name' => '日本代表',
         ]);
     }
 }
