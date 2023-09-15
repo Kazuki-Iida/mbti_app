@@ -37,3 +37,135 @@ input[type="file"]{
     border:1px solid #cccccc;
     cursor:pointer;
 }
+
+
+#imageContainer img{
+    display:none;
+    position:absolute;
+}
+
+.hi {
+  animation: 2s linear move1;
+  bottom: 50px;
+  position: absolute;
+  left: 70px;
+  display: block !important;
+}
+.hi2 {
+  animation: 2s linear move2;
+  left: 300px;
+  bottom: 50px;
+  position: absolute;
+  display: block !important;
+}
+.hi3 {
+  animation: 2s linear move3;
+  left: 230px;
+  bottom: 50px;
+  position: absolute;
+  display: block !important;
+}
+.hi4 {
+  animation: 2s linear move4;
+  left: 380px;
+  bottom: 50px;
+  position: absolute;
+  display: block;
+}
+.hi5 {
+  animation: 2s linear move5;
+  left: 150px;
+  bottom: 50px;
+  position: absolute;
+  display: block;
+}
+@keyframes move1 {
+  0% {
+    transform: translateY(0px);
+    bottom: 1000px;
+  }
+  50% {
+    transform: rotate(90deg);
+    bottom: 500px;
+  }
+  90% {
+  }
+  100% {
+    transform: rotate(360deg);
+    bottom: 50px;
+  }
+}
+@keyframes move2 {
+  0% {
+    transform: translateY(0px);
+    left: 300px;
+    bottom: 1000px;
+  }
+  50% {
+    transform: rotate(180deg);
+    left: 300px;
+    bottom: 500px;
+  }
+  90% {
+  }
+  100% {
+    transform: rotate(360deg);
+    left: 300px;
+    bottom: 50px;
+  }
+}
+@keyframes move3 {
+  0% {
+    transform: translateY(0px);
+
+    bottom: 1000px;
+  }
+  50% {
+    transform: rotate(90deg);
+    bottom: 500px;
+  }
+  90% {
+  }
+  100% {
+    transform: rotate(360deg);
+    bottom: 50px;
+  }
+}
+@keyframes move4 {
+  0% {
+    transform: translateY(0px);
+    left: 380px;
+    bottom: 1000px;
+  }
+  50% {
+    transform: rotate(90deg);
+    left: 380px;
+    bottom: 500px;
+  }
+  90% {
+  }
+  100% {
+    transform: rotate(360deg);
+    left: 380px;
+    bottom: 50px;
+  }
+}
+@keyframes move5 {
+  0% {
+    transform: translateY(0px);
+    left: 150px;
+    bottom: 1000px;
+  }
+  50% {
+    transform: rotate(90deg);
+    left: 150px;
+    bottom: 500px;
+  }
+  90% {
+  }
+  100% {
+    transform: rotate(360deg);
+    left: 150px;
+    bottom: 50px;
+  }
+}
