@@ -27,9 +27,10 @@ input[type="file"]{
   transform:translateY(-10px)scale(0.9);
 }
 
-/*.mbti-block:hover {*/
-/*  background-color: rgb(0, 0, 0);*/
-/*}*/
+.hashtag {
+  color: rgb(20, 20,190) !important;
+  font-weight: bold !important;
+}
 
 .drag-list li {
     line-height:3em;

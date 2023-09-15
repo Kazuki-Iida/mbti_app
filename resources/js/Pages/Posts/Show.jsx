@@ -162,7 +162,7 @@ function Show( props ) {
                                         )}
                                     
                                 </div>
-                                <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.body}</p>
+                                <p className="text-md break-words mt-10 leading-8 tracking-tight" onClick={(e) => {e.stopPropagation();}} dangerouslySetInnerHTML={{ __html: post.body }}></p>
                                 <div className="grid gap-5 grid-cols-2 w-full mt-5">
                                     {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
                                     <div className="">
