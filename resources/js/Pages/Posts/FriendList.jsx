@@ -103,6 +103,10 @@ function FriendList( props ) {
                         </div>
                     </div>
                 </div>
+                <div className="w-[39%] relative">
+                     <div className="pot w-full h-[50%] bg-gray-900 absolute bottom-[20px] right-[20px]">
+                     </div>
+                </div>
             </div>
         </>
     );
