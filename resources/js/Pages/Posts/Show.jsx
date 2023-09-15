@@ -232,7 +232,18 @@ function Show( props ) {
                                     <Link href={`/posts/${child_post.id}`}>
                                         <p className="text-md break-words mt-5 leading-8 tracking-tight">{child_post.body}</p>
                                     </Link>
-                                    <img className="mt-5 w-full rounded-xl"src={child_post.image_path}/>
+                                    <div className="grid gap-5 grid-cols-2 w-full mt-5">
+                                        {child_post.images && child_post.images.map((image, index) => ( //実際の写真を表示する用)
+                                            <div className="">
+                                                <img
+                                                    key={index}
+                                                    className="w-full rounded-xl block"
+                                                    src={image.image_path}
+                                                    alt={`Image ${index}`}
+                                                />
+                                            </div>
+                                        ))} 
+                                    </div>
                                     <div className="mt-5 flex">
                                         <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>{child_post.child_posts_count}</a>
                                         <LikeButton
@@ -290,8 +301,20 @@ function Show( props ) {
                                     </div>
                                     <Link href={`/posts/${parent_post.id}`}>
                                         <p className="text-md break-words mt-5 leading-8 tracking-tight">{parent_post.body}</p>
-                                        <img className="mt-5 w-full rounded-xl"src={parent_post.image_path} />
                                     </Link>
+                                        <div className="grid gap-5 grid-cols-2 w-full mt-5">
+                                            {parent_post.images && parent_post.images.map((image, index) => ( //実際の写真を表示する用)
+                                            <div className="">
+                                                <img
+                                                    key={index}
+                                                    className="w-full rounded-xl block"
+                                                    src={image.image_path}
+                                                    alt={`Image ${index}`}
+                                                />
+                                            </div>
+                                            ))} 
+                                        </div>
+                                    
                                     <div className="mt-5 flex">
                                         <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>{parent_post.child_posts_count}</a>
                                         <LikeButton

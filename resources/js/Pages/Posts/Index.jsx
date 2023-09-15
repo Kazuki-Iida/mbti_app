@@ -221,16 +221,16 @@ function Index( props ) {
                                 </Link>
 
                                 <div className="grid gap-5 grid-cols-2 w-full mt-5">
-                                {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
-                                <div className="">
-                                    <img
-                                        key={index}
-                                        className="w-full rounded-xl block"
-                                        src={image.image_path}
-                                        alt={`Image ${index}`}
-                                    />
-                                </div>
-                                ))} 
+                                    {post.images && post.images.map((image, index) => ( //実際の写真を表示する用)
+                                    <div className="">
+                                        <img
+                                            key={index}
+                                            className="w-full rounded-xl block"
+                                            src={image.image_path}
+                                            alt={`Image ${index}`}
+                                        />
+                                    </div>
+                                    ))} 
                                 </div>
                                 <div className="mt-5 flex">
                                     <a href="" className="flex items-center text-sm"><img src="img/comment.png" className="w-[20px] mr-[10px]"/>{post.child_posts_count}</a>
