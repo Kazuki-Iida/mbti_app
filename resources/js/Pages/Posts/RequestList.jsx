@@ -172,13 +172,26 @@ function RequestList( props ) {
   };
 
   // 各ボタンにイベントリスナーを追加
-  for (let i = 1; i <= 16; i++) {
-    const btn = document.querySelector(`[data-animal="${i}"]`);
-    console.log(btn);
+  // for (let i = 1; i <= 16; i++) {
+  //   const btn = document.querySelector(`[data-animal="${i}"]`);
+  //   console.log(btn);
+  //   btn.addEventListener('click', () => {
+  //     handleButtonClick(i);
+  //   });
+  // }
+  const buttonValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+// 各ボタンに対してイベントリスナーを追加
+buttonValues.forEach((value) => {
+  const buttons = document.querySelectorAll(`[data-animal="${value}"]`);
+  console.log('buttons', buttons);
+  
+  buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      handleButtonClick(i);
+      handleButtonClick(value);
     });
-  }
+  });
+});
 }, []);
 
     return (
