@@ -5,9 +5,70 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import UpdateProfileImage from './Partials/UpdateProfileImage';
 import { Head,Link } from '@inertiajs/react';
 import Menu from '../Common/Menu';
+import React, { useState, useEffect } from 'react';
 
 export default function Edit({ auth, mustVerifyEmail, status,mbti }) {
     console.log('mbti',mbti.name);
+    //  useEffect(() => {
+    //     const img1 = document.querySelector('[data-img="1"]');
+    //     window.addEventListener('load', () => {
+    //         img1.classList.add('img1');
+    //         console.log('done')
+    //     });
+    //     const img2 = document.querySelector('[data-img="2"]');
+    //     window.addEventListener('load', () => {
+    //         img2.classList.add('img2');
+    //         console.log('done')
+    //     });
+    //     const img3 = document.querySelector('[data-img="3"]');
+    //     window.addEventListener('load', () => {
+    //         img3.classList.add('img3');
+    //         console.log('done')
+    //     });
+    //     const img4 = document.querySelector('[data-img="4"]');
+    //     window.addEventListener('load', () => {
+    //         img4.classList.add('img4');
+    //         console.log('done')
+    //     });
+    //     const img5 = document.querySelector('[data-img="5"]');
+    //     window.addEventListener('load', () => {
+    //         img5.classList.add('img5');
+    //         console.log('done')
+    //     });
+    // }, []); 
+    useEffect(() => {
+  // 複数の要素のdata-img属性値とクラス名の対応を定義
+  const imgClasses = {
+    1: 'img1',
+    2: 'img2',
+    3: 'img3',
+    4: 'img4',
+    5: 'img5',
+    6: 'img6',
+    7: 'img7',
+    8: 'img8',
+    9: 'img9',
+    10: 'img10',
+    11: 'img11',
+    12: 'img12',
+    13: 'img13',
+    14: 'img14',
+    15: 'img15',
+    16: 'img16',
+  };
+
+  // data-img属性値を持つ要素に対して処理を行う
+  Object.entries(imgClasses).forEach(([dataAttr, className]) => {
+    const img = document.querySelector(`[data-img="${dataAttr}"]`);
+    const btn = document.querySelector('.friendBtn');
+    btn.addEventListener('click', () => {
+        btn.classList.add('hidden');
+      img.classList.add(className);
+      console.log('done');
+    });
+  });
+}, []);
+
     return (
     <>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
@@ -49,8 +110,27 @@ export default function Edit({ auth, mustVerifyEmail, status,mbti }) {
                     </div>
                 </div>
                 <div className="w-[39%] relative">
+                    <button className="block friendBtn font-bold absolute top-[20%] border border-black p-5 rounded-md">show my friends</button>
                      <div className="pot w-full h-[50%] bg-gray-900 absolute bottom-[20px] right-[20px]">
-                     </div>
+                </div>
+                <div id="animal-id">
+                    <img data-img="1"className="w-[80px] h-[80px]" id="img1" src="../img/uma.png" />
+                    <img data-img="2"className="w-[80px] h-[80px]"id="img2" src="../img/usi.png" />
+                    <img data-img="3"className="w-[80px] h-[80px]"id="img3" src="../img/kuma.png" />
+                    <img data-img="4"className="w-[80px] h-[80px]"id="img4" src="../img/simauma.png"/>
+                    <img data-img="5"className="w-[80px] h-[80px]"id="img5" src="../img/dog.png" />
+                    <img data-img="6"className="w-[80px] h-[80px]"id="img6" src="../img/zou.png" />
+                    <img data-img="7"className="w-[80px] h-[80px]"id="img7" src="../img/lion.png" />
+                    <img data-img="8"className="w-[80px] h-[80px]"id="img8" src="../img/oumu.png" />
+                    <img data-img="9"className="w-[80px] h-[80px]"id="img9" src="../img/sika.png" />
+                    <img data-img="10"className="w-[80px] h-[80px]"id="img10" src="../img/hituji.png" />
+                    <img data-img="11"className="w-[80px] h-[80px]"id="img11" src="../img/kaba.png" />
+                    <img data-img="12"className="w-[80px] h-[80px]"id="img12" src="../img/cat.png" />
+                    <img data-img="13"className="w-[80px] h-[80px]"id="img13" src="../img/kirin.png" />
+                    <img data-img="14"className="w-[80px] h-[80px]"id="img14" src="../img/usagi.png" />
+                    <img data-img="15"className="w-[80px] h-[80px]"id="img15" src="../img/tora.png" />
+                    <img data-img="16"className="w-[80px] h-[80px]"id="img16" src="../img/hukuro.png" />
+                </div>
                 </div>
             </div>
       </>      
