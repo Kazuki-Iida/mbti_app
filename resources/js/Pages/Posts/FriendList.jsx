@@ -29,8 +29,8 @@ function FriendList( props ) {
     return (
         <>  
         <div id="imageContainer">
-              <img id="img1" class=''
-              src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-607408726-1653469977.jpg?resize=640:*""
+              <img id="img1"
+              src="../uma.png"
               />
               <img
                 id="img2"
