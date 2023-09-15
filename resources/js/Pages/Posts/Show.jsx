@@ -111,8 +111,9 @@ function Show( props ) {
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
                 <h1 className="font-bold text-2xl"><Link href="/">MBTI APP<span className="text-xs block">あなたはどんな人？</span></Link></h1>
                 <div className="border-t border-gray-300 mt-5">
-                    <a href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</a>
-                    <a href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</a>
+                    <Link href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
+                    <Link href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</Link>
+                    <Link href="/request/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/req.png"/>Requests</Link>
                 </div>
                     <div class="border-t border-gray-300 mt-5">
                         <Menu/>
