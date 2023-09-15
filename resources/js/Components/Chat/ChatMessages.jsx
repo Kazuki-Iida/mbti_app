@@ -12,7 +12,7 @@ export default function ChatMessages({ messages, userName ,auth}) {
             <>
             {console.log('message.user',message.user)}
               {message.user.id == auth.id ? (
-                <li className="mt-5 mr-0 flex justify-start">
+                <li className="mt-5 mr-0 flex justify-end">
                   <div>
                     <div className="flex items-center">
                       <img src={message.user.image_path} className="mr-5 w-[40px] h-[40px] rounded-md" />
@@ -24,7 +24,7 @@ export default function ChatMessages({ messages, userName ,auth}) {
                   </div>
                 </li>
               ) : (
-                <li className="mt-5 mr-0 flex justify-end">
+                <li className="mt-5 mr-0 flex justify-start">
                   <div>
                     <div className="flex items-center">
                       <img src={message.user.image_path} className="mr-5 w-[40px] h-[40px] rounded-md" />

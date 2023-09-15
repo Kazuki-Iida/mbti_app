@@ -105,7 +105,7 @@ const ParentCreate = (props) => {
                         </div>
                     )}
                     <div className="">
-                        <div className="mt-20 flex items-center"><img src={profileImage} className="w-[35px] mr-1 rounded-md"/><img src="img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
+                        <div className="mt-20 flex items-center"><img src={profileImage} className="w-[35px] mr-1 rounded-md"/><img src="../img/post.png" className="w-[20px] mr-1"/><p className="font-bold">投稿する</p></div>
                         <textarea
                             placeholder="投稿する"
                             className="w-full h-[150px] mt-5 border-none focus:ring-0 bg-neutral-100 rounded-md"
