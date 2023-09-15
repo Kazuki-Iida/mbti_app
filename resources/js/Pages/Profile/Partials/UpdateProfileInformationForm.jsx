@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 
-export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
+export default function UpdateProfileInformation({ mustVerifyEmail, status, className ,auth,mbti}) {
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
@@ -38,7 +38,11 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <InputError className="mt-2" message={errors.name} />
                 </div>
-
+                <div>
+                    <input type="text" className="block w-full rounded-md font-bold text-4xl bg-gray-100" value={mbti}/>
+                
+                </div>
+                
                 <div>
                     <InputLabel htmlFor="email"/>
 

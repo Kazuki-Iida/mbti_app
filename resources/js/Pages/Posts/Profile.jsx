@@ -1,15 +1,19 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import DeleteUserForm from './Partials/DeleteUserForm';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
-import UpdateProfileImage from './Partials/UpdateProfileImage';
-import { Head,Link } from '@inertiajs/react';
+import React, { useState, useEffect } from 'react';
+import { Link, usePage , useForm } from '@inertiajs/react';
+import Authenticated from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import ParentCreate from './ParentCreate'; // ParentCreateコンポーネントをインポート
+import LikeButton from '../Button/LikeButton';
 import Menu from '../Common/Menu';
-
-export default function Edit({ auth, mustVerifyEmail, status,mbti }) {
-    console.log('mbti',mbti.name);
-    return (
-    <>
+import FriendRequestButton from '../Button/FriendRequestButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+function Profile( props ) {
+    
+    const { auth } = props;
+    return(
+        
+        <>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
                 <Link href="/"><h1 className="font-bold text-4xl">Pots<span className="text-xs block">animal conn(ll)ection</span></h1></Link>
                 <div className="border-t border-gray-300 mt-5">
@@ -28,32 +32,38 @@ export default function Edit({ auth, mustVerifyEmail, status,mbti }) {
                     <div className="py-12">
                         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                             <div className="p-8">
-                                <UpdateProfileImage className="max-w-xl" auth={auth}/>
+                                <div className="max-w-xl"/>
+                                    <div className="cursor-pointer px-5 block font-bold text-sm">
+                                        <div className="w-[300px] mx-auto">
+                                            <div className="w-full">
+                                                <img
+                                                    src="../img/pen.png"
+                                                    alt="Profile Image Image Preview"
+                                                    className="w-full rounded-xl"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="px-8">
-                                <UpdateProfileInformationForm
-                                    mustVerifyEmail={mustVerifyEmail}
-                                    status={status}
-                                    className="max-w-xl"
-                                    mbti={mbti.name}
-                                />
+                                <p className="block p-5 w-full rounded-md font-bold text-4xl">ユーザ名</p>
                             </div>
-                            
-                            {/*<div className="sm:p-8  sm:rounded-lg">
-                                <UpdatePasswordForm className="max-w-xl" />
+                            <div className="px-8">
+                                <p className="block p-5 w-full rounded-md font-bold text-4xl">mbti</p>
                             </div>
-        
-                            <div className="p-4 sm:p-8  sm:rounded-lg">
-                                <DeleteUserForm className="max-w-xl" />
-                            </div>*/}
+                            <div className="px-8">
+                                <p className="block p-5 w-full rounded-md font-bold text-xl">email</p>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div className="w-[39%] relative">
                      <div className="pot w-full h-[50%] bg-gray-900 absolute bottom-[20px] right-[20px]">
                      </div>
                 </div>
             </div>
-      </>      
-    );
-}
+        </>      
+        
+        );
+    }
+export default Profile;

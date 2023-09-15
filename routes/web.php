@@ -69,6 +69,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile/image/', [ProfileController::class, 'updateImage'])->name('profile.image.update');
     Route::delete('/profile/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    //profileテスト表示
+    Route::inertia('/profile/user',"Posts/Profile");
 });
 
 
