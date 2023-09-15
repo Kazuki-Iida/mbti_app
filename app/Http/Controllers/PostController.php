@@ -19,6 +19,7 @@ class PostController extends Controller
     {
         $mbti_name = 'Home';
         $query = $post->getOrderedParentPosts();
+        
         // dd($mbti->users()->pluck('id')->toArray());
         if (isset($mbti->name))
         {
@@ -60,7 +61,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $parentPost = $post->parentPost()->withCount('likes')->first();
+        $parentPost = $post->parentPost()->withCount('likes')->withCount('childPosts')->first();
         // $parentPosts = [];
         // while ($parentPost)
         // {
@@ -74,7 +75,7 @@ class PostController extends Controller
         //     }
         // }
         $postId = $post->id;
-        $showPost = Post::withCount('likes')->find($postId);
+        $showPost = Post::withCount('likes')->withCount('childPosts')->find($postId);
         
         // $parentPost = array_reverse($parentPost);
 

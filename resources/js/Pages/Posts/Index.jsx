@@ -233,7 +233,7 @@ function Index( props ) {
                                 ))} 
                                 </div>
                                 <div className="mt-5 flex">
-                                    <a href="" className="flex items-center text-sm"><img src="img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
+                                    <a href="" className="flex items-center text-sm"><img src="img/comment.png" className="w-[20px] mr-[10px]"/>{post.child_posts_count}</a>
                                     <LikeButton
                                     className="ml-10 flex items-center text-sm"
                                     postId={post.id}
