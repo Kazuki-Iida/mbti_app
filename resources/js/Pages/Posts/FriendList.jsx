@@ -2,15 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Link, usePage , useForm } from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import ParentCreate from './ParentCreate'; // ParentCreateコンポーネントをインポート
-import LikeButton from '../Button/LikeButton';
 import Menu from '../Common/Menu';
-import FriendRequestButton from '../Button/FriendRequestButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function FriendList( props ) {
-    const {auth} = props;
+    const {auth, friends, mbtis, talks} = props;
+    
+    const handleChat = (friendId) => {
+    // 友達のIDを使用して該当するトークを探す処理を追加
+    const talk = talks.find((talk) => talk.owner_id === friendId || talk.guest_id === friendId);
+
+    if (talk) {
+      // 該当するトークが見つかった場合、URLを直接設定してチャット画面に遷移
+      window.location.href = `/chat/${talk.id}`;
+    } else {
+      // 該当するトークが見つからなかった場合のエラーメッセージ
+      console.error('トークが見つかりませんでした。');
+    }
+  };
+    
     return (
         <>  
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
@@ -28,80 +39,29 @@ function FriendList( props ) {
             <div id="container" class="flex justify-between w-[82%] ml-[18%]">
                 {/* <InfiniteScroll posts = { posts }/> */}
                 <div className="w-[52%] mt-14">
-                        <div className="font-bold pl-10 text-2xl flex"><img className="w-[30px] h-[30px] mr-[20px]"src="/img/human.png"/><p>フレンド一覧</p></div>
-                    
-                    <div className="mt-10 pl-10">
+                    <div className="font-bold pl-10 text-2xl flex"><img className="w-[30px] h-[30px] mr-[20px]"src="/img/human.png"/><p>フレンド一覧</p></div>
+                    {friends.map((friend) => (
+                      <div className="mt-10 pl-10" key={friend.id}>
                         <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
+                          <div className="flex items-center">
+                            <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
+                            <div>
+                              <p className="font-bold text-xl">{friend.name}</p>
+                              <span className="font-bold">
+                                {mbtis.find((mbti) => mbti.id === friend.mbti_id)?.name}
+                              </span>
                             </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
+                          </div>
+                          <button
+                            className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"
+                            onClick={() => handleChat(friend.id)}
+                          >
+                            <img className="w-[30px] h-[30px]" src="/img/hand.png" />
+                            <p className="ml-5">chat</p>
+                          </button>
                         </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
-                    <div className="mt-10 pl-10">
-                        <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
-                            <div className="flex items-center">
-                                <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
-                                <div>
-                                    <p className="font-bold text-xl">kaito kosuge</p>
-                                    <span className="font-bold">intp</span>
-                                </div>
-                            </div>
-                            <button className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"><img className="w-[30px] h-[30px]" src="/img/hand.png"/><p className="ml-5">承認</p></button>
-                        </div>
-                    </div>
+                      </div>
+                    ))}
                 </div>
                 <div className="w-[39%] relative">
                      <div className="pot w-full h-[50%] bg-gray-900 absolute bottom-[20px] right-[20px]">
