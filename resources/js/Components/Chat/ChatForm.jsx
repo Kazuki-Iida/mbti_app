@@ -17,9 +17,9 @@ export default function ChatForm({ user, sendMessage }) {
     }
 
     return (
-        <div className="text-center">
+        <div className="h-[100px]">
             <textarea
-                className="border-0 border-white w-full"
+                className="block bg-white rounded-md border border-black w-full h-full"
                 placeholder="メッセージを入力"
                 value={newMessage}
                 onChange={handleChange}

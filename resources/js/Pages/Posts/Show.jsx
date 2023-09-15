@@ -6,6 +6,8 @@ import Menu from "../Common/Menu";
 import ChildCreate from './ChildCreate';
 import LikeButton from '../Button/LikeButton';
 import FriendRequestButton from '../Button/FriendRequestButton';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { FollowButton } from "../Button/FollowButton";
 //import InfiniteScroll from "react-infinite-scroller"
 
@@ -104,15 +106,19 @@ function Show( props ) {
     // const [childPostsData, setChildPostsData] = useState(child_posts);
     return (
         <>
-        <div className="fixed flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
-            <p className="font-bold text-xl mr-5"></p>
-            <input type="text" placeholder = "🔎検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-300 focus:ring-0"/>
+        <div className="fixed z-10 flex items-center left-[18%] p-[12px] bg-neutral-100 w-full border-b border-gray-300">
+        <Link href="/"><div className="px-2  mr-5 block rounded-md bg-black border border-black text-white"><p className="font-bold text-xl">home</p></div></Link>
+            <form className="flex w-full">
+
+                <input onChange={(e) => setData('search',e.target.value)} name="search" type="text" placeholder = "検索"className="bg-neutral-100 block rounded-md w-[70%] border-gray-500 focus:ring-0"/><button type="submit" className="block p-1 px-5 rounded-md bg-black border border-black ml-3"><FontAwesomeIcon icon={faSearch} size="lg" color="#fff" /></button>
+
+            </form>
         </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
-                <h1 className="font-bold text-2xl"><Link href="/">MBTI APP<span className="text-xs block">あなたはどんな人？</span></Link></h1>
+                <Link href="/"><h1 className="font-bold text-4xl">Pots<span className="text-xs block">animal conn(ll)ection</span></h1></Link>
                 <div className="border-t border-gray-300 mt-5">
-                    <Link href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
-                    <Link href="" className="flex font-bold mt-5 items-center"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</Link>
+                    <Link href="/profile" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
+                    <Link href="friend/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</Link>
                     <Link href="/request/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/req.png"/>Requests</Link>
                 </div>
                     <div class="border-t border-gray-300 mt-5">
