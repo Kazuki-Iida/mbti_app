@@ -1,24 +1,45 @@
-import React from 'react';
+export default function ChatMessages({ messages, userName ,auth}) {
+  console.log('messages', messages.user);
+  console.log('userName', userName);
+  console.log('auth',auth)
+  return (
+    <>
+      <ul className="chat">
+        {messages.map((message) => {
+          const mes = message.message;
 
-export default function ChatMessages({ messages },userName) {
-    console.log('messages',messages);
-    console.log('userName',userName);
-    return (
-        <ul className="chat">
-            {messages.map(message => {
-            //console.log('message',message);
-                //const username = message.user.name;
-                const mes = message.message;
-                // {console.log('message',message.user.name)}
-                return (
-                    <li>
-                        <strong className="text-black">{message.user.name || userName}</strong>
-                        <div className="mb-2 text-white">
-                            <p className="bg-[#6CC655] inline p-1 mb-2 rounded">{mes}</p>
-                        </div>
-                    </li>
-                )
-            })}
-        </ul>
-    );
+          return (
+            <>
+            {console.log('message.user',message.user)}
+              {message.user.id == auth.id ? (
+                <li className="mt-5 mr-0 flex justify-start">
+                  <div>
+                    <div className="flex items-center">
+                      <img src={message.user.image_path} className="mr-5 w-[40px] h-[40px] rounded-md" />
+                      <strong className="text-black block">{message.user.name || userName}</strong>
+                    </div>
+                    <div className="mt-[5px] mb-2 text-black text-md bg-white rounded-md p-5">
+                      <p className="p-1 mb-2 rounded">{mes}</p>
+                    </div>
+                  </div>
+                </li>
+              ) : (
+                <li className="mt-5 mr-0 flex justify-end">
+                  <div>
+                    <div className="flex items-center">
+                      <img src={message.user.image_path} className="mr-5 w-[40px] h-[40px] rounded-md" />
+                      <strong className="text-black block">{message.user.name || userName}</strong>
+                    </div>
+                    <div className="mt-[5px] mb-2 text-black text-md bg-white rounded-md p-5">
+                      <p className="p-1 mb-2 rounded">{mes}</p>
+                    </div>
+                  </div>
+                </li>
+              )}
+            </>
+          );
+        })}
+      </ul>
+    </>
+  );
 }
