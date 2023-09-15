@@ -175,7 +175,7 @@ function Show( props ) {
                                     ))} 
                                 </div>
                                 <div className="mt-5 flex">
-                                    <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
+                                    <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>{post.child_posts_count}</a>
                                     <LikeButton
                                         className="ml-10 flex items-center text-sm"
                                         postId={post.id}
@@ -234,7 +234,7 @@ function Show( props ) {
                                     </Link>
                                     <img className="mt-5 w-full rounded-xl"src={child_post.image_path}/>
                                     <div className="mt-5 flex">
-                                        <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
+                                        <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>{child_post.child_posts_count}</a>
                                         <LikeButton
                                             className="ml-10 flex items-center text-sm"
                                             postId={child_post.id}
@@ -293,7 +293,7 @@ function Show( props ) {
                                         <img className="mt-5 w-full rounded-xl"src={parent_post.image_path} />
                                     </Link>
                                     <div className="mt-5 flex">
-                                        <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>20</a>
+                                        <a href="" className="flex items-center text-sm"><img src="../img/comment.png" className="w-[20px] mr-[10px]"/>{parent_post.child_posts_count}</a>
                                         <LikeButton
                                             className="ml-10 flex items-center text-sm"
                                             postId={parent_post.id}
