@@ -66,6 +66,7 @@ function RequestList( props ) {
                           </div>
                           <button
                             className="bg-white flex items-center justify-between py-1 px-5 rounded-md font-bold"
+                            id={`${request.request_user.mbti_id}`}
                             onClick={() => handleApproval(request.request_user)}
                           >
                             <img className="w-[30px] h-[30px]" src="/img/hand.png" />
