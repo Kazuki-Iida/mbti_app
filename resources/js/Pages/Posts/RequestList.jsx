@@ -53,7 +53,7 @@ function RequestList( props ) {
                       <div className="mt-10 pl-10" key={request.request_user.id} id={`requester-${request.request_user.id}`}>
                         <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
                           <div className="flex items-center">
-                            <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
+                            <Link href={`/profile/user/${request.request_user.id}`}><img className="w-[60px] h-[60px] rounded-md mr-5" src={request.request_user.image_path} /></Link>
                             <div>
                               <p className="font-bold text-xl">{request.request_user.name}</p>
                               <span className="font-bold">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\FriendRequestController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PostController;
@@ -70,8 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/image/', [ProfileController::class, 'updateImage'])->name('profile.image.update');
     Route::delete('/profile/', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    //profileテスト表示
-    Route::inertia('/profile/user',"Posts/Profile");
+    Route::get('/profile/user/{user}', [UserController::class, 'profile']);
 });
 
 
