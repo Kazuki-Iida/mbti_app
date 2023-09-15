@@ -4,6 +4,10 @@
 input[type="file"]{
     display: none;
 }
+.pot{
+  /*background-color: gray;*/
+  clip-path: polygon(0 0, 4% 0, 7% 92%, 93% 92%, 96% 0, 100% 0, 100% 56%, 100% 100%, 65% 100%, 35% 100%, 0 100%, 0 56%);
+}
 #container {
   height: 100vh; /* スクロール可能な高さを指定 */
   overflow-y: scroll; /* 垂直スクロールを有効にする */

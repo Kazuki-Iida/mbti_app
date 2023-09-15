@@ -49,7 +49,7 @@ function RequestList( props ) {
             </div>
             <div id="container" class="flex justify-between w-[82%] ml-[18%]">
                 <div className="w-[52%] mt-14">
-                    <div className="font-bold pl-10 text-2xl flex"><img className="w-[30px] h-[30px] mr-[20px]"src="/img/human.png"/><p>繋がり申請</p></div>
+                    <div className="font-bold pl-10 text-2xl flex"><img className="w-[30px] h-[30px] mr-[20px]"src="/img/human.png"/><p>フレンド申請</p></div>
                     {requesters.map((requester) => (
                       <div className="mt-10 pl-10" key={requester.id} id={`requester-${requester.id}`}>
                         <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
@@ -72,6 +72,10 @@ function RequestList( props ) {
                         </div>
                       </div>
                     ))}
+                </div>
+                <div className="w-[39%] relative">
+                     <div className="pot w-full h-[50%] bg-gray-900 absolute bottom-[20px] right-[20px]">
+                     </div>
                 </div>
             </div>
         </>
