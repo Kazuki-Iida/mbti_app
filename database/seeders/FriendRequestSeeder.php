@@ -18,13 +18,13 @@ class FriendRequestSeeder extends Seeder
         DB::table('friend_requests')->insert([
             'requester_id' => 2,
             'permitter_id' => 1,
-            'message' => 'メッセージ',
+            'message' => '気が合いそうなのでお話ししてみたいです！',
             'post_id' => 1,
         ]);
         DB::table('friend_requests')->insert([
             'requester_id' => 3,
             'permitter_id' => 1,
-            'message' => 'メッセージ',
+            'message' => 'ぜひお話ししたいです！よろしくお願いします！',
             'post_id' => 1,
         ]);
     }
