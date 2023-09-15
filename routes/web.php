@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/isliked/', [PostController::class, "isLiked"]);
     Route::get('/posts/{post}/', [PostController::class, 'show'])->name('post.show');
     
+    Route::get('/hashtags/{hashtag}', [PostController::class, 'hashtagIndex'])->name('hashtag.index');
+    
     Route::post('/posts/{post}/like/', [LikeController::class, "like"])->name('post.like');
     Route::post('/posts/{post}/dislike/', [LikeController::class, "dislike"])->name('post.dislike');
     
@@ -51,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/friend/unrequest/', [FriendController::class, 'unrequest'])->name('friend.unrequest');
     Route::post('/request/permit/', [FriendController::class, 'permit'])->name('friend.permit');
     Route::delete('/request/dismiss/', [FriendController::class, 'dismiss'])->name('friend.dismiss');
+    
     //
     Route::get('/request/index/', [FriendRequestController::class, 'index'])->name('request.index');
     

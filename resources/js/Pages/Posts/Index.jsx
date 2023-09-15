@@ -98,6 +98,11 @@ function Index( props ) {
             return isFriend ? "フレンド" : isPermittered ? "申請済み" : "friend request";
         };
         
+        
+    const stop = (e) => {
+        e.stopPropagation(); // クリックイベントの伝播を停止
+        console.log('ok');
+    }
 
     
     const handleLike = async (postId, updatedLikesCount) => {
@@ -214,8 +219,8 @@ function Index( props ) {
                                           </div>
                                         )}
                                 </div>
-                                <Link href={`/posts/${post.id}`}>
-                                    <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.body}</p>
+                                <Link href={`/posts/${post.id}`} className="relative z-10">
+                                    <p className="text-md break-words mt-10 leading-8 tracking-tight" onClick={(e) => {e.stopPropagation();}} dangerouslySetInnerHTML={{ __html: post.body }}></p>
                                 </Link>
 
                                 <div className="grid gap-5 grid-cols-2 w-full mt-5">

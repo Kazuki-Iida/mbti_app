@@ -7,20 +7,35 @@ const ParentCreate = (props) => {
         body: "",
         images: [], // 画像ファイルを複数のファイルとして管理するための配列
     });
+    //ハッシュタグを入れる配列を初期化
+    const [hashtags, setHashtags] = useState([]);
+    console.log('hashtag', hashtags);
+    const handleTextareaChange = (e) => {
+        const inputValue = e.target.value;
+        setData('body', inputValue);
+        
+        // テキスト内のハッシュタグを抽出する正規表現
+        const hashtagRegex = /(#\S+)/g;
+        const extractedHashtags = inputValue.match(hashtagRegex);
+        
+        // 抽出されたハッシュタグをセット
+        if (extractedHashtags) {
+          setHashtags(extractedHashtags);
+        } else {
+          setHashtags([]);
+        }
+    };
+    
+    
     // プレビュー用のステートを初期化
     const [imagePreview, setImagePreview] = useState(null);
     // 本文空白のバナー表示用ステート
     const [showEmptyBodyBanner, setShowEmptyBodyBanner] = useState(false);
     const [showTooLongBodyBanner, setShowTooLongBodyBanner] = useState(false);
-     const handleTextareaChange = (e) => {
-        const inputValue = e.target.value;
-        setData('body', inputValue);
-    };
+    //テキストエリアが編集された時の挙動
+    
 
-    const formatText = (text) => {
-        const formattedText = text.replace(/(#\S+)/g, '<span style="color: blue;">$1</span>');
-        return { __html: formattedText };
-    };
+    
     // フォームの高さスタイルを制御するステート
     const [formHeight, setFormHeight] = useState('auto');
     // 画像ファイルが選択されたときの処理
@@ -97,6 +112,11 @@ const ParentCreate = (props) => {
                             onChange={handleTextareaChange}
                             value={data.body}
                         />
+                        <div>
+                            {hashtags.map((hashtag, index) => (
+                                <div key={index}>{hashtag}</div>
+                            ))}
+                        </div>
                         <div className="bottom-bar">
                             {/* 入力しているテキストを表示 */}
                             {/*<div className="mt-2" dangerouslySetInnerHTML={formatText(data.body)} />*/}

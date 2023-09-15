@@ -12,4 +12,9 @@ class Hashtag extends Model
      public $timestamps = false;
     
     protected $fillable = ['name'];
+    
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }

@@ -46,6 +46,60 @@ class PostController extends Controller
         $friends = $user->friends()->get(); 
         
         $permitters = $user->permitters()->get();
+        
+        //ハッシュタグをリンクにする
+        foreach ($posts as $post)
+        {
+            preg_match_all("/(#\S+)/", $post->body, $matches);
+            // dd($post->body);
+            // 抽出したハッシュタグをリンクに変換
+            foreach ($matches[0] as $match)
+            {
+                $hashtag = str_replace('#', '', $match); // ハッシュタグの#を削除
+                $post->body = str_replace($match, '<a href="/hashtags/' . $hashtag . '" class="hashtag">' . $match . '</a>', $post->body);
+            }
+        }
+        
+        return Inertia::render(
+                "Posts/Index", 
+                [
+                    "posts" => $posts,
+                    "likedPosts" => $likedPosts,
+                    "friends" => $friends,
+                    "permitters" => $permitters,
+                    "mbti_name" => $mbti_name
+                ]
+            );
+    }
+    
+    public function hashtagIndex($hashtagName)
+    {
+        // dd($hashtag);
+        $mbti_name = 'Home';
+        
+        $user = auth()->user();
+        $likedPosts = $user->likedPosts()->pluck('post_id');
+        $friends = $user->friends()->get(); 
+        
+        $permitters = $user->permitters()->get();
+        
+        $hashtag = Hashtag::where('name', $hashtagName)->first();
+        $posts = $hashtag->posts()->get();
+        // dd($hashtag);
+        
+        //ハッシュタグをリンクにする
+        foreach ($posts as $post)
+        {
+            preg_match_all("/(#\S+)/", $post->body, $matches);
+            // dd($post->body);
+            // 抽出したハッシュタグをリンクに変換
+            foreach ($matches[0] as $match)
+            {
+                $hashtag = str_replace('#', '', $match); // ハッシュタグの#を削除
+                $post->body = str_replace($match, '<a href="/hashtags/' . $hashtag . '" class="hashtag">' . $match . '</a>', $post->body);
+            }
+        }
+        
         return Inertia::render(
                 "Posts/Index", 
                 [
@@ -93,6 +147,15 @@ class PostController extends Controller
         
         $permitters = $user->permitters()->get(); 
         
+        preg_match_all("/(#\S+)/", $showPost->body, $matches);
+        // dd($post->body);
+        // 抽出したハッシュタグをリンクに変換
+        foreach ($matches[0] as $match)
+        {
+            $hashtag = str_replace('#', '', $match); // ハッシュタグの#を削除
+            $showPost->body = str_replace($match, '<a href="/hashtags/' . $hashtag . '" class="hashtag">' . $match . '</a>', $showPost->body);
+        }
+        
         return Inertia::render(
                 "Posts/Show", 
                 [
@@ -137,7 +200,7 @@ class PostController extends Controller
         $post_body = $post->body;
         $hashtags = [];
         
-        preg_match_all("/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u", $post_body, $hashtags); //正規表現を用いてハッシュタグを見つけて配列($hashtags)に入れる。
+        preg_match_all("/(#\S+)/", $post_body, $hashtags); //正規表現を用いてハッシュタグを見つけて配列($hashtags)に入れる。
         foreach ($hashtags[1] as $tag) {
             $tag = ltrim($tag, '#'); //先頭の`#`を削除。
             $hashtag = Hashtag::firstOrCreate(['name' => $tag]); //すでにhashtagテーブルにある場合はfirst、なければcreateする。
