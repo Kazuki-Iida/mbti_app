@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Friend;
 use App\Models\FriendRequest;
+use App\Models\Talk;
+use App\Models\Message;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class FriendController extends Controller
 {
@@ -83,7 +85,7 @@ class FriendController extends Controller
         $permitterId = $request['permitter_id'];
         try
         {
-            $friendRequest = FriendRequest::where('requester_id', $requesterId)->where('permitter_id', $permitterId)->first();
+            $friendRequest = FriendRequest::where('requester', $requesterId)->where('permitter', $permitterId)->first();
             $deleteSuccess = $friendRequest->delete();
             if ($deleteSuccess)
             {
@@ -100,16 +102,14 @@ class FriendController extends Controller
     
     public function permit(Request $request)
     {
-        
         $requesterOne = $request->input('requester'); // リクエストからrequesterを取得
         $requester = User::find($requesterOne['id']);
         $permitter = \Auth::user();
-        
         // dd($requester);
-        
         try
         {
             $friendRequest = FriendRequest::where('requester_id', $requester->id)->where('permitter_id', $permitter->id)->first();
+            $requestMessage = $friendRequest->message;
             $deleteSuccess = $friendRequest->delete();
             $friendCheck = Friend::where('user_id', $requester->id)->where('friend_id', $permitter->id)->first();
             if (!$requester->isFriend($permitter->id))
@@ -117,15 +117,38 @@ class FriendController extends Controller
                 $requesterSaveSuccess = $requester->friends()->attach($permitter->id);
                 $permitterSaveSuccess = $permitter->friends()->attach($requester->id);
             }
-            
             // if ($deleteSuccess && $permitterSaveSuccess && $requesterSaveSuccess)
             // {
-                return response()->json(['message' => '繋がり申請承認に成功しました'], 200);
-            // } else {
+            
+            $owner = $requester;
+            $guest = $permitter;
+            try
+            {
+                $talk = Talk::create([
+                        'last_sent_at' => Carbon::now(),
+                        'owner_id' => $owner->id,
+                        'guest_id' => $guest->id,
+                    ]);
+                
+                $firstMessageSuccess = Message::create([
+                        'user_id' => $owner->id,
+                        'talk_id' => $talk->id,
+                        'message' => $requestMessage,
+                    ]);
+                if ($talk && $firstMessageSuccess)
+                {
+                    return response()->json(['message' => 'トークの作成に成功しました'], 200);
+                } else {
+                    return response()->json(['message' => 'トークの作成に失敗しました'], 500);
+                }
+            } catch (Exception $e) {
+                return response()->json(['message' => 'トークの作成に失敗しました'], 500);
+            }
+         // } else {
             //     return response()->json(['message' => '繋がり申請承認に失敗しました'], 500);
             // }
         } catch (Exception $e) {
-            return response()->json(['message' => 'すでにフレンド'], 500);
+            return response()->json(['message' => 'すでにフレンドです'], 500);
         }
     }
     

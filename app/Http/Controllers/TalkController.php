@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Talk;
+use App\Models\Message;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -9,24 +11,30 @@ class TalkController extends Controller
 {
     public function store(Request $request)
     {
-        $user = \Auth::user();
-        
+        $owner = $request['owner'];
+        $guest = $request['guest'];
         try
+        {
+            $talk = Talk::create([
+                    'last_sent_at' => Carbon::now(),
+                    'owner_id' => $owner->id,
+                    'guest_id' => $guest->id,
+                ]);
+            
+            $firstMessageSuccess = Message::create([
+                    'user_id' => $owner->id,
+                    'talk_id' => $talk->id,
+                    'message' => $request['request_message'],
+                ]);
+            if ($talk && $firstMessageSuccess)
             {
-                $saveSuccess = Talk::create([
-                        'last_sent_at' => Carbon::now(),
-                        'owner_id' => $user_id,
-                        'guest_id' => $request['guest_id'],
-                    ]);
-                if ($saveSuccess)
-                {
-                    return response()->json(['message' => 'トークの作成に成功しました'], 200);
-                } else {
-                    return response()->json(['message' => 'トークの作成に失敗しました'], 500);
-                }
-            } catch (Exception $e) {
+                return response()->json(['message' => 'トークの作成に成功しました'], 200);
+            } else {
                 return response()->json(['message' => 'トークの作成に失敗しました'], 500);
             }
+        } catch (Exception $e) {
+            return response()->json(['message' => 'トークの作成に失敗しました'], 500);
+        }
     }
     
     

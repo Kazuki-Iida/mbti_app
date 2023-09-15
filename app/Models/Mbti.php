@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Mbti extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'user_id',
+        'talk_id',
+        'message',
+    ];
 
     public function users()
     {

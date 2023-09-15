@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PostSeeder::class);
         $this->call(HashtagSeeder::class);
         $this->call(HashtagPostSeeder::class);
-        $this->call(TalkSeeder::class);
+        // $this->call(TalkSeeder::class);
+        $this->call(FriendRequestSeeder::class);
     }
 }
