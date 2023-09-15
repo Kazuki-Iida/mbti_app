@@ -186,10 +186,10 @@ function Show( props ) {
                                 </div>
                         </div>
                         <ChildCreate parentId={post.id} profileImage={auth.user.image_path}/>
-                        <div className="pb-24">
+                        <div className="px-24">
                             {child_posts.map((child_post) => (
                                 <>
-                                    <div key={child_post.id} className="border-t border-gray-300 text-gray-900  py-5  w-[100%] mt-1">
+                                    <div key={child_post.id} className="border-b border-gray-300 text-gray-900 py-5  w-[100%] mt-1">
                                         <div class="flex justify-between items-center">
                                         <p className="text-xl font-bold flex items-center object-cover"><img src={child_post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{child_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{child_post.created_at}</span><span className="block text-xs">intp</span></div></p>
                                         {auth.user.id !== child_post.user_id && (
@@ -248,9 +248,9 @@ function Show( props ) {
                             ))}
                              <>
                                 {parent_post !== null ? (
-                                <div key={parent_post.id} className="border-t border-gray-300 text-gray-900 py-5 w-[100%] mt-1">
+                                <div key={parent_post.id} className="border-b border-gray-300 text-gray-900 py-5 w-[100%] mt-1">
                                     <div class="flex justify-between items-center">
-                                        <p className="text-xl font-bold flex items-center object-cover"><img src="../img/sunrise.jpg" className="element w-[40px] h-[40px] mr-5" /><div>{parent_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{parent_post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                        <p className="text-xl font-bold flex items-center object-cover"><img src={parent_post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{parent_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{parent_post.created_at}</span><span className="block text-xs">intp</span></div></p>
                                         {auth.user.id !== parent_post.user_id && (
                                             <button
                                               className="font-bold flex rounded-md border border-gray-400 p-1"
@@ -305,7 +305,7 @@ function Show( props ) {
                                 </div>
                                 ) : null}
                             
-                                {parent_post !== null ? <ChildCreate /> : null}
+                               
                             </>
                         </div>
                 </div>
