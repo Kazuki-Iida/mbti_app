@@ -118,12 +118,12 @@ class FriendController extends Controller
                 $permitterSaveSuccess = $permitter->friends()->attach($requester->id);
             }
             
-            if ($deleteSuccess && $permitterSaveSuccess && $requesterSaveSuccess)
-            {
+            // if ($deleteSuccess && $permitterSaveSuccess && $requesterSaveSuccess)
+            // {
                 return response()->json(['message' => '繋がり申請承認に成功しました'], 200);
-            } else {
-                return response()->json(['message' => '繋がり申請承認に失敗しました'], 500);
-            }
+            // } else {
+            //     return response()->json(['message' => '繋がり申請承認に失敗しました'], 500);
+            // }
         } catch (Exception $e) {
             return response()->json(['message' => 'すでにフレンド'], 500);
         }
