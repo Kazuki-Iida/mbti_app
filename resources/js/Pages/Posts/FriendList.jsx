@@ -21,9 +21,34 @@ function FriendList( props ) {
       console.error('トークが見つかりませんでした。');
     }
   };
+  console.log('friends',friends);
+  friends.map((friend) => (
+          console.log('friend_id',friend.mbti_id)
+          ))
     
     return (
         <>  
+        <div id="imageContainer">
+              <img id="img1" class=''
+              src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-607408726-1653469977.jpg?resize=640:*""
+              />
+              <img
+                id="img2"
+                src="https://kpopmania.net/wp-content/uploads/2020/05/00305292.jpg"
+              />
+              <img
+                id="img3"
+                src="//www.ponant.jp/cdn/shop/articles/encounter_with_the_sentinel_10_1905x608.jpg?v=1672028489"
+              />
+              <img
+                id="img4"
+                src="//www.ponant.jp/cdn/shop/articles/encounter_with_the_sentinel_10_1905x608.jpg?v=1672028489"
+              />
+              <img
+                id="img5"
+                src="//www.ponant.jp/cdn/shop/articles/encounter_with_the_sentinel_10_1905x608.jpg?v=1672028489"
+              />
+        </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
                 <Link href="/"><h1 className="font-bold text-4xl">Pots<span className="text-xs block">animal conn(ll)ection</span></h1></Link>
                 <div className="border-t border-gray-300 mt-5">
