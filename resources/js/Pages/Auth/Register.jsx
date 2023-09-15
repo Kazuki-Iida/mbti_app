@@ -69,16 +69,16 @@ export default function Register(props) {
                 </div>
 
 
-                
-                <select type="number" name="mbti_id" onChange={handleOnChange}>
+                <div class="mt-10">
+                <select type="number" name="mbti_id" onChange={handleOnChange} className="block text-xl w-[300px] bg-gray-100 font-bold">
                     {props.mbtis.map((mbti) => (
                         <>
-                            <option type="number" value={ mbti.id }>{ mbti.name }</option>
+                            <option type="number" value={ mbti.id } className="block rounded-md w-[300px] bg-gray-100 font-bold">{ mbti.name }</option>
                         </>
                     ))
                     }
                 </select>
-                
+                </div>
                 
                 <div className="mt-10">
                     <TextInput
@@ -120,7 +120,7 @@ export default function Register(props) {
                     </PrimaryButton>
                     <Link
                         href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="mt-10 block underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         登録済みの方はこちら
                     </Link>

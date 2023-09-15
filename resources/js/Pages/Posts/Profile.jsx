@@ -36,7 +36,12 @@ function Profile( props ) {
         }
     };
     
-    
+    useEffect(() => {
+        const img1 = document.querySelector('[data-img="1"]');
+        window.addEventListener('onload', () => {
+            img1.classList.add('img1');
+        });
+    }, []); 
     return(
         
         <>
@@ -129,6 +134,7 @@ function Profile( props ) {
                 <div className="w-[39%] relative">
                      <div className="pot w-full h-[50%] bg-gray-900 absolute bottom-[20px] right-[20px]">
                      </div>
+                     
                 </div>
           
         </>      

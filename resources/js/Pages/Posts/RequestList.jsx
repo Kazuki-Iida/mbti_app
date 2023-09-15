@@ -31,35 +31,62 @@ function RequestList( props ) {
         console.error(error);
       }
     };
-    useEffect(() => {
-      const btns1 = document.querySelectorAll('[data-animal="1"]');
-      btns1.forEach((btn1) => {
-          btn1.addEventListener("click", () => {
-          const image1 = document.createElement("img");
-          image1.src =
-            "../img/uma.png";
-          image1.id = "img1";
-          image1.className="w-[65px] h-[65px]";
-          const imageContainer = document.getElementById("imageContainer");
-          imageContainer.appendChild(image1);
-          image1.classList.add("hi");
-          console.log('ok')
-      });
-      });
-      const btns2 = document.querySelectorAll('[data-animal="2"]');
-      btns2.forEach((btn2) => {
-          btn2.addEventListener("click", () => {
-          const image2 = document.createElement("img");
-          image2.src =
-            "../img/usi.png";
-          image2.id = "img2";
-          image2.className="w-[65px] h-[65px]";
-          const imageContainer = document.getElementById("imageContainer");
-          imageContainer.appendChild(image2);
-          image2.classList.add("hi2");
-          console.log('ok')
-      });
-      });
+  //   useEffect(() => {
+  //     const imgClasses = {
+  //   1: 'img1',
+  //   2: 'img2',
+  //   3: 'img3',
+  //   4: 'img4',
+  //   5: 'img5',
+  //   6: 'img6',
+  //   7: 'img7',
+  //   8: 'img8',
+  //   9: 'img9',
+  //   10: 'img10',
+  //   11: 'img11',
+  //   12: 'img12',
+  //   13: 'img13',
+  //   14: 'img14',
+  //   15: 'img15',
+  //   16: 'img16',
+  // };
+  // // data-img属性値を持つ要素に対して処理を行う
+  // Object.entries(imgClasses).forEach(([dataAttr, className]) => {
+  //   const img = document.querySelector(`[data-img="${dataAttr}"]`);
+  //   const btn1 = document.querySelector(`[data-animal="1"]`);
+  //   btn1.addEventListener('click', () => {
+  //     img.classList.add(className);
+  //     console.log('done');
+  //   });
+  // });
+      // const btns1 = document.querySelectorAll('[data-animal="1"]');
+      // btns1.forEach((btn1) => {
+      //     btn1.addEventListener("click", () => {
+      //     const image1 = document.createElement("img");
+      //     image1.src =
+      //       "../img/uma.png";
+      //     image1.id = "img1";
+      //     image1.className="w-[85px] h-[85px]";
+      //     const imageContainer = document.getElementById("imageContainer");
+      //     imageContainer.appendChild(image1);
+      //     image1.classList.add("hi");
+      //     console.log('ok')
+      // });
+      // });
+      // const btns2 = document.querySelectorAll('[data-animal="2"]');
+      // btns2.forEach((btn2) => {
+      //     btn2.addEventListener("click", () => {
+      //     const image2 = document.createElement("img");
+      //     image2.src =
+      //       "../img/usi.png";
+      //     image2.id = "img2";
+      //     image2.className="w-[85px] h-[85px]";
+      //     const imageContainer = document.getElementById("imageContainer");
+      //     imageContainer.appendChild(image2);
+      //     image2.classList.add("hi2");
+      //     console.log('ok')
+      // });
+      // });
       // const test = document.getElementById("test");
       // const btn1 = document.getElementById("3");
       // btn1.addEventListener("click", () => {
@@ -115,7 +142,45 @@ function RequestList( props ) {
       //   image5.classList.add("hi5");
       // });
 
-    }, []); 
+    // }, []); 
+    useEffect(() => {
+  // data-img属性値とクラス名の対応を定義
+  const imgClasses = {
+    1: 'img1',
+    2: 'img2',
+    3: 'img3',
+    4: 'img4',
+    5: 'img5',
+    6: 'img6',
+    7: 'img7',
+    8: 'img8',
+    9: 'img9',
+    10: 'img10',
+    11: 'img11',
+    12: 'img12',
+    13: 'img13',
+    14: 'img14',
+    15: 'img15',
+    16: 'img16',
+  };
+
+  // ボタンをクリックしたときの処理を定義
+  const handleButtonClick = (dataAttr) => {
+    const img = document.querySelector(`[data-img="${dataAttr}"]`);
+    img.classList.add(imgClasses[dataAttr]);
+    console.log('done');
+  };
+
+  // 各ボタンにイベントリスナーを追加
+  for (let i = 1; i <= 16; i++) {
+    const btn = document.querySelector(`[data-animal="${i}"]`);
+    console.log(btn);
+    btn.addEventListener('click', () => {
+      handleButtonClick(i);
+    });
+  }
+}, []);
+
     return (
         <>  
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
@@ -162,23 +227,23 @@ function RequestList( props ) {
                 <div className="w-[39%] relative">
                      <div className="pot w-full h-[50%] bg-black absolute bottom-[20px] right-[20px]">
                      </div>
-                     <div id="imageContainer">
-                        {/*<img className="w-[50px] h-[50px]" id="img1" src="../img/uma.png" />
-                        <img className="w-[50px] h-[50px]"id="img2" src="../img/usi.png" />
-                        <img className="w-[50px] h-[50px]"id="img3" src="../img/kuma.png" />
-                        <img className="w-[50px] h-[50px]"id="img4" src="../img/simauma.png"/>
-                        <img className="w-[50px] h-[50px]"id="img5" src="../img/dog.png" />
-                        <img className="w-[50px] h-[50px]"id="img6" src="../img/zou.png" />
-                        <img className="w-[50px] h-[50px]"id="img7" src="../img/lion.png" />
-                        <img className="w-[50px] h-[50px]"id="img8" src="../img/oumu.png" />
-                        <img className="w-[50px] h-[50px]"id="img9" src="../img/sika.png" />
-                        <img className="w-[50px] h-[50px]"id="img10" src="../img/hituji.png" />
-                        <img className="w-[50px] h-[50px]"id="img11" src="../img/kaba.png" />
-                        <img className="w-[50px] h-[50px]"id="img12" src="../img/cat.png" />
-                        <img className="w-[50px] h-[50px]"id="img13" src="../img/kirin.png" />
-                        <img className="w-[50px] h-[50px]"id="img14" src="../img/usagi.png" />
-                        <img className="w-[50px] h-[50px]"id="img15" src="../img/tora.png" />
-                        <img className="w-[50px] h-[50px]"id="img16" src="../img/hukuro.png" />*/}
+                     <div id="animal-id">
+                        <img data-img="1"className="w-[80px] h-[80px]" id="img1" src="../img/uma.png" />
+                        <img data-img="2"className="w-[80px] h-[80px]"id="img2" src="../img/usi.png" />
+                        <img data-img="3"className="w-[80px] h-[80px]"id="img3" src="../img/kuma.png" />
+                        <img data-img="4"className="w-[80px] h-[80px]"id="img4" src="../img/simauma.png"/>
+                        <img data-img="5"className="w-[80px] h-[80px]"id="img5" src="../img/dog.png" />
+                        <img data-img="6"className="w-[80px] h-[80px]"id="img6" src="../img/zou.png" />
+                        <img data-img="7"className="w-[80px] h-[80px]"id="img7" src="../img/lion.png" />
+                        <img data-img="8"className="w-[80px] h-[80px]"id="img8" src="../img/oumu.png" />
+                        <img data-img="9"className="w-[80px] h-[80px]"id="img9" src="../img/sika.png" />
+                        <img data-img="10"className="w-[80px] h-[80px]"id="img10" src="../img/hituji.png" />
+                        <img data-img="11"className="w-[80px] h-[80px]"id="img11" src="../img/kaba.png" />
+                        <img data-img="12"className="w-[80px] h-[80px]"id="img12" src="../img/cat.png" />
+                        <img data-img="13"className="w-[80px] h-[80px]"id="img13" src="../img/kirin.png" />
+                        <img data-img="14"className="w-[80px] h-[80px]"id="img14" src="../img/usagi.png" />
+                        <img data-img="15"className="w-[80px] h-[80px]"id="img15" src="../img/tora.png" />
+                        <img data-img="16"className="w-[80px] h-[80px]"id="img16" src="../img/hukuro.png" />
                     </div>
                 </div>
             </div>
