@@ -13,7 +13,7 @@ input[type="file"]{
   overflow-y: scroll; /* 垂直スクロールを有効にする */
 }
 .post {
-  transition: transform 0.3s ease-in-out, scale 0.3s ease-in-out;
+  transition: transform 0.7s ease-in-out, scale 0.3s ease-in-out;
 }
 .big {
   transform: scale(1);
@@ -24,7 +24,7 @@ input[type="file"]{
 .small {
   position:relative;
   z-index:1;
-  transform:translateY(-300px)scale(0.6);
+  transform:translateY(-10px)scale(0.9);
 }
 
 /*.mbti-block:hover {*/

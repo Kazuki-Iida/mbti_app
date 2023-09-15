@@ -160,8 +160,7 @@ function Index( props ) {
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
                 <Link href="/"><h1 className="font-bold text-4xl">Pots<span className="text-xs block">animal conn(ll)ection</span></h1></Link>
                 <div className="border-t border-gray-300 mt-5">
-                <Link href={route('logout')} method="post" as="button">logout</Link>
-                    <Link href="/profile" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
+                    <Link href="/profile" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5 rounded-md"src={auth.user.image_path}/>profile</Link>
                     <Link href="/friend/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</Link>
                     <Link href="/request/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/req.png"/>Requests</Link>
                 </div>
@@ -176,9 +175,8 @@ function Index( props ) {
                 { posts.map(( post ) => (
                     
                         <div key={post.id} className="post bg-neutral-100 border-t border-gray-300 text-gray-900  py-10 px-10 w-[100%] mt-1">
-                            
                                 <div class="flex justify-between items-center">
-                                    <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
+                                    <p className="text-xl font-bold flex items-center object-cover"><img src={post.user.image_path} className="element w-[40px] h-[40px] mr-5 rounded-md" /><div>{post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{post.created_at}</span><span className="block text-xs"> {post.user.mbti.name}</span></div></p>
                                     {auth.user.id !== post.user_id && (
                                         <button
                                           className="font-bold flex rounded-md border border-gray-400 p-1"
