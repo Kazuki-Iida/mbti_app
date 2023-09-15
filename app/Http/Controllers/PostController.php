@@ -59,7 +59,7 @@ class PostController extends Controller
     }
 
 
-    public function show(Post $post)
+    public function show(Post $post, Mbti $mbti)
     {
         $parentPost = $post->parentPost()->withCount('likes')->withCount('childPosts')->first();
         // $parentPosts = [];
@@ -101,7 +101,8 @@ class PostController extends Controller
                     "child_posts" => $childPosts,
                     "likedPosts" => $likedPosts,
                     "friends" => $friends,
-                    "permitters" => $permitters
+                    "permitters" => $permitters,
+                    "mbtis" => $mbti->get(),
                 ]
             );
     }

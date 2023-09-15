@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 function Profile( props ) {
     
-    const { auth } = props;
+    const { auth, user, mbtis } = props;
     return(
         
         <>
@@ -19,8 +19,8 @@ function Profile( props ) {
                 <div className="border-t border-gray-300 mt-5">
                     <Link href={route('logout')} method="post" as="button">logout</Link>
                     <Link href="/profile" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
-                    <Link href="/friend/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</Link>
-                    <Link href="/request/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/req.png"/>Requests</Link>
+                    <Link href="/friend/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="/img/hand.png"/>friends</Link>
+                    <Link href="/request/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="/img/req.png"/>Requests</Link>
                 </div>
                 <div className="border-t border-gray-300 mt-5">
                     <Menu/>
@@ -37,7 +37,7 @@ function Profile( props ) {
                                         <div className="w-[300px] mx-auto">
                                             <div className="w-full">
                                                 <img
-                                                    src="../img/pen.png"
+                                                    src={user.image_path}
                                                     alt="Profile Image Image Preview"
                                                     className="w-full rounded-xl"
                                                 />
@@ -47,13 +47,13 @@ function Profile( props ) {
                                 </div>
                             </div>
                             <div className="px-8">
-                                <p className="block p-5 w-full rounded-md font-bold text-4xl">ユーザ名</p>
+                                <p className="block p-5 w-full rounded-md font-bold text-4xl">{user.name}</p>
                             </div>
                             <div className="px-8">
-                                <p className="block p-5 w-full rounded-md font-bold text-4xl">mbti</p>
+                                <p className="block p-5 w-full rounded-md font-bold text-4xl">{mbtis.find((mbti) => mbti.id === user.mbti_id)?.name}</p>
                             </div>
                             <div className="px-8">
-                                <p className="block p-5 w-full rounded-md font-bold text-xl">email</p>
+                                <p className="block p-5 w-full rounded-md font-bold text-xl">{user.email}</p>
                             </div>
                         </div>
                     </div>

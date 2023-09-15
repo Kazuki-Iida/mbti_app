@@ -44,7 +44,7 @@ function FriendList( props ) {
                       <div className="mt-10 pl-10" key={friend.id}>
                         <div className="flex items-center bg-gray-100 border border-black p-5 rounded-md justify-between">
                           <div className="flex items-center">
-                            <img className="w-[60px] h-[60px] rounded-md mr-5" src="/img/sunrise.jpg" />
+                            <Link href={`/profile/user/${friend.id}`}><img className="w-[60px] h-[60px] rounded-md mr-5" src={friend.image_path} /></Link>
                             <div>
                               <p className="font-bold text-xl">{friend.name}</p>
                               <span className="font-bold">

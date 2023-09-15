@@ -10,7 +10,7 @@ import FriendRequestButton from '../Button/FriendRequestButton';
 //import InfiniteScroll from "react-infinite-scroller"
 
 function Show( props ) {
-    const { parent_post, post,auth, child_posts, likedPosts: initialLikedPosts, friends: initialFriendsList, permitters: initialRequestersList} = props;
+    const { parent_post, post,auth, child_posts, likedPosts: initialLikedPosts, friends: initialFriendsList, permitters: initialRequestersList, mbtis} = props;
     
     console.log('post',post);
     console.log('parent_post',parent_post);
@@ -191,7 +191,7 @@ function Show( props ) {
                                 <>
                                     <div key={child_post.id} className="border-b border-gray-300 text-gray-900 py-5  w-[100%] mt-1">
                                         <div class="flex justify-between items-center">
-                                        <p className="text-xl font-bold flex items-center object-cover"><img src={child_post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{child_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{child_post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                        <p className="text-xl font-bold flex items-center object-cover"><img src={child_post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{child_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{child_post.created_at}</span><span className="block text-xs">{mbtis.find((mbti) => mbti.id === child_post.user.mbti_id)?.name}</span></div></p>
                                         {auth.user.id !== child_post.user_id && (
                                             <button
                                               className="font-bold flex rounded-md border border-gray-400 p-1"
@@ -261,7 +261,7 @@ function Show( props ) {
                                 {parent_post !== null ? (
                                 <div key={parent_post.id} className="border-b border-gray-300 text-gray-900 py-5 w-[100%] mt-1">
                                     <div class="flex justify-between items-center">
-                                        <p className="text-xl font-bold flex items-center object-cover"><img src={parent_post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{parent_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{parent_post.created_at}</span><span className="block text-xs">intp</span></div></p>
+                                        <p className="text-xl font-bold flex items-center object-cover"><img src={parent_post.user.image_path} className="element w-[40px] h-[40px] mr-5" /><div>{parent_post.user.name}<span className="ml-5 text-xs font-medium text-gray-500">{parent_post.created_at}</span><span className="block text-xs">{mbtis.find((mbti) => mbti.id === parent_post.user.mbti_id)?.name}</span></div></p>
                                         {auth.user.id !== parent_post.user_id && (
                                             <button
                                               className="font-bold flex rounded-md border border-gray-400 p-1"
