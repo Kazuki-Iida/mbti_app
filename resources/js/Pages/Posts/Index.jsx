@@ -158,7 +158,7 @@ function Index( props ) {
             </form>
         </div>
             <div className="w-[18%] bg-neutral-100 text-gray-900 p-10 fixed h-screen overflow-scroll border-r border-gray-300">
-                <Link href="/"><h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1></Link>
+                <Link href="/"><h1 className="font-bold text-4xl">Pots<span className="text-xs block">animal conn(ll)ection</span></h1></Link>
                 <div className="border-t border-gray-300 mt-5">
                 <Link href={route('logout')} method="post" as="button">logout</Link>
                     <Link href="/profile" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
@@ -217,7 +217,7 @@ function Index( props ) {
                                         )}
                                 </div>
                                 <Link href={`/posts/${post.id}`}>
-                                    <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.id}{post.body}</p>
+                                    <p className="text-md break-words mt-10 leading-8 tracking-tight">{post.body}</p>
                                 </Link>
 
                                 <div className="grid gap-5 grid-cols-2 w-full mt-5">
@@ -248,7 +248,7 @@ function Index( props ) {
                 </div>
                             
                     <ParentCreate profileImage = {auth.user.image_path} /> {/* ParentCreateコンポーネントを配置 */}
-                    {showBanner && <div className="fixed bg-sky-500 text-white p-2 mb-4" >申請が成功しました！</div>}
+                    {/*{showBanner && <div className="fixed bg-sky-500 text-white p-2 mb-4" >申請が成功しました！</div>}*/}
 
                 
 
