@@ -118,7 +118,7 @@ const ParentCreate = (props) => {
                         <div className="flex justify-between items-center border-t border-gray-300 py-5">
                             <label htmlFor="images" className="cursor-pointer px-5 block font-bold text-sm"><img src="../img/image2.png" className="w-[25px]"/>img</label>
                             <input type="file" id="images" onChange={handleFileChange} accept="image/*" multiple />
-                            <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="img/post.png" className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
+                            <button className="flex items-center border border-gray-400 p-1 rounded-md"><img src="../img/post.png" className="w-[20px] mr-1" /><p className="font-bold">送信</p></button>
                         </div>
                     </div>
                 </div>
