@@ -161,9 +161,9 @@ function Index( props ) {
                 <Link href="/"><h1 className="font-bold text-2xl">MBTI APP<span className="text-xs block">あなたはどんな人？</span></h1></Link>
                 <div className="border-t border-gray-300 mt-5">
                 <Link href={route('logout')} method="post" as="button">logout</Link>
-                    <Link href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
-                    <Link href="" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</Link>
-                    <Link href="/request/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/hand.png"/>Requests</Link>
+                    <Link href="/profile" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src={auth.user.image_path}/>profile</Link>
+                    <Link href="/friend/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/hand.png"/>friends</Link>
+                    <Link href="/request/index" className="flex font-bold mt-5 items-center ml-5"><img className="w-[35px] mr-5"src="../img/req.png"/>Requests</Link>
                 </div>
                 <div className="border-t border-gray-300 mt-5">
                     <Menu />
@@ -200,7 +200,7 @@ function Index( props ) {
                                         {openModalForPost === post.id && (
                                           <div className="modal">
                                             <div className="modal-content">
-                                              <span className="close" onClick={closeModal}>&times;</span>
+                                              <span className="close text-xl cursor-pointer" onClick={closeModal}>✖︎</span>
                                               <FriendRequestButton
                                                 permitterId={post.user_id}
                                                 postId={post.id}
@@ -248,7 +248,7 @@ function Index( props ) {
                 </div>
                             
                     <ParentCreate profileImage = {auth.user.image_path} /> {/* ParentCreateコンポーネントを配置 */}
-                    {showBanner && <div className="relative  bg-sky-500 text-white p-2 mb-4" >申請が成功しました！</div>}
+                    {showBanner && <div className="fixed bg-sky-500 text-white p-2 mb-4" >申請が成功しました！</div>}
 
                 
 

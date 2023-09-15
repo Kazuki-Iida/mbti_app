@@ -114,17 +114,16 @@ export default function Register(props) {
                 
                 
 
-                <div className="flex items-center justify-center mt-10">
+                <div className="mt-10">
+                    <PrimaryButton className="" disabled={processing}>
+                        登録
+                    </PrimaryButton>
                     <Link
                         href={route('login')}
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         登録済みの方はこちら
                     </Link>
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        登録
-                    </PrimaryButton>
                 </div>
             </form>
         </GuestLayout>

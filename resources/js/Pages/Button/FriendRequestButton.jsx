@@ -40,18 +40,19 @@ function FriendRequestButton({ permitterId, postId, onRequestComplete }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="relative">
+      <form onSubmit={handleSubmit} class="absolute z-10 top-[0px] right-[0px] bg-black mt-5 rounded-md p-5">
         <div>
-          <label htmlFor="message">メッセージ:</label>
+          <label htmlFor="message" className="text-white font-bold text-xs block">メッセージ</label>
           <textarea
             id="message"
             value={data.message}
             onChange={(e) => setData('message', e.target.value)}
+            className="rounded-md w-[400px] block mt-1"
             required
           />
         </div>
-        <button type="submit">リクエストを送信</button>
+        <button type="submit" className="bg-gray-100 flex items-center mt-5 border border-black px-5 py-1 rounded-md font-bold text-sm"><img src="../img/hand.png" className="mr-1 w-[25px] mr-1" />リクエストする</button>
       </form>
 
       
