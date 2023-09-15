@@ -5,18 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Post;
 use App\Models\Mbti;
 
 class UserController extends Controller
 {
-    public function profile(User $user, Mbti $mbti)
+    public function profile(User $user, Mbti $mbti, Post $post)
     {
+        // dd($user);
+        $posts = $post->getOrderedParentPosts()->where('user_id', $user->id)->get();
         
+        $loginUser = auth()->user();
+        $likedPosts = $loginUser->likedPosts()->pluck('post_id');
+
+
         return Inertia::render(
         "Posts/Profile",
             [
                 "user" => $user,
                 "mbtis" => $mbti->get(),
+                "posts" => $posts,
+                "likedPosts" => $likedPosts,
             ]
         );
     }
