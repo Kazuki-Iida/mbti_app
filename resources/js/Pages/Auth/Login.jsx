@@ -77,19 +77,18 @@ export default function Login({ status, canResetPassword }) {
                     </label>
                 </div>
 
-                <div className="flex items-center justify-center mt-20">
+                <div className="mt-20">
+                    <PrimaryButton className="" disabled={processing}>
+                        ログイン
+                    </PrimaryButton>
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="mt-5 m-auto block underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             パスワードを忘れた方はこちら
                         </Link>
                     )}
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        ログイン
-                    </PrimaryButton>
                 </div>
             </form>
         </GuestLayout>
