@@ -5,23 +5,35 @@ namespace App\Http\Controllers;
 use App\Models\Friend;
 use App\Models\FriendRequest;
 use App\Models\Talk;
+use App\Models\Mbti;
 use App\Models\Message;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FriendController extends Controller
 {
-    public function index()
+    public function index(Mbti $mbti)
     {
         $user = \Auth::user();
         $friends = $user->getOrderedFriends();
+        
+        $userId = $user->id;
+
+        //自分の参加しているトーク一覧を取得
+        $talks = Talk::where('owner_id', $userId)->orWhere('guest_id', $userId)->get();
+        // dd($talks);
+        
+        // dd($friends);
         
         return Inertia::render(
             "Posts/FriendList", 
             [
                 "friends" => $friends,
+                "mbtis" => $mbti->get(),
+                "talks" => $talks,
             ]
         );
     }
