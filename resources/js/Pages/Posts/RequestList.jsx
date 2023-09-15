@@ -23,12 +23,11 @@ function RequestList( props ) {
           if (requesterElement) {
             requesterElement.style.display = 'none';
           }
-          alert('繋がり申請が承認されました！');
         } else {
-          alert('繋がり申請の承認に失敗しました。');
+          console.log('繋がり申請の承認に失敗しました。');
         }
       } catch (error) {
-        alert('エラーが発生しました。繋がり申請の承認に失敗しました。');
+        // alert('エラーが発生しました。繋がり申請の承認に失敗しました。');
         console.error(error);
       }
     };
